@@ -1,4 +1,4 @@
-var rdf = require('rdf-ext')()
+var rdf = require('rdf-ext')
 
 var clownface = {}
 

@@ -1,7 +1,7 @@
 /* global before, describe, it */
 var assert = require('assert')
 var clownface = require('../')
-var rdf = require('rdf-ext')()
+var rdf = require('rdf-ext')
 var testData = require('rdf-test-data')
 
 describe('clownface', function () {
