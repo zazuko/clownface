@@ -58,7 +58,7 @@ describe('clownface', function () {
 
       assert.equal(result.length, 1)
       assert.equal(result[0].interfaceName, 'NamedNode')
-      assert.equal(result[0].toString(), 'http://localhost:8080/data/person/stuart-bloom')
+      assert.equal(result[0].nominalValue, 'http://localhost:8080/data/person/stuart-bloom')
     })
 
     it('should create named node context', function () {
@@ -68,7 +68,7 @@ describe('clownface', function () {
 
       assert.equal(result.length, 1)
       assert.equal(result[0].interfaceName, 'NamedNode')
-      assert.equal(result[0].toString(), 'http://localhost:8080/data/person/stuart-bloom')
+      assert.equal(result[0].nominalValue, 'http://localhost:8080/data/person/stuart-bloom')
     })
 
     it('should create literal node context', function () {
@@ -78,7 +78,7 @@ describe('clownface', function () {
 
       assert.equal(result.length, 1)
       assert.equal(result[0].interfaceName, 'Literal')
-      assert.equal(result[0].toString(), '2311 North Los Robles Avenue, Aparment 4A')
+      assert.equal(result[0].nominalValue, '2311 North Los Robles Avenue, Aparment 4A')
     })
 
     it('should create literal node context from number', function () {
@@ -88,7 +88,7 @@ describe('clownface', function () {
 
       assert.equal(result.length, 1)
       assert.equal(result[0].interfaceName, 'Literal')
-      assert.equal(result[0].toString(), '123')
+      assert.equal(result[0].nominalValue, '123')
     })
 
     it('should throw an error on unknown type', function () {
@@ -152,7 +152,7 @@ describe('clownface', function () {
 
       assert.equal(result.length, 1)
       assert.equal(result[0].interfaceName, 'Literal')
-      assert.equal(result[0].toString(), 'neurobiologist')
+      assert.equal(result[0].nominalValue, 'neurobiologist')
     })
 
     it('.out should search subject->object with multiple predicate values', function () {
@@ -356,7 +356,7 @@ describe('clownface', function () {
 
         assert.equal(result.length, 1)
         assert.equal(result[0].interfaceName, 'NamedNode')
-        assert.equal(result[0].toString(), 'http://localhost:8080/data/person/stuart-bloom')
+        assert.equal(result[0].nominalValue, 'http://localhost:8080/data/person/stuart-bloom')
 
         done()
       }).catch(function (error) {
@@ -373,7 +373,7 @@ describe('clownface', function () {
 
           assert.equal(result.length, 1)
           assert.equal(result[0].interfaceName, 'NamedNode')
-          assert.equal(result[0].toString(), 'http://localhost:8080/data/person/stuart-bloom')
+          assert.equal(result[0].nominalValue, 'http://localhost:8080/data/person/stuart-bloom')
 
           done()
         }).catch(function (error) {
@@ -389,7 +389,7 @@ describe('clownface', function () {
 
         assert.equal(result.length, 1)
         assert.equal(result[0].interfaceName, 'NamedNode')
-        assert.equal(result[0].toString(), 'http://localhost:8080/data/person/stuart-bloom')
+        assert.equal(result[0].nominalValue, 'http://localhost:8080/data/person/stuart-bloom')
 
         done()
       }).catch(function (error) {
@@ -405,7 +405,7 @@ describe('clownface', function () {
 
         assert.equal(result.length, 1)
         assert.equal(result[0].interfaceName, 'Literal')
-        assert.equal(result[0].toString(), '2311 North Los Robles Avenue, Aparment 4A')
+        assert.equal(result[0].nominalValue, '2311 North Los Robles Avenue, Aparment 4A')
 
         done()
       }).catch(function (error) {
@@ -416,12 +416,12 @@ describe('clownface', function () {
     it('should create literal node context from number', function (done) {
       var cf = clownface.Store(tbbtStore)
 
-      cf.node(123, null, function (result) {
+      cf.node(123, 'http://example.org/', function (result) {
         result = result.nodes()
 
         assert.equal(result.length, 1)
         assert.equal(result[0].interfaceName, 'Literal')
-        assert.equal(result[0].toString(), '123')
+        assert.equal(result[0].nominalValue, '123')
 
         done()
       }).catch(function (error) {
@@ -509,7 +509,7 @@ describe('clownface', function () {
 
         assert.equal(result.length, 1)
         assert.equal(result[0].interfaceName, 'Literal')
-        assert.equal(result[0].toString(), 'neurobiologist')
+        assert.equal(result[0].nominalValue, 'neurobiologist')
 
         done()
       }).catch(function (error) {

@@ -133,7 +133,7 @@ clownface.Graph = function (graph, nodes) {
 
     return this.context
       .map(function (node) {
-        return node.toString()
+        return node.nominalValue
       })
   }
 
@@ -286,7 +286,7 @@ clownface.Store = function (store, nodes) {
 
     return this.context
       .map(function (node) {
-        return node.toString()
+        return node.nominalValue
       })
   }
 
