@@ -1,6 +1,6 @@
 {
   "name": "clownface",
-  "version": "0.3.0-rc1",
+  "version": "0.3.0-rc2",
   "description": "Simple but powerful graph traversing library",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,6 @@
   },
   "devDependencies": {
     "mocha": "^2.3.3",
-    "rdf-test-data": "^0.3.0-rc1"
+    "rdf-test-data": "^0.3.0-rc2"
   }
 }
