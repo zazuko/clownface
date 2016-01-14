@@ -1,6 +1,6 @@
 {
   "name": "clownface",
-  "version": "0.3.0-rc6",
+  "version": "0.3.0",
   "description": "Simple but powerful graph traversing library",
   "main": "index.js",
   "scripts": {
@@ -24,10 +24,10 @@
   },
   "homepage": "https://github.com/rdf-ext/clownface",
   "dependencies": {
-    "rdf-ext": "^0.3.0-rc6"
+    "rdf-ext": "^0.3.0"
   },
   "devDependencies": {
     "mocha": "^2.3.3",
-    "rdf-test-data": "^0.3.0-rc2"
+    "rdf-test-data": "^0.3.0"
   }
 }
