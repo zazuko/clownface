@@ -177,6 +177,12 @@ clownface.Graph = function (graph, nodes) {
     return this.nodes().map(this.node)
   }
 
+  this.filter = function (callback) {
+    return clownface.Graph(graph, this.toArray().filter(callback).map(function (cf) {
+      return cf.context.shift()
+    }))
+  }
+
   this.forEach = function (callback) {
     return this.toArray().forEach(callback)
   }

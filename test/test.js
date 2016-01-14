@@ -265,6 +265,24 @@ describe('clownface', function () {
       assert(result[0] instanceof clownface.Graph)
     })
 
+    it('.filter should remove nodes based on the return value of the callback function', function () {
+      var cf = clownface.Graph(tbbtGraph)
+
+      var count = 0
+
+      cf.node('http://localhost:8080/data/person/bernadette-rostenkowski')
+        .in('http://schema.org/knows')
+        .filter(function (item) {
+          return !item.nodes().shift().equals('http://localhost:8080/data/person/howard-wolowitz')
+        })
+        .forEach(function (item) {
+          assert(item instanceof clownface.Graph)
+          count++
+        })
+
+      assert.equal(count, 6)
+    })
+
     it('.forEach should iterate over all nodes', function () {
       var cf = clownface.Graph(tbbtGraph)
 
