@@ -25,7 +25,7 @@
     "@rdfjs/data-model": "^1.1.0"
   },
   "devDependencies": {
-    "@rdfjs/namespace": "git+https://github.com/rdfjs/namespace.git#master",
+    "@rdfjs/namespace": "^1.0.0",
     "@rdfjs/parser-n3": "^1.1.2",
     "mocha": "^5.2.0",
     "rdf-ext": "^1.1.2",
