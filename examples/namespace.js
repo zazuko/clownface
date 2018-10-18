@@ -38,4 +38,13 @@ initExample().then(dataset => {
       .map(person => person.out(schema.givenName).value)
       .join(', ')
   )
+
+  const neurobiologist = tbbt.has(schema.jobTitle, 'neurobiologist')
+
+  console.log(`people with the job title neurobiologist`)
+  console.log(
+    neurobiologist
+      .out(schema.givenName)
+      .values.join(', ')
+  )
 })
