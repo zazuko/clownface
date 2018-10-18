@@ -35,10 +35,7 @@ initExample().then(dataset => {
     apartment4a
       .in(schema.streetAddress)
       .in(schema.address)
-      .map(person => person
-        .out([schema.givenName, schema.familyName])
-        .values.join(' ')
-      )
+      .map(person => person.out(schema.givenName).value)
       .join(', ')
   )
 })
