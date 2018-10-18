@@ -44,6 +44,31 @@ describe('Dataset', () => {
     })
   })
 
+  describe('.term', () => {
+    it('should be undefined if there is no context with a term', () => {
+      const cf = clownface.dataset(graph)
+
+      assert.strictEqual(typeof cf.term, 'undefined')
+    })
+
+    it('should be the term of the context if there is only one term', () => {
+      const term = rdf.literal('1')
+
+      const cf = clownface.dataset(graph, term)
+
+      assert(term.equals(cf.term))
+    })
+
+    it('should be undefined if there are multiple terms in the context', () => {
+      const termA = rdf.literal('1')
+      const termB = rdf.namedNode('http://example.org/')
+
+      const cf = clownface.dataset(graph, [termA, termB])
+
+      assert.strictEqual(typeof cf.term, 'undefined')
+    })
+  })
+
   describe('.terms', () => {
     it('should be an array property', () => {
       const cf = clownface.dataset(graph)
@@ -70,6 +95,31 @@ describe('Dataset', () => {
       assert.strictEqual(result.length, 2)
       assert(termA.equals(result[0]))
       assert(termB.equals(result[1]))
+    })
+  })
+
+  describe('.value', () => {
+    it('should be undefined if there is no context with a term', () => {
+      const cf = clownface.dataset(graph)
+
+      assert.strictEqual(typeof cf.value, 'undefined')
+    })
+
+    it('should be the value of the context if there is only one term', () => {
+      const term = rdf.literal('1')
+
+      const cf = clownface.dataset(graph, term)
+
+      assert.strictEqual(cf.value, term.value)
+    })
+
+    it('should be undefined if there are multiple terms in the context', () => {
+      const termA = rdf.literal('1')
+      const termB = rdf.namedNode('http://example.org/')
+
+      const cf = clownface.dataset(graph, [termA, termB])
+
+      assert.strictEqual(typeof cf.value, 'undefined')
     })
   })
 
