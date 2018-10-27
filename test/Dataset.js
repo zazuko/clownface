@@ -632,6 +632,23 @@ describe('Dataset', () => {
 
       assert.strictEqual(result._context.length, 2)
     })
+
+    it('should use context term as subject', () => {
+      const subjectA = rdf.namedNode('http://localhost:8080/data/person/sheldon-cooper')
+      const subjectB = rdf.namedNode('http://localhost:8080/data/person/stuart-bloom')
+      const predicate = rdf.namedNode('http://schema.org/givenName')
+      const objects = [
+        rdf.literal('Leonard'),
+        rdf.literal('Sheldon')
+      ]
+
+      const cf = clownface.dataset(graph, [subjectA, subjectB])
+
+      const result = cf.has(predicate, objects)
+
+      assert.strictEqual(result._context.length, 1)
+      assert(result._context[0].term.equals(subjectA))
+    })
   })
 
   describe('.deleteIn', () => {
