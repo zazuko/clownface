@@ -540,6 +540,17 @@ describe('Dataset', () => {
 
       assert.strictEqual(result._context.length, 8)
     })
+
+    it('should support clownface objects as predicates', () => {
+      const cf = clownface.dataset(graph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
+
+      const result = cf.in(cf.node([
+        rdf.namedNode('http://schema.org/spouse'),
+        rdf.namedNode('http://schema.org/knows')
+      ]))
+
+      assert.strictEqual(result._context.length, 8)
+    })
   })
 
   describe('.out', () => {
@@ -575,6 +586,17 @@ describe('Dataset', () => {
         rdf.namedNode('http://schema.org/familyName'),
         rdf.namedNode('http://schema.org/givenName')
       ])
+
+      assert.strictEqual(result._context.length, 2)
+    })
+
+    it('should support clownface objects as predicates', () => {
+      const cf = clownface.dataset(graph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
+
+      const result = cf.out(cf.node([
+        rdf.namedNode('http://schema.org/familyName'),
+        rdf.namedNode('http://schema.org/givenName')
+      ]))
 
       assert.strictEqual(result._context.length, 2)
     })
@@ -762,6 +784,20 @@ describe('Dataset', () => {
       assert.deepStrictEqual(result, [subjectA.value, subjectB.value])
     })
 
+    it('should support clownface objects as predicate and subject', () => {
+      const localGraph = rdf.dataset().addAll(graph)
+      const subject = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      const predicate = rdf.namedNode('http://schema.org/knows')
+      const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
+      const cf = clownface.dataset(localGraph, object)
+
+      cf.addIn(cf.node(predicate), cf.node(subject))
+
+      const result = localGraph.match(subject, predicate, object)
+
+      assert.strictEqual(result.length, 1)
+    })
+
     it('should return the called object', () => {
       const localGraph = rdf.dataset().addAll(graph)
       const subject = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
@@ -876,6 +912,20 @@ describe('Dataset', () => {
       })
 
       assert.deepStrictEqual(result, [objectA.value, objectB.value])
+    })
+
+    it('should support clownface objects as predicate and object', () => {
+      const localGraph = rdf.dataset().addAll(graph)
+      const subject = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
+      const predicate = rdf.namedNode('http://schema.org/knows')
+      const object = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      const cf = clownface.dataset(localGraph, subject)
+
+      cf.addOut(cf.node(predicate), cf.node(object))
+
+      const result = localGraph.match(subject, predicate, object)
+
+      assert.strictEqual(result.length, 1)
     })
 
     it('should return the called object', () => {
