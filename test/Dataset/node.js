@@ -98,4 +98,22 @@ describe('.node', () => {
     assert.strictEqual(result._context[1].term.termType, 'Literal')
     assert.strictEqual(result._context[1].term.value, '2')
   })
+
+  it('should create Named Node context if type is NamedNode', () => {
+    const cf = clownface.dataset(rdf.dataset())
+
+    const result = cf.node('http://example.org/', { type: 'NamedNode' })
+
+    assert.strictEqual(result._context.length, 1)
+    assert.strictEqual(result._context[0].term.termType, 'NamedNode')
+  })
+
+  it('should create Blank Node context if type is BlankNode', () => {
+    const cf = clownface.dataset(rdf.dataset())
+
+    const result = cf.node(null, { type: 'BlankNode' })
+
+    assert.strictEqual(result._context.length, 1)
+    assert.strictEqual(result._context[0].term.termType, 'BlankNode')
+  })
 })
