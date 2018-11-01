@@ -3,6 +3,7 @@
 const assert = require('assert')
 const clownface = require('../..')
 const rdf = require('rdf-ext')
+const rdfDataModel = require('@rdfjs/data-model')
 const initExample = require('../support/example')
 const Index = require('../../lib/Dataset')
 
@@ -122,6 +123,18 @@ describe('.node', () => {
     const cf = clownface.dataset(rdf.dataset())
 
     const result = cf.node('example', { datatype: datatype.value })
+
+    assert.strictEqual(result._context.length, 1)
+    assert.strictEqual(result._context[0].term.termType, 'Literal')
+    assert.strictEqual(result._context[0].term.datatype.termType, 'NamedNode')
+    assert.strictEqual(result._context[0].term.datatype.value, datatype.value)
+  })
+
+  it('should accept rdfjs NamedNodes as datatype', () => {
+    const datatype = rdfDataModel.namedNode('http://example.org/datatype')
+    const cf = clownface.dataset(rdf.dataset())
+
+    const result = cf.node('example', { datatype: datatype })
 
     assert.strictEqual(result._context.length, 1)
     assert.strictEqual(result._context[0].term.termType, 'Literal')
