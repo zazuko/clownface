@@ -116,4 +116,16 @@ describe('.node', () => {
     assert.strictEqual(result._context.length, 1)
     assert.strictEqual(result._context[0].term.termType, 'BlankNode')
   })
+
+  it('should use the given datatype', () => {
+    const datatype = rdf.namedNode('http://example.org/datatype')
+    const cf = clownface.dataset(rdf.dataset())
+
+    const result = cf.node('example', { datatype: datatype.value })
+
+    assert.strictEqual(result._context.length, 1)
+    assert.strictEqual(result._context[0].term.termType, 'Literal')
+    assert.strictEqual(result._context[0].term.datatype.termType, 'NamedNode')
+    assert.strictEqual(result._context[0].term.datatype.value, datatype.value)
+  })
 })
