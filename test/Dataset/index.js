@@ -6,6 +6,8 @@ describe('Dataset', () => {
   require('./terms')
   require('./value')
   require('./values')
+  require('./dataset')
+  require('./datasets')
   require('./list')
   require('./node')
   require('./filter')
