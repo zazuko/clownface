@@ -23,4 +23,5 @@ describe('Dataset', () => {
   require('./addList')
   require('./deleteIn')
   require('./deleteOut')
+  require('./deleteList')
 })
