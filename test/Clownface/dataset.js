@@ -6,7 +6,7 @@ const rdf = require('rdf-ext')
 
 describe('.dataset', () => {
   it('should be undefined if there is no context with a dataset', () => {
-    const cf = clownface.dataset()
+    const cf = clownface()
 
     assert.strictEqual(typeof cf.dataset, 'undefined')
   })
@@ -14,7 +14,7 @@ describe('.dataset', () => {
   it('should be the dataset of the context if there is only one dataset', () => {
     const dataset = rdf.dataset()
 
-    const cf = clownface.dataset(dataset)
+    const cf = clownface(dataset)
 
     assert.strictEqual(cf.dataset, dataset)
   })
@@ -25,7 +25,7 @@ describe('.dataset', () => {
     const datasetA = rdf.dataset()
     const datasetB = rdf.dataset()
 
-    const cf = clownface.dataset(null, [termA, termB])
+    const cf = clownface(null, [termA, termB])
 
     // TODO: should be possible with constructor or static method
     cf._context[0].dataset = datasetA

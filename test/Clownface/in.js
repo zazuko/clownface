@@ -4,7 +4,7 @@ const assert = require('assert')
 const clownface = require('../..')
 const rdf = require('rdf-ext')
 const initExample = require('../support/example')
-const Index = require('../../lib/Dataset')
+const Clownface = require('../../lib/Clownface')
 
 describe('.in', () => {
   let graph
@@ -16,22 +16,22 @@ describe('.in', () => {
   })
 
   it('should be a function', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     assert.strictEqual(typeof cf.in, 'function')
   })
 
   it('should return a new Dataset instance', () => {
-    const cf = clownface.dataset(graph, '2311 North Los Robles Avenue, Aparment 4A')
+    const cf = clownface(graph, '2311 North Los Robles Avenue, Aparment 4A')
 
     const result = cf.in(rdf.namedNode('http://schema.org/streetAddress'))
 
-    assert(result instanceof Index)
+    assert(result instanceof Clownface)
     assert.notStrictEqual(result, cf)
   })
 
   it('should search object -> subject', () => {
-    const cf = clownface.dataset(graph, '2311 North Los Robles Avenue, Aparment 4A')
+    const cf = clownface(graph, '2311 North Los Robles Avenue, Aparment 4A')
 
     const result = cf.in(rdf.namedNode('http://schema.org/streetAddress'))
 
@@ -40,7 +40,7 @@ describe('.in', () => {
   })
 
   it('should support multiple predicate values in an array', () => {
-    const cf = clownface.dataset(graph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
+    const cf = clownface(graph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
 
     const result = cf.in([
       rdf.namedNode('http://schema.org/spouse'),
@@ -51,7 +51,7 @@ describe('.in', () => {
   })
 
   it('should support clownface objects as predicates', () => {
-    const cf = clownface.dataset(graph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
+    const cf = clownface(graph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
 
     const result = cf.in(cf.node([
       rdf.namedNode('http://schema.org/spouse'),

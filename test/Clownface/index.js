@@ -1,6 +1,6 @@
 /* global describe */
 
-describe('Dataset', () => {
+describe('Clownface', () => {
   require('./factory')
   require('./term')
   require('./terms')

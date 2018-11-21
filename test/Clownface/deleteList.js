@@ -7,7 +7,7 @@ const rdf = require('rdf-ext')
 
 describe('.deleteList', () => {
   it('should be a function', () => {
-    const cf = clownface.dataset()
+    const cf = clownface()
 
     assert.strictEqual(typeof cf.deleteList, 'function')
   })
@@ -15,7 +15,7 @@ describe('.deleteList', () => {
   it('should throw an error if predicate parameter is missing', () => {
     const localGraph = rdf.dataset()
     const subject = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface.dataset(localGraph, subject)
+    const cf = clownface(localGraph, subject)
 
     let touched = false
 
@@ -38,7 +38,7 @@ describe('.deleteList', () => {
     const first0 = rdf.blankNode()
     const first1 = rdf.blankNode()
     const other = rdf.quad(subject, predicateOther, item0)
-    const cf = clownface.dataset(localGraph, subject)
+    const cf = clownface(localGraph, subject)
 
     localGraph.addAll([
       other,

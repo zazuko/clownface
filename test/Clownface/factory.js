@@ -3,7 +3,7 @@
 const assert = require('assert')
 const clownface = require('../..')
 const initExample = require('../support/example')
-const Index = require('../../lib/Dataset')
+const Clownface = require('../../lib/Clownface')
 
 describe('factory', () => {
   let graph
@@ -15,13 +15,13 @@ describe('factory', () => {
   })
 
   it('should create a Dataset object', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
-    assert(cf instanceof Index)
+    assert(cf instanceof Clownface)
   })
 
   it('should create an empty context', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     assert.strictEqual(cf._context.length, 1)
     assert.strictEqual(cf._context[0].dataset, graph)
@@ -33,7 +33,7 @@ describe('factory', () => {
     let catched = false
 
     try {
-      clownface.dataset(graph, new RegExp())
+      clownface(graph, new RegExp())
     } catch (e) {
       catched = true
     }

@@ -15,7 +15,7 @@ describe('.addIn', () => {
   })
 
   it('should be a function', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     assert.strictEqual(typeof cf.addIn, 'function')
   })
@@ -24,7 +24,7 @@ describe('.addIn', () => {
     const localGraph = rdf.dataset()
     const subject = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface.dataset(localGraph, object)
+    const cf = clownface(localGraph, object)
 
     let touched = false
 
@@ -42,7 +42,7 @@ describe('.addIn', () => {
     const subject = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
     const predicate = rdf.namedNode('http://schema.org/knows')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface.dataset(localGraph, object)
+    const cf = clownface(localGraph, object)
 
     cf.addIn(predicate, subject)
 
@@ -55,7 +55,7 @@ describe('.addIn', () => {
     const localGraph = rdf.dataset()
     const predicate = rdf.namedNode('http://schema.org/knows')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface.dataset(localGraph, object)
+    const cf = clownface(localGraph, object)
 
     cf.addIn(predicate)
 
@@ -71,7 +71,7 @@ describe('.addIn', () => {
     const predicateA = rdf.namedNode('http://schema.org/knows')
     const predicateB = rdf.namedNode('http://schema.org/saw')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface.dataset(localGraph, object)
+    const cf = clownface(localGraph, object)
 
     cf.addIn([predicateA, predicateB], subject)
 
@@ -87,7 +87,7 @@ describe('.addIn', () => {
     const subjectB = rdf.namedNode('http://localhost:8080/data/person/penny')
     const predicate = rdf.namedNode('http://schema.org/saw')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface.dataset(localGraph, object)
+    const cf = clownface(localGraph, object)
 
     cf.addIn(predicate, [subjectA, subjectB])
 
@@ -104,7 +104,7 @@ describe('.addIn', () => {
     const predicateA = rdf.namedNode('http://schema.org/knows')
     const predicateB = rdf.namedNode('http://schema.org/saw')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface.dataset(localGraph, object)
+    const cf = clownface(localGraph, object)
 
     let result
 
@@ -119,7 +119,7 @@ describe('.addIn', () => {
     const localGraph = rdf.dataset()
     const predicate = rdf.namedNode('http://schema.org/knows')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface.dataset(localGraph, object)
+    const cf = clownface(localGraph, object)
 
     let result
 
@@ -136,7 +136,7 @@ describe('.addIn', () => {
     const subject = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
     const predicate = rdf.namedNode('http://schema.org/knows')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface.dataset(localGraph, object)
+    const cf = clownface(localGraph, object)
 
     cf.addIn(cf.node(predicate), cf.node(subject))
 
@@ -150,7 +150,7 @@ describe('.addIn', () => {
     const subject = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
     const predicate = rdf.namedNode('http://schema.org/knows')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface.dataset(localGraph, object)
+    const cf = clownface(localGraph, object)
 
     assert.strictEqual(cf.addIn(predicate, subject), cf)
   })

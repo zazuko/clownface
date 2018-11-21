@@ -15,21 +15,21 @@ describe('.deleteOut', () => {
   })
 
   it('should be a function', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     assert.strictEqual(typeof cf.deleteOut, 'function')
   })
 
   it('should return the called object', () => {
     const localGraph = rdf.dataset().addAll(graph)
-    const cf = clownface.dataset(localGraph)
+    const cf = clownface(localGraph)
 
     assert.strictEqual(cf.deleteOut(), cf)
   })
 
   it('should remove quad based on the object value', () => {
     const localGraph = rdf.dataset().addAll(graph)
-    const cf = clownface.dataset(localGraph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
+    const cf = clownface(localGraph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
 
     cf.deleteOut()
 
@@ -38,7 +38,7 @@ describe('.deleteOut', () => {
 
   it('should remove quad based on the object value and predicate', () => {
     const localGraph = rdf.dataset().addAll(graph)
-    const cf = clownface.dataset(localGraph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
+    const cf = clownface(localGraph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
 
     cf.deleteOut(rdf.namedNode('http://schema.org/knows'))
 
@@ -47,7 +47,7 @@ describe('.deleteOut', () => {
 
   it('should remove quad based on the object value and multiple predicates', () => {
     const localGraph = rdf.dataset().addAll(graph)
-    const cf = clownface.dataset(localGraph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
+    const cf = clownface(localGraph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
 
     cf.deleteOut([
       rdf.namedNode('http://schema.org/knows'),

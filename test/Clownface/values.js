@@ -5,7 +5,7 @@ const clownface = require('../..')
 const rdf = require('rdf-ext')
 const initExample = require('../support/example')
 
-describe('.terms', () => {
+describe('.values', () => {
   let graph
 
   before(() => {
@@ -15,29 +15,27 @@ describe('.terms', () => {
   })
 
   it('should be an array property', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
-    assert(Array.isArray(cf.terms))
+    assert(Array.isArray(cf.values))
   })
 
   it('should be empty if there is no context with a term', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
-    const result = cf.terms
-
-    assert.deepStrictEqual(result, [])
+    assert.deepStrictEqual(cf.values, [])
   })
 
-  it('should contain all terms of the context', () => {
+  it('should contain the values of the terms', () => {
     const termA = rdf.literal('1')
     const termB = rdf.namedNode('http://example.org/')
 
-    const cf = clownface.dataset(graph, [termA, termB])
+    const cf = clownface(graph, [termA, termB])
 
-    const result = cf.terms
+    const result = cf.values
 
     assert.strictEqual(result.length, 2)
-    assert(termA.equals(result[0]))
-    assert(termB.equals(result[1]))
+    assert.strictEqual(result[0], termA.value)
+    assert.strictEqual(result[1], termB.value)
   })
 })

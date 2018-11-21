@@ -15,19 +15,19 @@ describe('.toString', () => {
   })
 
   it('should be a function', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     assert.strictEqual(typeof cf.toString, 'function')
   })
 
   it('should return a string', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     assert.strictEqual(typeof cf.toString(), 'string')
   })
 
   it('should return the value of a single term', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     const result = cf.node(rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
       .out(rdf.namedNode('http://schema.org/givenName'))
@@ -37,7 +37,7 @@ describe('.toString', () => {
   })
 
   it('should return comma separated values if multiple terms', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     const givenName = cf.node([
       rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),

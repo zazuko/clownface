@@ -5,7 +5,7 @@ const clownface = require('../..')
 const rdf = require('rdf-ext')
 const rdfDataModel = require('@rdfjs/data-model')
 const initExample = require('../support/example')
-const Index = require('../../lib/Dataset')
+const Clownface = require('../../lib/Clownface')
 
 describe('.node', () => {
   let graph
@@ -17,24 +17,24 @@ describe('.node', () => {
   })
 
   it('should be a function', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     assert.strictEqual(typeof cf.node, 'function')
   })
 
   it('should return a new Dataset instance', () => {
     const term = rdf.namedNode('http://localhost:8080/data/person/stuart-bloom')
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     const result = cf.node(term)
 
-    assert(result instanceof Index)
+    assert(result instanceof Clownface)
     assert.notStrictEqual(result, cf)
   })
 
   it('should use the dataset from the context', () => {
     const term = rdf.namedNode('http://localhost:8080/data/person/stuart-bloom')
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     const result = cf.node(term)
 
@@ -43,7 +43,7 @@ describe('.node', () => {
 
   it('should use the given Named Node', () => {
     const term = rdf.namedNode('http://localhost:8080/data/person/stuart-bloom')
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     const result = cf.node(term)
 
@@ -53,7 +53,7 @@ describe('.node', () => {
 
   it('should use the given string as Literal', () => {
     const value = '2311 North Los Robles Avenue, Aparment 4A'
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     const result = cf.node(value)
 
@@ -63,7 +63,7 @@ describe('.node', () => {
   })
 
   it('should use the given number as Literal', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     const result = cf.node(123)
 
@@ -73,7 +73,7 @@ describe('.node', () => {
   })
 
   it('should throw an error if an unknown type is given', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     let result
     let catched = false
@@ -89,7 +89,7 @@ describe('.node', () => {
   })
 
   it('should support multiple values in an array', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     const result = cf.node(['1', '2'])
 
@@ -101,7 +101,7 @@ describe('.node', () => {
   })
 
   it('should create Named Node context if type is NamedNode', () => {
-    const cf = clownface.dataset(rdf.dataset())
+    const cf = clownface(rdf.dataset())
 
     const result = cf.node('http://example.org/', { type: 'NamedNode' })
 
@@ -110,7 +110,7 @@ describe('.node', () => {
   })
 
   it('should create Blank Node context if type is BlankNode', () => {
-    const cf = clownface.dataset(rdf.dataset())
+    const cf = clownface(rdf.dataset())
 
     const result = cf.node(null, { type: 'BlankNode' })
 
@@ -120,7 +120,7 @@ describe('.node', () => {
 
   it('should use the given datatype', () => {
     const datatype = rdf.namedNode('http://example.org/datatype')
-    const cf = clownface.dataset(rdf.dataset())
+    const cf = clownface(rdf.dataset())
 
     const result = cf.node('example', { datatype: datatype.value })
 
@@ -132,7 +132,7 @@ describe('.node', () => {
 
   it('should accept rdfjs NamedNodes as datatype', () => {
     const datatype = rdfDataModel.namedNode('http://example.org/datatype')
-    const cf = clownface.dataset(rdf.dataset())
+    const cf = clownface(rdf.dataset())
 
     const result = cf.node('example', { datatype: datatype })
 

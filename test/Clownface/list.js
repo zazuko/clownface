@@ -22,19 +22,19 @@ describe('.list', () => {
   }
 
   it('should be a function', () => {
-    const cf = clownface.dataset(listGraph())
+    const cf = clownface(listGraph())
 
     assert.strictEqual(typeof cf.list, 'function')
   })
 
   it('should return an iterator', () => {
-    const cf = clownface.dataset(listGraph())
+    const cf = clownface(listGraph())
 
     assert.strictEqual(typeof cf.out(ns.list).list()[Symbol.iterator], 'function')
   })
 
   it('should iterate over a single term context', () => {
-    const cf = clownface.dataset(listGraph())
+    const cf = clownface(listGraph())
 
     const result = []
 
@@ -46,7 +46,7 @@ describe('.list', () => {
   })
 
   it('should not iterate over a multiple term context', () => {
-    const cf = clownface.dataset(listGraph().addAll(listGraph()))
+    const cf = clownface(listGraph().addAll(listGraph()))
 
     let list
     let touched = false

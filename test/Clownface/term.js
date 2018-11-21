@@ -5,7 +5,7 @@ const clownface = require('../..')
 const rdf = require('rdf-ext')
 const initExample = require('../support/example')
 
-describe('.value', () => {
+describe('.term', () => {
   let graph
 
   before(() => {
@@ -15,25 +15,25 @@ describe('.value', () => {
   })
 
   it('should be undefined if there is no context with a term', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
-    assert.strictEqual(typeof cf.value, 'undefined')
+    assert.strictEqual(typeof cf.term, 'undefined')
   })
 
-  it('should be the value of the context if there is only one term', () => {
+  it('should be the term of the context if there is only one term', () => {
     const term = rdf.literal('1')
 
-    const cf = clownface.dataset(graph, term)
+    const cf = clownface(graph, term)
 
-    assert.strictEqual(cf.value, term.value)
+    assert(term.equals(cf.term))
   })
 
   it('should be undefined if there are multiple terms in the context', () => {
     const termA = rdf.literal('1')
     const termB = rdf.namedNode('http://example.org/')
 
-    const cf = clownface.dataset(graph, [termA, termB])
+    const cf = clownface(graph, [termA, termB])
 
-    assert.strictEqual(typeof cf.value, 'undefined')
+    assert.strictEqual(typeof cf.term, 'undefined')
   })
 })

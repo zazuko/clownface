@@ -16,7 +16,7 @@ describe('.addList', () => {
   })
 
   it('should be a function', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     assert.strictEqual(typeof cf.addList, 'function')
   })
@@ -25,7 +25,7 @@ describe('.addList', () => {
     const localGraph = rdf.dataset()
     const subject = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
     const predicate = rdf.namedNode('http://schema.org/knows')
-    const cf = clownface.dataset(localGraph, subject)
+    const cf = clownface(localGraph, subject)
 
     let touched = false
 
@@ -42,7 +42,7 @@ describe('.addList', () => {
     const localGraph = rdf.dataset()
     const subject = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
     const object = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
-    const cf = clownface.dataset(localGraph, subject)
+    const cf = clownface(localGraph, subject)
 
     let touched = false
 
@@ -61,7 +61,7 @@ describe('.addList', () => {
     const predicate = rdf.namedNode('http://schema.org/counts')
     const item0 = rdf.literal('0')
     const item1 = rdf.literal('1')
-    const cf = clownface.dataset(localGraph, subject)
+    const cf = clownface(localGraph, subject)
 
     cf.addList(predicate, [item0, item1])
 

@@ -1,9 +1,13 @@
-const Dataset = require('./lib/Dataset')
+const Clownface = require('./lib/Clownface')
 
-function dataset (graph, nodes) {
-  return new Dataset(graph, nodes)
+function factory (dataset, nodes) {
+  return new Clownface(dataset, nodes)
 }
 
-module.exports = {
-  dataset
+factory.dataset = (dataset, nodes) => {
+  console.error(new Error('clownface.dataset(...) is deprecated, just call clownface(...)'))
+
+  return factory(dataset, nodes)
 }
+
+module.exports = factory

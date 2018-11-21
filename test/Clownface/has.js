@@ -4,7 +4,7 @@ const assert = require('assert')
 const clownface = require('../..')
 const rdf = require('rdf-ext')
 const initExample = require('../support/example')
-const Index = require('../../lib/Dataset')
+const Clownface = require('../../lib/Clownface')
 
 describe('.has', () => {
   let graph
@@ -16,24 +16,24 @@ describe('.has', () => {
   })
 
   it('should be a function', () => {
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     assert.strictEqual(typeof cf.has, 'function')
   })
 
   it('should return a new Dataset instance', () => {
     const predicate = rdf.namedNode('http://schema.org/givenName')
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     const result = cf.has(predicate, 'Stuart')
 
-    assert(result instanceof Index)
+    assert(result instanceof Clownface)
     assert.notStrictEqual(result, cf)
   })
 
   it('should use the dataset from the context', () => {
     const predicate = rdf.namedNode('http://schema.org/givenName')
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     const result = cf.has(predicate, 'Stuart')
 
@@ -43,7 +43,7 @@ describe('.has', () => {
   it('should use the found subject in the context', () => {
     const subject = rdf.namedNode('http://localhost:8080/data/person/stuart-bloom')
     const predicate = rdf.namedNode('http://schema.org/givenName')
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     const result = cf.has(predicate, 'Stuart')
 
@@ -55,7 +55,7 @@ describe('.has', () => {
     const predicateA = rdf.namedNode('http://schema.org/knows')
     const predicateB = rdf.namedNode('http://schema.org/spouse')
     const object = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     const result = cf.has([predicateA, predicateB], object)
 
@@ -66,7 +66,7 @@ describe('.has', () => {
     const predicate = rdf.namedNode('http://schema.org/givenName')
     const objectA = rdf.literal('Leonard')
     const objectB = rdf.literal('Sheldon')
-    const cf = clownface.dataset(graph)
+    const cf = clownface(graph)
 
     const result = cf.has(predicate, [objectA, objectB])
 
@@ -82,7 +82,7 @@ describe('.has', () => {
       rdf.literal('Sheldon')
     ]
 
-    const cf = clownface.dataset(graph, [subjectA, subjectB])
+    const cf = clownface(graph, [subjectA, subjectB])
 
     const result = cf.has(predicate, objects)
 

@@ -6,13 +6,13 @@ const rdf = require('rdf-ext')
 
 describe('.datasets', () => {
   it('should be an array property', () => {
-    const cf = clownface.dataset()
+    const cf = clownface()
 
     assert(Array.isArray(cf.datasets))
   })
 
   it('should be empty if there is no context with a dataset', () => {
-    const cf = clownface.dataset()
+    const cf = clownface()
 
     const result = cf.datasets
 
@@ -25,7 +25,7 @@ describe('.datasets', () => {
     const datasetA = rdf.dataset()
     const datasetB = rdf.dataset()
 
-    const cf = clownface.dataset(null, [termA, termB])
+    const cf = clownface(null, [termA, termB])
 
     // TODO: should be possible with constructor or static method
     cf._context[0].dataset = datasetA
