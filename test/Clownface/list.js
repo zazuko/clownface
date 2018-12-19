@@ -61,4 +61,13 @@ describe('.list', () => {
     assert(touched)
     assert(!list)
   })
+
+  it('should return empty iterator when no list exists', () => {
+    const cf = clownface(listGraph())
+
+    const list = cf.out(rdf.namedNode('http://example.com/not-list')).list()[Symbol.iterator]()
+
+    const first = list.next()
+    assert.strictEqual(first.done, true)
+  })
 })
