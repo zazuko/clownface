@@ -3,3 +3,9 @@ node_js:
   - "6"
   - "8"
   - "10"
+before_install:
+  - npm i -g codecov
+after_failure:
+  - codecov
+after_success:
+  - codecov
