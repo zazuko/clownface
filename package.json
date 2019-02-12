@@ -29,8 +29,6 @@
     "@rdfjs/parser-n3": "^1.1.2",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
-    "rdf-ext": "^1.1.2",
-    "rdf-store-dataset": "^1.0.0",
     "rdf-ext": "^1.2.2",
     "standard": "^12.0.1",
     "tbbt-ld": "^1.1.0"
