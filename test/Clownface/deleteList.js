@@ -3,7 +3,8 @@
 const assert = require('assert')
 const clownface = require('../..')
 const ns = require('../support/namespace')
-const rdf = require('rdf-ext')
+const rdf = require('../support/factory')
+const { addAll } = require('../support/utils')
 
 describe('.deleteList', () => {
   it('should be a function', () => {
@@ -40,7 +41,7 @@ describe('.deleteList', () => {
     const other = rdf.quad(subject, predicateOther, item0)
     const cf = clownface(localGraph, subject)
 
-    localGraph.addAll([
+    addAll(localGraph, [
       other,
       rdf.quad(subject, predicate, first0),
       rdf.quad(first0, ns.first, item0),
@@ -51,7 +52,7 @@ describe('.deleteList', () => {
 
     cf.deleteList(predicate)
 
-    assert.strictEqual(localGraph.length, 1)
-    assert(localGraph.toArray()[0].equals(other))
+    assert.strictEqual(localGraph.size, 1)
+    assert([...localGraph][0].equals(other))
   })
 })

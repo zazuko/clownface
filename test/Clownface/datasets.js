@@ -2,7 +2,8 @@
 
 const assert = require('assert')
 const clownface = require('../..')
-const rdf = require('rdf-ext')
+const rdf = require('../support/factory')
+const { equals } = require('../support/utils')
 
 describe('.datasets', () => {
   it('should be an array property', () => {
@@ -34,7 +35,7 @@ describe('.datasets', () => {
     const result = cf.datasets
 
     assert.strictEqual(result.length, 2)
-    assert(datasetA.equals(result[0]))
-    assert(datasetB.equals(result[1]))
+    assert(equals(datasetA, result[0]))
+    assert(equals(datasetB, result[1]))
   })
 })

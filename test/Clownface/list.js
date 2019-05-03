@@ -2,8 +2,9 @@
 
 const assert = require('assert')
 const clownface = require('../..')
-const rdf = require('rdf-ext')
+const rdf = require('../support/factory')
 const ns = require('../support/namespace')
+const { addAll } = require('../support/utils')
 
 describe('.list', () => {
   const listGraph = () => {
@@ -46,7 +47,7 @@ describe('.list', () => {
   })
 
   it('should not iterate over a multiple term context', () => {
-    const cf = clownface(listGraph().addAll(listGraph()))
+    const cf = clownface(addAll(listGraph(), listGraph()))
 
     let list
     let touched = false

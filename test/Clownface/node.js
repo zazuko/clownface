@@ -2,7 +2,7 @@
 
 const assert = require('assert')
 const clownface = require('../..')
-const rdf = require('rdf-ext')
+const rdf = require('../support/factory')
 const rdfDataModel = require('@rdfjs/data-model')
 const initExample = require('../support/example')
 const Clownface = require('../../lib/Clownface')

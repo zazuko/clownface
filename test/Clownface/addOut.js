@@ -2,8 +2,9 @@
 
 const assert = require('assert')
 const clownface = require('../..')
-const rdf = require('rdf-ext')
+const rdf = require('../support/factory')
 const initExample = require('../support/example')
+const { addAll } = require('../support/utils')
 
 describe('.addOut', () => {
   let graph
@@ -21,7 +22,7 @@ describe('.addOut', () => {
   })
 
   it('should throw an error if predicate parameter is missing', () => {
-    const localGraph = rdf.dataset().addAll(graph)
+    const localGraph = addAll(rdf.dataset(), graph)
     const subject = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
     const object = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
     const cf = clownface(localGraph, subject)
@@ -38,7 +39,7 @@ describe('.addOut', () => {
   })
 
   it('should add quads using the context term as subject and the given predicate and object', () => {
-    const localGraph = rdf.dataset().addAll(graph)
+    const localGraph = addAll(rdf.dataset(), graph)
     const subject = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
     const predicate = rdf.namedNode('http://schema.org/knows')
     const object = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
@@ -48,7 +49,7 @@ describe('.addOut', () => {
 
     const result = localGraph.match(subject, predicate, object)
 
-    assert.strictEqual(result.length, 1)
+    assert.strictEqual(result.size, 1)
   })
 
   it('should create a Blank Node subject if no subject was given', () => {
@@ -61,8 +62,8 @@ describe('.addOut', () => {
 
     const result = localGraph.match(subject, predicate)
 
-    assert.strictEqual(result.length, 1)
-    assert.strictEqual(result.toArray()[0].object.termType, 'BlankNode')
+    assert.strictEqual(result.size, 1)
+    assert.strictEqual([...result][0].object.termType, 'BlankNode')
   })
 
   it('should support array values as predicate', () => {
@@ -75,10 +76,11 @@ describe('.addOut', () => {
 
     cf.addOut([predicateA, predicateB], object)
 
-    const result = localGraph.match(subject, predicateA, object)
-      .addAll(localGraph.match(subject, predicateB, object))
+    const result = addAll(
+      localGraph.match(subject, predicateA, object),
+      localGraph.match(subject, predicateB, object))
 
-    assert.strictEqual(result.length, 2)
+    assert.strictEqual(result.size, 2)
   })
 
   it('should support array values as object', () => {
@@ -91,10 +93,11 @@ describe('.addOut', () => {
 
     cf.addOut(predicate, [objectA, objectB])
 
-    const result = localGraph.match(subject, predicate, objectA)
-      .addAll(localGraph.match(subject, predicate, objectB))
+    const result = addAll(
+      localGraph.match(subject, predicate, objectA),
+      localGraph.match(subject, predicate, objectB))
 
-    assert.strictEqual(result.length, 2)
+    assert.strictEqual(result.size, 2)
   })
 
   it('should call the given function with a context for all added objects', () => {
@@ -142,7 +145,7 @@ describe('.addOut', () => {
 
     const result = localGraph.match(subject, predicate, object)
 
-    assert.strictEqual(result.length, 1)
+    assert.strictEqual(result.size, 1)
   })
 
   it('should return the called object', () => {
