@@ -4,7 +4,7 @@ const assert = require('assert')
 const clownface = require('../..')
 const ns = require('../support/namespace')
 const rdf = require('../support/factory')
-const { addAll } = require('../support/utils')
+const { addAll } = require('rdf-dataset-ext')
 
 describe('.deleteList', () => {
   it('should be a function', () => {

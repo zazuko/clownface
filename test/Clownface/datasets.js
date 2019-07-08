@@ -3,7 +3,7 @@
 const assert = require('assert')
 const clownface = require('../..')
 const rdf = require('../support/factory')
-const { equals } = require('../support/utils')
+const { equals } = require('rdf-dataset-ext')
 
 describe('.datasets', () => {
   it('should be an array property', () => {

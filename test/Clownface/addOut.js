@@ -4,7 +4,7 @@ const assert = require('assert')
 const clownface = require('../..')
 const rdf = require('../support/factory')
 const initExample = require('../support/example')
-const { addAll } = require('../support/utils')
+const { addAll } = require('rdf-dataset-ext')
 
 describe('.addOut', () => {
   let graph

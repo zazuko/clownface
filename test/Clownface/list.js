@@ -4,7 +4,7 @@ const assert = require('assert')
 const clownface = require('../..')
 const rdf = require('../support/factory')
 const ns = require('../support/namespace')
-const { addAll } = require('../support/utils')
+const { addAll } = require('rdf-dataset-ext')
 
 describe('.list', () => {
   const listGraph = () => {

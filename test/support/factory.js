@@ -6,7 +6,7 @@ const factory = require('rdf-ext')
 const dataset = require('@rdfjs/dataset')
 const model = require('@rdfjs/data-model')
 
-const factory = Object.assign({}, model, dataset)
+const factory = { ...model, ...dataset }
 */
 
 module.exports = factory
