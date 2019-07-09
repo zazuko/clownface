@@ -3,7 +3,7 @@
 const assert = require('assert')
 const clownface = require('../..')
 const ns = require('../support/namespace')
-const rdf = require('rdf-ext')
+const rdf = require('../support/factory')
 const initExample = require('../support/example')
 
 describe('.addList', () => {
@@ -65,11 +65,11 @@ describe('.addList', () => {
 
     cf.addList(predicate, [item0, item1])
 
-    const entry = localGraph.match(subject, predicate).toArray()[0]
-    const first0 = localGraph.match(entry.object, ns.first, item0).toArray()[0]
-    const rest0 = localGraph.match(entry.object, ns.rest).toArray()[0]
-    const first1 = localGraph.match(rest0.object, ns.first, item1).toArray()[0]
-    const rest1 = localGraph.match(rest0.object, ns.rest, ns.nil).toArray()[0]
+    const entry = [...localGraph.match(subject, predicate)][0]
+    const first0 = [...localGraph.match(entry.object, ns.first, item0)][0]
+    const rest0 = [...localGraph.match(entry.object, ns.rest)][0]
+    const first1 = [...localGraph.match(rest0.object, ns.first, item1)][0]
+    const rest1 = [localGraph.match(rest0.object, ns.rest, ns.nil)][0]
 
     assert(entry)
     assert.strictEqual(entry.object.termType, 'BlankNode')

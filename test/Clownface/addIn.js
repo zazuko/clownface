@@ -2,8 +2,9 @@
 
 const assert = require('assert')
 const clownface = require('../..')
-const rdf = require('rdf-ext')
+const rdf = require('../support/factory')
 const initExample = require('../support/example')
+const { addAll } = require('rdf-dataset-ext')
 
 describe('.addIn', () => {
   let graph
@@ -48,7 +49,7 @@ describe('.addIn', () => {
 
     const result = localGraph.match(subject, predicate, object)
 
-    assert.strictEqual(result.length, 1)
+    assert.strictEqual(result.size, 1)
   })
 
   it('should create a Blank Node subject if no subject was given', () => {
@@ -61,8 +62,8 @@ describe('.addIn', () => {
 
     const result = localGraph.match(null, predicate, object)
 
-    assert.strictEqual(result.length, 1)
-    assert.strictEqual(result.toArray()[0].subject.termType, 'BlankNode')
+    assert.strictEqual(result.size, 1)
+    assert.strictEqual([...result][0].subject.termType, 'BlankNode')
   })
 
   it('should support array values as predicate', () => {
@@ -75,10 +76,11 @@ describe('.addIn', () => {
 
     cf.addIn([predicateA, predicateB], subject)
 
-    const result = localGraph.match(subject, predicateA, object)
-      .addAll(localGraph.match(subject, predicateB, object))
+    const result = addAll(
+      localGraph.match(subject, predicateA, object),
+      localGraph.match(subject, predicateB, object))
 
-    assert.strictEqual(result.length, 2)
+    assert.strictEqual(result.size, 2)
   })
 
   it('should support array values as subject', () => {
@@ -91,10 +93,11 @@ describe('.addIn', () => {
 
     cf.addIn(predicate, [subjectA, subjectB])
 
-    const result = localGraph.match(subjectA, predicate, object)
-      .addAll(localGraph.match(subjectB, predicate, object))
+    const result = addAll(
+      localGraph.match(subjectA, predicate, object),
+      localGraph.match(subjectB, predicate, object))
 
-    assert.strictEqual(result.length, 2)
+    assert.strictEqual(result.size, 2)
   })
 
   it('should call the given function with a context for all added subjects', () => {
@@ -142,7 +145,7 @@ describe('.addIn', () => {
 
     const result = localGraph.match(subject, predicate, object)
 
-    assert.strictEqual(result.length, 1)
+    assert.strictEqual(result.size, 1)
   })
 
   it('should return the called object', () => {

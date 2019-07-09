@@ -2,7 +2,7 @@
 
 const assert = require('assert')
 const clownface = require('../..')
-const rdf = require('rdf-ext')
+const rdf = require('../support/factory')
 
 describe('.dataset', () => {
   it('should be undefined if there is no context with a dataset', () => {

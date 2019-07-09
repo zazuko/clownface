@@ -2,7 +2,7 @@
 
 const assert = require('assert')
 const clownface = require('../..')
-const rdf = require('rdf-ext')
+const rdf = require('../support/factory')
 const initExample = require('../support/example')
 
 describe('.value', () => {
