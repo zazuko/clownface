@@ -61,6 +61,17 @@ describe('.literal', () => {
     assert.strictEqual(result._context[0].term.value, value.toString())
   })
 
+  it('should use the given boolean as Literal', () => {
+    const value = true
+    const cf = clownface(graph)
+
+    const result = cf.literal(value)
+
+    assert.strictEqual(result._context.length, 1)
+    assert.strictEqual(result._context[0].term.termType, 'Literal')
+    assert.strictEqual(result._context[0].term.value, value.toString())
+  })
+
   it('should support multiple values in an array', () => {
     const cf = clownface(graph)
 
