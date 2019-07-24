@@ -58,7 +58,8 @@ describe('.literal', () => {
 
     assert.strictEqual(result._context.length, 1)
     assert.strictEqual(result._context[0].term.termType, 'Literal')
-    assert.strictEqual(result._context[0].term.value, value.toString())
+    assert.strictEqual(result._context[0].term.value, value.toString(10))
+    assert.strictEqual(result._context[0].term.datatype.value, 'http://www.w3.org/2001/XMLSchema#double')
   })
 
   it('should use the given boolean as Literal', () => {
@@ -70,6 +71,7 @@ describe('.literal', () => {
     assert.strictEqual(result._context.length, 1)
     assert.strictEqual(result._context[0].term.termType, 'Literal')
     assert.strictEqual(result._context[0].term.value, value.toString())
+    assert.strictEqual(result._context[0].term.datatype.value, 'http://www.w3.org/2001/XMLSchema#boolean')
   })
 
   it('should support multiple values in an array', () => {
