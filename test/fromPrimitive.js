@@ -38,6 +38,10 @@ describe('fromPrimitive', () => {
     it('returns Literal with xsd:double datatype for number value', () => {
       assert(rdf.literal('3.21', xsd.double).equals(numberToLiteral(3.21)))
     })
+
+    it('returns Literal with xsd:integer datatype for a number value that is an integer', () => {
+      assert(rdf.literal('321', xsd.integer).equals(numberToLiteral(321)))
+    })
   })
 
   describe('stringToLiteral', () => {

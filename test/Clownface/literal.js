@@ -50,8 +50,8 @@ describe('.literal', () => {
     assert.strictEqual(result._context[0].term.value, value)
   })
 
-  it('should use the given number as Literal', () => {
-    const value = 123
+  it('should use the given double number as Literal', () => {
+    const value = 1.23
     const cf = clownface(graph)
 
     const result = cf.literal(value)
@@ -60,6 +60,18 @@ describe('.literal', () => {
     assert.strictEqual(result._context[0].term.termType, 'Literal')
     assert.strictEqual(result._context[0].term.value, value.toString(10))
     assert.strictEqual(result._context[0].term.datatype.value, 'http://www.w3.org/2001/XMLSchema#double')
+  })
+
+  it('should use the given integer number as Literal', () => {
+    const value = 123
+    const cf = clownface(graph)
+
+    const result = cf.literal(value)
+
+    assert.strictEqual(result._context.length, 1)
+    assert.strictEqual(result._context[0].term.termType, 'Literal')
+    assert.strictEqual(result._context[0].term.value, value.toString(10))
+    assert.strictEqual(result._context[0].term.datatype.value, 'http://www.w3.org/2001/XMLSchema#integer')
   })
 
   it('should use the given boolean as Literal', () => {
