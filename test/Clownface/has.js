@@ -1,29 +1,21 @@
-/* global before, describe, it */
+/* global describe, it */
 
 const assert = require('assert')
 const clownface = require('../..')
+const loadExample = require('../support/example')
 const rdf = require('../support/factory')
-const initExample = require('../support/example')
 const Clownface = require('../../lib/Clownface')
 
 describe('.has', () => {
-  let graph
-
-  before(() => {
-    return initExample().then(dataset => {
-      graph = dataset
-    })
-  })
-
   it('should be a function', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     assert.strictEqual(typeof cf.has, 'function')
   })
 
-  it('should return a new Dataset instance', () => {
+  it('should return a new Dataset instance', async () => {
     const predicate = rdf.namedNode('http://schema.org/givenName')
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: await loadExample() })
 
     const result = cf.has(predicate, 'Stuart')
 
@@ -31,19 +23,20 @@ describe('.has', () => {
     assert.notStrictEqual(result, cf)
   })
 
-  it('should use the dataset from the context', () => {
+  it('should use the dataset from the context', async () => {
+    const dataset = await loadExample()
     const predicate = rdf.namedNode('http://schema.org/givenName')
-    const cf = clownface(graph)
+    const cf = clownface({ dataset })
 
     const result = cf.has(predicate, 'Stuart')
 
-    assert.strictEqual(result._context[0].dataset, graph)
+    assert.strictEqual(result._context[0].dataset, dataset)
   })
 
-  it('should use the found subject in the context', () => {
+  it('should use the found subject in the context', async () => {
     const subject = rdf.namedNode('http://localhost:8080/data/person/stuart-bloom')
     const predicate = rdf.namedNode('http://schema.org/givenName')
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: await loadExample() })
 
     const result = cf.has(predicate, 'Stuart')
 
@@ -51,29 +44,29 @@ describe('.has', () => {
     assert(subject.equals(result._context[0].term))
   })
 
-  it('should support multiple predicates in an array', () => {
+  it('should support multiple predicates in an array', async () => {
     const predicateA = rdf.namedNode('http://schema.org/knows')
     const predicateB = rdf.namedNode('http://schema.org/spouse')
     const object = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: await loadExample() })
 
     const result = cf.has([predicateA, predicateB], object)
 
     assert.strictEqual(result._context.length, 8)
   })
 
-  it('should support multiple predicates in an array', () => {
+  it('should support multiple predicates in an array', async () => {
     const predicate = rdf.namedNode('http://schema.org/givenName')
     const objectA = rdf.literal('Leonard')
     const objectB = rdf.literal('Sheldon')
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: await loadExample() })
 
     const result = cf.has(predicate, [objectA, objectB])
 
     assert.strictEqual(result._context.length, 2)
   })
 
-  it('should use context term as subject', () => {
+  it('should use context term as subject', async () => {
     const subjectA = rdf.namedNode('http://localhost:8080/data/person/sheldon-cooper')
     const subjectB = rdf.namedNode('http://localhost:8080/data/person/stuart-bloom')
     const predicate = rdf.namedNode('http://schema.org/givenName')
@@ -82,7 +75,7 @@ describe('.has', () => {
       rdf.literal('Sheldon')
     ]
 
-    const cf = clownface(graph, [subjectA, subjectB])
+    const cf = clownface({ dataset: await loadExample(), term: [subjectA, subjectB] })
 
     const result = cf.has(predicate, objects)
 

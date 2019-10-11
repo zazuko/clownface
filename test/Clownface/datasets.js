@@ -7,17 +7,17 @@ const { equals } = require('rdf-dataset-ext')
 
 describe('.datasets', () => {
   it('should be an array property', () => {
-    const cf = clownface()
+    const cf = clownface({ dataset: rdf.dataset() })
 
     assert(Array.isArray(cf.datasets))
   })
 
   it('should be empty if there is no context with a dataset', () => {
-    const cf = clownface()
+    const cf = clownface({ dataset: rdf.dataset() })
 
-    const result = cf.datasets
+    cf._context = []
 
-    assert.deepStrictEqual(result, [])
+    assert.deepStrictEqual(cf.datasets, [])
   })
 
   it('should contain all datasets of the context', () => {
@@ -25,8 +25,7 @@ describe('.datasets', () => {
     const termB = rdf.namedNode('http://example.org/')
     const datasetA = rdf.dataset()
     const datasetB = rdf.dataset()
-
-    const cf = clownface(null, [termA, termB])
+    const cf = clownface({ dataset: rdf.dataset(), value: [termA, termB] })
 
     // TODO: should be possible with constructor or static method
     cf._context[0].dataset = datasetA

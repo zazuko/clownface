@@ -1,31 +1,21 @@
-/* global before, describe, it */
+/* global describe, it */
 
 const assert = require('assert')
 const clownface = require('../..')
 const rdf = require('../support/factory')
-const initExample = require('../support/example')
 const { addAll } = require('rdf-dataset-ext')
 
 describe('.addIn', () => {
-  let graph
-
-  before(() => {
-    return initExample().then(dataset => {
-      graph = dataset
-    })
-  })
-
   it('should be a function', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     assert.strictEqual(typeof cf.addIn, 'function')
   })
 
   it('should throw an error if predicate parameter is missing', () => {
-    const localGraph = rdf.dataset()
     const subject = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface(localGraph, object)
+    const cf = clownface({ dataset: rdf.dataset(), term: object })
 
     let touched = false
 
@@ -39,77 +29,77 @@ describe('.addIn', () => {
   })
 
   it('should add quads using the context term as object and the given predicate and subject', () => {
-    const localGraph = rdf.dataset()
+    const dataset = rdf.dataset()
     const subject = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
     const predicate = rdf.namedNode('http://schema.org/knows')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface(localGraph, object)
+    const cf = clownface({ dataset, term: object })
 
     cf.addIn(predicate, subject)
 
-    const result = localGraph.match(subject, predicate, object)
+    const result = dataset.match(subject, predicate, object)
 
     assert.strictEqual(result.size, 1)
   })
 
   it('should create a Blank Node subject if no subject was given', () => {
-    const localGraph = rdf.dataset()
+    const dataset = rdf.dataset()
     const predicate = rdf.namedNode('http://schema.org/knows')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface(localGraph, object)
+    const cf = clownface({ dataset, term: object })
 
     cf.addIn(predicate)
 
-    const result = localGraph.match(null, predicate, object)
+    const result = dataset.match(null, predicate, object)
 
     assert.strictEqual(result.size, 1)
     assert.strictEqual([...result][0].subject.termType, 'BlankNode')
   })
 
   it('should support array values as predicate', () => {
-    const localGraph = rdf.dataset()
+    const dataset = rdf.dataset()
     const subject = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
     const predicateA = rdf.namedNode('http://schema.org/knows')
     const predicateB = rdf.namedNode('http://schema.org/saw')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface(localGraph, object)
+    const cf = clownface({ dataset, term: object })
 
     cf.addIn([predicateA, predicateB], subject)
 
     const result = addAll(
-      localGraph.match(subject, predicateA, object),
-      localGraph.match(subject, predicateB, object))
+      dataset.match(subject, predicateA, object),
+      dataset.match(subject, predicateB, object))
 
     assert.strictEqual(result.size, 2)
   })
 
   it('should support array values as subject', () => {
-    const localGraph = rdf.dataset()
+    const dataset = rdf.dataset()
     const subjectA = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
     const subjectB = rdf.namedNode('http://localhost:8080/data/person/penny')
     const predicate = rdf.namedNode('http://schema.org/saw')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface(localGraph, object)
+    const cf = clownface({ dataset, term: object })
 
     cf.addIn(predicate, [subjectA, subjectB])
 
     const result = addAll(
-      localGraph.match(subjectA, predicate, object),
-      localGraph.match(subjectB, predicate, object))
+      dataset.match(subjectA, predicate, object),
+      dataset.match(subjectB, predicate, object))
 
     assert.strictEqual(result.size, 2)
   })
 
   it('should call the given function with a context for all added subjects', () => {
-    const localGraph = rdf.dataset()
+    const dataset = rdf.dataset()
     const subjectA = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
     const subjectB = rdf.namedNode('http://localhost:8080/data/person/penny')
     const predicateA = rdf.namedNode('http://schema.org/knows')
     const predicateB = rdf.namedNode('http://schema.org/saw')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface(localGraph, object)
+    const cf = clownface({ dataset, term: object })
 
-    let result
+    let result = null
 
     cf.addIn([predicateA, predicateB], [subjectA, subjectB], child => {
       result = child.values
@@ -119,12 +109,12 @@ describe('.addIn', () => {
   })
 
   it('should call the given function with a Blank Node context for the created subject', () => {
-    const localGraph = rdf.dataset()
+    const dataset = rdf.dataset()
     const predicate = rdf.namedNode('http://schema.org/knows')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface(localGraph, object)
+    const cf = clownface({ dataset, term: object })
 
-    let result
+    let result = null
 
     cf.addIn(predicate, child => {
       result = child
@@ -135,25 +125,25 @@ describe('.addIn', () => {
   })
 
   it('should support clownface objects as predicate and subject', () => {
-    const localGraph = rdf.dataset()
+    const dataset = rdf.dataset()
     const subject = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
     const predicate = rdf.namedNode('http://schema.org/knows')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface(localGraph, object)
+    const cf = clownface({ dataset, term: object })
 
     cf.addIn(cf.node(predicate), cf.node(subject))
 
-    const result = localGraph.match(subject, predicate, object)
+    const result = dataset.match(subject, predicate, object)
 
     assert.strictEqual(result.size, 1)
   })
 
   it('should return the called object', () => {
-    const localGraph = rdf.dataset()
+    const dataset = rdf.dataset()
     const subject = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
     const predicate = rdf.namedNode('http://schema.org/knows')
     const object = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface(localGraph, object)
+    const cf = clownface({ dataset, term: object })
 
     assert.strictEqual(cf.addIn(predicate, subject), cf)
   })

@@ -1,29 +1,20 @@
-/* global before, describe, it */
+/* global describe, it */
 
 const assert = require('assert')
 const clownface = require('../..')
-const rdf = require('rdf-ext')
-const rdfDataModel = require('@rdfjs/data-model')
-const initExample = require('../support/example')
+const loadExample = require('../support/example')
+const rdf = require('../support/factory')
 const Clownface = require('../../lib/Clownface')
 
 describe('.literal', () => {
-  let graph
-
-  before(() => {
-    return initExample().then(dataset => {
-      graph = dataset
-    })
-  })
-
   it('should be a function', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     assert.strictEqual(typeof cf.literal, 'function')
   })
 
   it('should return a new Clownface instance', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.literal('example')
 
@@ -32,16 +23,17 @@ describe('.literal', () => {
   })
 
   it('should use the dataset from the context', () => {
-    const cf = clownface(graph)
+    const dataset = rdf.dataset()
+    const cf = clownface({ dataset })
 
     const result = cf.literal('example')
 
-    assert.strictEqual(result._context[0].dataset, graph)
+    assert.strictEqual(result._context[0].dataset, dataset)
   })
 
-  it('should use the given string as Literal', () => {
+  it('should use the given string as Literal', async () => {
     const value = '2311 North Los Robles Avenue, Aparment 4A'
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: await loadExample() })
 
     const result = cf.literal(value)
 
@@ -52,7 +44,7 @@ describe('.literal', () => {
 
   it('should use the given double number as Literal', () => {
     const value = 1.23
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.literal(value)
 
@@ -64,7 +56,7 @@ describe('.literal', () => {
 
   it('should use the given integer number as Literal', () => {
     const value = 123
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.literal(value)
 
@@ -76,7 +68,7 @@ describe('.literal', () => {
 
   it('should use the given boolean as Literal', () => {
     const value = true
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.literal(value)
 
@@ -87,7 +79,7 @@ describe('.literal', () => {
   })
 
   it('should support multiple values in an array', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.literal(['1', '2'])
 
@@ -100,7 +92,7 @@ describe('.literal', () => {
 
   it('should use the given datatype', () => {
     const datatypeIri = 'http://example.org/datatype'
-    const cf = clownface(rdf.dataset())
+    const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.literal('example', datatypeIri)
 
@@ -111,8 +103,8 @@ describe('.literal', () => {
   })
 
   it('should accept rdfjs NamedNodes as datatype', () => {
-    const datatype = rdfDataModel.namedNode('http://example.org/datatype')
-    const cf = clownface(rdf.dataset())
+    const datatype = rdf.namedNode('http://example.org/datatype')
+    const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.literal('example', datatype)
 
@@ -124,7 +116,7 @@ describe('.literal', () => {
 
   it('should use the given language', () => {
     const language = 'en'
-    const cf = clownface(rdf.dataset())
+    const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.literal('example', language)
 

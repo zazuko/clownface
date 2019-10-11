@@ -1,27 +1,18 @@
-/* global before, describe, it */
+/* global describe, it */
 
 const assert = require('assert')
 const clownface = require('../..')
 const rdf = require('../support/factory')
-const initExample = require('../support/example')
 
 describe('.terms', () => {
-  let graph
-
-  before(() => {
-    return initExample().then(dataset => {
-      graph = dataset
-    })
-  })
-
   it('should be an array property', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     assert(Array.isArray(cf.terms))
   })
 
   it('should be empty if there is no context with a term', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.terms
 
@@ -31,8 +22,7 @@ describe('.terms', () => {
   it('should contain all terms of the context', () => {
     const termA = rdf.literal('1')
     const termB = rdf.namedNode('http://example.org/')
-
-    const cf = clownface(graph, [termA, termB])
+    const cf = clownface({ dataset: rdf.dataset(), term: [termA, termB] })
 
     const result = cf.terms
 

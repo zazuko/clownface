@@ -6,36 +6,36 @@ const rdf = require('../support/factory')
 const ns = require('../support/namespace')
 const { addAll } = require('rdf-dataset-ext')
 
+function listDataset () {
+  const start = rdf.blankNode()
+  const item = [rdf.blankNode(), rdf.blankNode(), rdf.blankNode()]
+
+  return rdf.dataset([
+    rdf.quad(start, ns.list, item[0]),
+    rdf.quad(item[0], ns.first, rdf.literal('1')),
+    rdf.quad(item[0], ns.rest, item[1]),
+    rdf.quad(item[1], ns.first, rdf.literal('2')),
+    rdf.quad(item[1], ns.rest, item[2]),
+    rdf.quad(item[2], ns.first, rdf.literal('3')),
+    rdf.quad(item[2], ns.rest, ns.nil)
+  ])
+}
+
 describe('.list', () => {
-  const listGraph = () => {
-    const start = rdf.blankNode()
-    const item = [rdf.blankNode(), rdf.blankNode(), rdf.blankNode()]
-
-    return rdf.dataset([
-      rdf.quad(start, ns.list, item[0]),
-      rdf.quad(item[0], ns.first, rdf.literal('1')),
-      rdf.quad(item[0], ns.rest, item[1]),
-      rdf.quad(item[1], ns.first, rdf.literal('2')),
-      rdf.quad(item[1], ns.rest, item[2]),
-      rdf.quad(item[2], ns.first, rdf.literal('3')),
-      rdf.quad(item[2], ns.rest, ns.nil)
-    ])
-  }
-
   it('should be a function', () => {
-    const cf = clownface(listGraph())
+    const cf = clownface({ dataset: listDataset() })
 
     assert.strictEqual(typeof cf.list, 'function')
   })
 
   it('should return an iterator', () => {
-    const cf = clownface(listGraph())
+    const cf = clownface({ dataset: listDataset() })
 
     assert.strictEqual(typeof cf.out(ns.list).list()[Symbol.iterator], 'function')
   })
 
   it('should iterate over a single term context', () => {
-    const cf = clownface(listGraph())
+    const cf = clownface({ dataset: listDataset() })
 
     const result = []
 
@@ -47,7 +47,7 @@ describe('.list', () => {
   })
 
   it('should not iterate over a multiple term context', () => {
-    const cf = clownface(addAll(listGraph(), listGraph()))
+    const cf = clownface({ dataset: addAll(listDataset(), listDataset()) })
 
     let list
     let touched = false
@@ -63,11 +63,11 @@ describe('.list', () => {
   })
 
   it('should return empty iterator when no list exists', () => {
-    const cf = clownface(listGraph())
+    const cf = clownface({ dataset: listDataset() })
 
     const list = cf.out(rdf.namedNode('http://example.com/not-list')).list()[Symbol.iterator]()
-
     const first = list.next()
+
     assert.strictEqual(first.done, true)
   })
 })

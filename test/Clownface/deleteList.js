@@ -2,21 +2,24 @@
 
 const assert = require('assert')
 const clownface = require('../..')
-const ns = require('../support/namespace')
 const rdf = require('../support/factory')
+const ns = require('../support/namespace')
 const { addAll } = require('rdf-dataset-ext')
 
 describe('.deleteList', () => {
   it('should be a function', () => {
-    const cf = clownface()
+    const cf = clownface({ dataset: rdf.dataset() })
 
     assert.strictEqual(typeof cf.deleteList, 'function')
   })
 
   it('should throw an error if predicate parameter is missing', () => {
-    const localGraph = rdf.dataset()
+    const dataset = rdf.dataset()
     const subject = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
-    const cf = clownface(localGraph, subject)
+    const cf = clownface({
+      dataset,
+      term: subject
+    })
 
     let touched = false
 
@@ -30,7 +33,7 @@ describe('.deleteList', () => {
   })
 
   it('should remove list quads using the context term as subject and the given predicate', () => {
-    const localGraph = rdf.dataset()
+    const dataset = rdf.dataset()
     const subject = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
     const predicate = rdf.namedNode('http://schema.org/counts')
     const predicateOther = rdf.namedNode('http://schema.org/other')
@@ -39,9 +42,12 @@ describe('.deleteList', () => {
     const first0 = rdf.blankNode()
     const first1 = rdf.blankNode()
     const other = rdf.quad(subject, predicateOther, item0)
-    const cf = clownface(localGraph, subject)
+    const cf = clownface({
+      dataset,
+      term: subject
+    })
 
-    addAll(localGraph, [
+    addAll(dataset, [
       other,
       rdf.quad(subject, predicate, first0),
       rdf.quad(first0, ns.first, item0),
@@ -52,7 +58,7 @@ describe('.deleteList', () => {
 
     cf.deleteList(predicate)
 
-    assert.strictEqual(localGraph.size, 1)
-    assert([...localGraph][0].equals(other))
+    assert.strictEqual(dataset.size, 1)
+    assert([...dataset][0].equals(other))
   })
 })

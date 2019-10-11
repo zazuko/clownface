@@ -1,27 +1,19 @@
-/* global before, describe, it */
+/* global describe, it */
 
 const assert = require('assert')
 const clownface = require('../..')
-const initExample = require('../support/example')
+const rdf = require('../support/factory')
 const Clownface = require('../../lib/Clownface')
 
 describe('.namedNode', () => {
-  let graph
-
-  before(() => {
-    return initExample().then(dataset => {
-      graph = dataset
-    })
-  })
-
   it('should be a function', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     assert.strictEqual(typeof cf.namedNode, 'function')
   })
 
   it('should return a new Clownface instance', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.namedNode('http://localhost:8080/data/person/stuart-bloom')
 
@@ -30,16 +22,17 @@ describe('.namedNode', () => {
   })
 
   it('should use the dataset from the context', () => {
-    const cf = clownface(graph)
+    const dataset = rdf.dataset()
+    const cf = clownface({ dataset })
 
     const result = cf.namedNode('http://localhost:8080/data/person/stuart-bloom')
 
-    assert.strictEqual(result._context[0].dataset, graph)
+    assert.strictEqual(result._context[0].dataset, dataset)
   })
 
   it('should use the given string as IRI for the Named Node', () => {
     const iri = 'http://localhost:8080/data/person/stuart-bloom'
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.namedNode(iri)
 
@@ -51,7 +44,7 @@ describe('.namedNode', () => {
   it('should support multiple values in an array', () => {
     const iriA = 'http://example.org/a'
     const iriB = 'http://example.org/b'
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.namedNode([iriA, iriB])
 

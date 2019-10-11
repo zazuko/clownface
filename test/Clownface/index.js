@@ -1,6 +1,7 @@
 /* global describe */
 
 describe('Clownface', () => {
+  require('./constructor')
   require('./factory')
   require('./term')
   require('./terms')
