@@ -21,7 +21,7 @@ describe('.value', () => {
   it('should be undefined if there are multiple terms in the context', () => {
     const termA = rdf.literal('1')
     const termB = rdf.namedNode('http://example.org/')
-    const cf = clownface({ dataset: rdf.dataset(), terms: [termA, termB] })
+    const cf = clownface({ dataset: rdf.dataset(), term: [termA, termB] })
 
     assert.strictEqual(typeof cf.value, 'undefined')
   })
