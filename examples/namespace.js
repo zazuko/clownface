@@ -6,7 +6,7 @@ initExample().then(dataset => {
   const people = namespace('http://localhost:8080/data/person/')
   const schema = namespace('http://schema.org/')
 
-  const tbbt = clownface({ dataset} )
+  const tbbt = clownface({ dataset })
 
   const stuartBloom = tbbt.node(people('stuart-bloom'))
 
