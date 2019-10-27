@@ -1,28 +1,23 @@
-/* global before, describe, it */
+/* global describe, it */
 
 const assert = require('assert')
 const clownface = require('../..')
+const loadExample = require('../support/example')
 const rdf = require('../support/factory')
-const initExample = require('../support/example')
 const Clownface = require('../../lib/Clownface')
 
 describe('.out', () => {
-  let graph
-
-  before(() => {
-    return initExample().then(dataset => {
-      graph = dataset
-    })
-  })
-
   it('should be a function', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     assert.strictEqual(typeof cf.out, 'function')
   })
 
-  it('should return a new Dataset instance', () => {
-    const cf = clownface(graph, rdf.namedNode('http://localhost:8080/data/person/amy-farrah-fowler'))
+  it('should return a new Dataset instance', async () => {
+    const cf = clownface({
+      dataset: await loadExample(),
+      term: rdf.namedNode('http://localhost:8080/data/person/amy-farrah-fowler')
+    })
 
     const result = cf.out(rdf.namedNode('http://schema.org/jobTitle'))
 
@@ -30,8 +25,11 @@ describe('.out', () => {
     assert.notStrictEqual(result, cf)
   })
 
-  it('should search subject -> object', () => {
-    const cf = clownface(graph, rdf.namedNode('http://localhost:8080/data/person/amy-farrah-fowler'))
+  it('should search subject -> object', async () => {
+    const cf = clownface({
+      dataset: await loadExample(),
+      term: rdf.namedNode('http://localhost:8080/data/person/amy-farrah-fowler')
+    })
 
     const result = cf.out(rdf.namedNode('http://schema.org/jobTitle'))
 
@@ -40,8 +38,11 @@ describe('.out', () => {
     assert.strictEqual(result._context[0].term.value, 'neurobiologist')
   })
 
-  it('should support multiple predicate values in an array', () => {
-    const cf = clownface(graph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
+  it('should support multiple predicate values in an array', async () => {
+    const cf = clownface({
+      dataset: await loadExample(),
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+    })
 
     const result = cf.out([
       rdf.namedNode('http://schema.org/familyName'),
@@ -51,8 +52,11 @@ describe('.out', () => {
     assert.strictEqual(result._context.length, 2)
   })
 
-  it('should support clownface objects as predicates', () => {
-    const cf = clownface(graph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
+  it('should support clownface objects as predicates', async () => {
+    const cf = clownface({
+      dataset: await loadExample(),
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+    })
 
     const result = cf.out(cf.node([
       rdf.namedNode('http://schema.org/familyName'),

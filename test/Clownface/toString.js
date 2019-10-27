@@ -1,50 +1,44 @@
-/* global before, describe, it */
+/* global describe, it */
 
 const assert = require('assert')
 const clownface = require('../..')
+const loadExample = require('../support/example')
 const rdf = require('../support/factory')
-const initExample = require('../support/example')
 
 describe('.toString', () => {
-  let graph
-
-  before(() => {
-    return initExample().then(dataset => {
-      graph = dataset
-    })
-  })
-
   it('should be a function', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     assert.strictEqual(typeof cf.toString, 'function')
   })
 
   it('should return a string', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     assert.strictEqual(typeof cf.toString(), 'string')
   })
 
-  it('should return the value of a single term', () => {
-    const cf = clownface(graph)
+  it('should return the value of a single term', async () => {
+    const cf = clownface({
+      dataset: await loadExample(),
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+    })
 
-    const result = cf.node(rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
-      .out(rdf.namedNode('http://schema.org/givenName'))
-      .toString()
+    const result = cf.out(rdf.namedNode('http://schema.org/givenName')).toString()
 
     assert.strictEqual(result, 'Bernadette')
   })
 
-  it('should return comma separated values if multiple terms', () => {
-    const cf = clownface(graph)
+  it('should return comma separated values if multiple terms', async () => {
+    const cf = clownface({
+      dataset: await loadExample(),
+      term: [
+        rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
+        rdf.namedNode('http://localhost:8080/data/person/howard-wolowitz')
+      ]
+    })
 
-    const givenName = cf.node([
-      rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
-      rdf.namedNode('http://localhost:8080/data/person/howard-wolowitz')
-    ])
-      .out(rdf.namedNode('http://schema.org/givenName'))
-      .toString()
+    const givenName = cf.out(rdf.namedNode('http://schema.org/givenName')).toString()
 
     assert.strictEqual(givenName, 'Bernadette,Howard')
   })

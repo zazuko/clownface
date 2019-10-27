@@ -1,60 +1,61 @@
-/* global before, describe, it */
+/* global describe, it */
 
 const assert = require('assert')
 const clownface = require('../..')
+const loadExample = require('../support/example')
 const rdf = require('../support/factory')
-const initExample = require('../support/example')
 const { addAll } = require('rdf-dataset-ext')
 
 describe('.deleteIn', () => {
-  let graph
-
-  before(() => {
-    return initExample().then(dataset => {
-      graph = dataset
-    })
-  })
-
   it('should be a function', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     assert.strictEqual(typeof cf.deleteIn, 'function')
   })
 
-  it('should return the called object', () => {
-    const localGraph = addAll(rdf.dataset(), graph)
-    const cf = clownface(localGraph)
+  it('should return the called object', async () => {
+    const dataset = addAll(rdf.dataset(), await loadExample())
+    const cf = clownface({ dataset })
 
     assert.strictEqual(cf.deleteIn(), cf)
   })
 
-  it('should remove quads based on the object value', () => {
-    const localGraph = addAll(rdf.dataset(), graph)
-    const cf = clownface(localGraph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
+  it('should remove quads based on the object value', async () => {
+    const dataset = addAll(rdf.dataset(), await loadExample())
+    const cf = clownface({
+      dataset,
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+    })
 
     cf.deleteIn()
 
-    assert.strictEqual(localGraph.size, 118)
+    assert.strictEqual(dataset.size, 118)
   })
 
-  it('should remove quads based on the object value and predicate', () => {
-    const localGraph = addAll(rdf.dataset(), graph)
-    const cf = clownface(localGraph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
+  it('should remove quads based on the object value and predicate', async () => {
+    const dataset = addAll(rdf.dataset(), await loadExample())
+    const cf = clownface({
+      dataset,
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+    })
 
     cf.deleteIn(rdf.namedNode('http://schema.org/knows'))
 
-    assert.strictEqual(localGraph.size, 119)
+    assert.strictEqual(dataset.size, 119)
   })
 
-  it('should remove quads based on the object value and multiple predicates', () => {
-    const localGraph = addAll(rdf.dataset(), graph)
-    const cf = clownface(localGraph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
+  it('should remove quads based on the object value and multiple predicates', async () => {
+    const dataset = addAll(rdf.dataset(), await loadExample())
+    const cf = clownface({
+      dataset,
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+    })
 
     cf.deleteIn([
       rdf.namedNode('http://schema.org/knows'),
       rdf.namedNode('http://schema.org/spouse')
     ])
 
-    assert.strictEqual(localGraph.size, 118)
+    assert.strictEqual(dataset.size, 118)
   })
 })

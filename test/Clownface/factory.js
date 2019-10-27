@@ -1,43 +1,42 @@
-/* global before, describe, it */
+/* global describe, it */
 
 const assert = require('assert')
 const clownface = require('../..')
-const initExample = require('../support/example')
+const rdf = require('../support/factory')
 const Clownface = require('../../lib/Clownface')
 
 describe('factory', () => {
-  let graph
-
-  before(() => {
-    return initExample().then(dataset => {
-      graph = dataset
-    })
-  })
-
-  it('should create a Dataset object', () => {
-    const cf = clownface(graph)
+  it('should create a Clownface object', () => {
+    const dataset = rdf.dataset()
+    const cf = clownface({ dataset })
 
     assert(cf instanceof Clownface)
   })
 
-  it('should create an empty context', () => {
-    const cf = clownface(graph)
+  it('should forward the dataset argument', () => {
+    const dataset = rdf.dataset()
+    const cf = clownface({ dataset })
 
     assert.strictEqual(cf._context.length, 1)
-    assert.strictEqual(cf._context[0].dataset, graph)
-    assert(!cf._context[0].graph)
-    assert(!cf._context[0].term)
+    assert.strictEqual(cf._context[0].dataset, dataset)
   })
 
-  it('should throw an error if an unknown type is given', () => {
-    let catched = false
+  it('should forward the term argument', () => {
+    const dataset = rdf.dataset()
+    const term = rdf.namedNode('http://example.org/subject')
+    const cf = clownface({ dataset, term })
 
-    try {
-      clownface(graph, new RegExp())
-    } catch (e) {
-      catched = true
-    }
+    assert.strictEqual(cf._context.length, 1)
+    assert.strictEqual(cf._context[0].term, term)
+  })
 
-    assert.strictEqual(catched, true)
+  it('should forward the value argument', () => {
+    const dataset = rdf.dataset()
+    const value = 'abc'
+    const cf = clownface({ dataset, value })
+
+    assert.strictEqual(cf._context.length, 1)
+    assert.strictEqual(cf._context[0].term.termType, 'Literal')
+    assert.strictEqual(cf._context[0].term.value, value)
   })
 })

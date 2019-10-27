@@ -1,27 +1,19 @@
-/* global before, describe, it */
+/* global describe, it */
 
 const assert = require('assert')
 const clownface = require('../..')
-const initExample = require('../support/example')
+const rdf = require('../support/factory')
 const Clownface = require('../../lib/Clownface')
 
 describe('.blankNode', () => {
-  let graph
-
-  before(() => {
-    return initExample().then(dataset => {
-      graph = dataset
-    })
-  })
-
   it('should be a function', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     assert.strictEqual(typeof cf.blankNode, 'function')
   })
 
   it('should return a new Clownface instance', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.blankNode()
 
@@ -30,15 +22,16 @@ describe('.blankNode', () => {
   })
 
   it('should use the dataset from the context', () => {
-    const cf = clownface(graph)
+    const dataset = rdf.dataset()
+    const cf = clownface({ dataset })
 
     const result = cf.blankNode()
 
-    assert.strictEqual(result._context[0].dataset, graph)
+    assert.strictEqual(result._context[0].dataset, dataset)
   })
 
   it('should create a context with a Blank Node term', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.blankNode()
 
@@ -48,7 +41,7 @@ describe('.blankNode', () => {
 
   it('should use the given label for the Blank Node', () => {
     const label = 'b321'
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.blankNode(label)
 
@@ -60,7 +53,7 @@ describe('.blankNode', () => {
   it('should support multiple values in an array', () => {
     const labelA = 'b321a'
     const labelB = 'b321b'
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.blankNode([labelA, labelB])
 

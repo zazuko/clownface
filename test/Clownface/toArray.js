@@ -1,34 +1,29 @@
-/* global before, describe, it */
+/* global describe, it */
 
 const assert = require('assert')
 const clownface = require('../..')
+const loadExample = require('../support/example')
 const rdf = require('../support/factory')
-const initExample = require('../support/example')
 const Clownface = require('../../lib/Clownface')
 
 describe('.toArray', () => {
-  let graph
-
-  before(() => {
-    return initExample().then(dataset => {
-      graph = dataset
-    })
-  })
-
   it('should be a function', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     assert.strictEqual(typeof cf.toArray, 'function')
   })
 
   it('should return an array', () => {
-    const cf = clownface(graph)
+    const cf = clownface({ dataset: rdf.dataset() })
 
     assert(Array.isArray(cf.toArray()))
   })
 
-  it('should return a Dataset instance for every context object', () => {
-    const cf = clownface(graph, rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'))
+  it('should return a Dataset instance for every context object', async () => {
+    const cf = clownface({
+      dataset: await loadExample(),
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+    })
 
     const result = cf.in(rdf.namedNode('http://schema.org/knows')).toArray()
 
