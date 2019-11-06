@@ -58,6 +58,21 @@ describe('.addOut', () => {
     assert.strictEqual([...result][0].object.termType, 'BlankNode')
   })
 
+  it('should add a string Literal Node object when objects are falsy literals', () => {
+    const dataset = rdf.dataset()
+    const subject = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
+    const predicate = rdf.namedNode('http://schema.org/knows')
+    const cf = clownface({ dataset, term: subject })
+
+    cf.addOut(predicate, ['', 0])
+
+    const result = dataset.match(subject, predicate)
+
+    assert.strictEqual(result.size, 2)
+    assert.strictEqual([...result][0].object.termType, 'Literal')
+    assert.strictEqual([...result][1].object.termType, 'Literal')
+  })
+
   it('should support array values as predicate', () => {
     const dataset = rdf.dataset()
     const subject = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
