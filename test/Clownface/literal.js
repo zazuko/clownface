@@ -78,6 +78,51 @@ describe('.literal', () => {
     assert.strictEqual(result._context[0].term.datatype.value, 'http://www.w3.org/2001/XMLSchema#boolean')
   })
 
+  it('should use the given false boolean as Literal', () => {
+    const value = false
+    const cf = clownface({ dataset: rdf.dataset() })
+
+    const result = cf.literal(value)
+
+    assert.strictEqual(result._context.length, 1)
+    assert.strictEqual(result._context[0].term.termType, 'Literal')
+    assert.strictEqual(result._context[0].term.value, value.toString())
+    assert.strictEqual(result._context[0].term.datatype.value, 'http://www.w3.org/2001/XMLSchema#boolean')
+  })
+
+  it('should use the numeric 0 as Literal', () => {
+    const value = 0
+    const cf = clownface({ dataset: rdf.dataset() })
+
+    const result = cf.literal(value)
+
+    assert.strictEqual(result._context.length, 1)
+    assert.strictEqual(result._context[0].term.termType, 'Literal')
+    assert.strictEqual(result._context[0].term.value, value.toString())
+    assert.strictEqual(result._context[0].term.datatype.value, 'http://www.w3.org/2001/XMLSchema#integer')
+  })
+
+  it('should use empty string as Literal', () => {
+    const value = ''
+    const cf = clownface({ dataset: rdf.dataset() })
+
+    const result = cf.literal(value)
+
+    assert.strictEqual(result._context.length, 1)
+    assert.strictEqual(result._context[0].term.termType, 'Literal')
+    assert.strictEqual(result._context[0].term.value, value.toString())
+    assert.strictEqual(result._context[0].term.datatype.value, 'http://www.w3.org/2001/XMLSchema#string')
+  })
+
+  it('should not create nodes for empty array', () => {
+    const value = []
+    const cf = clownface({ dataset: rdf.dataset() })
+
+    const result = cf.literal(value)
+
+    assert.strictEqual(result._context.length, 0)
+  })
+
   it('should support multiple values in an array', () => {
     const cf = clownface({ dataset: rdf.dataset() })
 
