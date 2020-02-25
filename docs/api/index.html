@@ -62,35 +62,63 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
-					<h1>Installation</h1>
+				<a href="#clownface" id="clownface" style="color: inherit; text-decoration: none;">
+					<h1>clownface</h1>
 				</a>
-				<blockquote>
-					<p><code>npm install --save @types/clownface</code></p>
-				</blockquote>
-				<a href="#summary" id="summary" style="color: inherit; text-decoration: none;">
-					<h1>Summary</h1>
+				<p><a href="https://travis-ci.org/rdf-ext/clownface"><img src="https://travis-ci.org/rdf-ext/clownface.svg?branch=master" alt="Build Status"></a>
+				<a href="https://npm.im/clownface"><img src="https://img.shields.io/npm/v/clownface.svg?style=flat" alt="NPM Version"></a></p>
+				<p>Clownface is a graph traversal library inspired by <a href="http://tinkerpop.apache.org/">Gremlin</a>
+				which allows to query any <a href="https://rdf.js.org/dataset-spec/">RDF dataset</a> in a concise and readable way.</p>
+				<a href="#introduction" id="introduction" style="color: inherit; text-decoration: none;">
+					<h2>Introduction</h2>
 				</a>
-				<p>This package contains type definitions for clownface (<a href="https://github.com/rdf-ext/clownface">https://github.com/rdf-ext/clownface</a>).</p>
+				<p>Querying an RDF graph can be challenging. Apart from trivial queries, e.g. simply listing all the
+					objects connected to a subject, it is usually necessary to write multiple loop and validation
+				conditions to retrieve an answer. Clownface is there to help.</p>
+				<p>If we would like to get the given name and family name of all persons known by e.g. Stuart Bloom
+				(from <a href="https://github.com/zazuko/tbbt-ld">tbbt-ld</a>) we can write:</p>
+				<run-kit>
+					<pre><code class="language-js"><span class="hljs-keyword">const</span> cf = <span class="hljs-built_in">require</span>(<span class="hljs-string">'clownface'</span>)
+<span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@rdfjs/fetch'</span>)
+<span class="hljs-keyword">const</span> { schema } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@tpluscode/rdf-ns-builders'</span>)
+
+<span class="hljs-comment">// load the tbbt-ld graph</span>
+<span class="hljs-keyword">const</span> dataset = <span class="hljs-keyword">await</span> fetch(<span class="hljs-string">'http://zazuko.github.io/tbbt-ld/dist/tbbt.nt'</span>)
+  .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.dataset())
+
+<span class="hljs-comment">// turn the RDF/JS dataset into a Clownface context</span>
+<span class="hljs-keyword">const</span> tbbt = cf({ dataset })
+
+<span class="hljs-comment">// get a starting node inside the dataset</span>
+<span class="hljs-keyword">const</span> stuartBloom = tbbt.namedNode(<span class="hljs-string">'http://localhost:8080/data/person/stuart-bloom'</span>)
+
+<span class="hljs-comment">// query for all people Stuart knows and print their full name</span>
+stuartBloom
+  <span class="hljs-comment">// get all nodes connected through schema:knows </span>
+  .out(schema.knows) 
+  <span class="hljs-comment">// for every result</span>
+  .map(<span class="hljs-function">(<span class="hljs-params">person</span>) =&gt;</span> {
+    <span class="hljs-comment">// get their schema:givenName and schema:familyName</span>
+    <span class="hljs-keyword">const</span> personalInformation = person.out([
+      schema.givenName,
+      schema.familyName
+    ])
+    <span class="hljs-comment">// join the givenName and familyName with a space</span>
+    <span class="hljs-keyword">return</span> personalInformation.values.join(<span class="hljs-string">' '</span>)
+  })
+  <span class="hljs-comment">// join the list of names with a comma</span>
+  .join(<span class="hljs-string">', '</span>)</code></pre>
+				</run-kit>
 				<a href="#details" id="details" style="color: inherit; text-decoration: none;">
-					<h1>Details</h1>
+					<h2>Details</h2>
 				</a>
-				<p>Files were exported from <a href="https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/clownface">https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/clownface</a>.</p>
-				<a href="#additional-details" id="additional-details" style="color: inherit; text-decoration: none;">
-					<h3>Additional Details</h3>
-				</a>
-				<ul>
-					<li>Last updated: Thu, 30 Jan 2020 21:15:26 GMT</li>
-					<li>Dependencies: <a href="https://npmjs.com/package/@types/rdf-js">@types/rdf-js</a></li>
-					<li>Global values: none</li>
-				</ul>
-				<a href="#credits" id="credits" style="color: inherit; text-decoration: none;">
-					<h1>Credits</h1>
-				</a>
-				<p>These definitions were written by tpluscode (<a href="https://github.com/tpluscode">https://github.com/tpluscode</a>).</p>
+				<p>Clownface provides a set of chainable methods. The most important ones are <code>.in(predicate)</code> and <code>.out(predicate)</code> which allow the traversal through the graph. It is possible to chain as many of these methods to extract a sub-graph from the available dataset.</p>
+				<p>Finally the result of your query can be accessed with <code>.values</code>.</p>
+				<p>We use the well known <code>&lt;subject&gt;</code> <code>&lt;predicate&gt;</code> <code>&lt;object&gt;</code> nomenclature for a triple in the following description. All examples are based on the toy dataset <a href="https://github.com/zazuko/tbbt-ld">tbbt-ld</a>.</p>
 				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
 					<h1>API</h1>
 				</a>
+				<p>Check the generated Typedoc pages at <a href="/api"><code>/api</code></a></p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

@@ -8,7 +8,7 @@
     "test": "nyc mocha",
     "posttest": "nyc report --reporter=text-lcov > coverage.lcov",
     "docs:serve": "docsify serve docs",
-    "docs:api": "typedoc --out docs/typedoc node_modules/@types/clownface/ --includeDeclarations --excludeExternals --name clownface"
+    "docs:api": "typedoc --out docs/api node_modules/@types/clownface/ --includeDeclarations --excludeExternals --name clownface --readme docs/README.md"
   },
   "repository": {
     "type": "git",
