@@ -23,15 +23,42 @@ npm i -S clownface
 To start using it, an instance of [RDF/JS `DatasetCore`](https://rdf.js.org/dataset-spec/#datasetcore-interface) must be
 provided to the exported factory method
 
+<run-kit>
+
 ```js
 const cf = require('clownface')
 const dataset = require('rdf-dataset-indexed')
+const { foaf } = require('@tpluscode/rdf-ns-builders')
 
+// initialize
 const graph = cf({ dataset: dataset() })
+
+// add some resources 
+graph
+  .namedNode('http://localhost:8080/data/person/stuart-bloom')
+  .addOut(foaf.firstName, 'Stuart')
+  .addOut(foaf.lastName, 'Bloom')
+  .namedNode('http://localhost:8080/data/person/penny')
+  .addOut(foaf.firstName, 'Penny')
+  
+// and not retrieve the first names of those who have a last name
+graph
+  .has(foaf.lastName)
+  .out(foaf.firstName)
+  .values
 ```
 
-Check out the [deep dive](deep-dive.md) page for a running example which shows how to use the `graph` object to traverse
-am RDF graph.
+</run-kit>
+
+## Details
+
+Clownface provides a set of chainable methods. The most important ones are `.in(predicate)` and `.out(predicate)` which allow the traversal through the graph. It is possible to chain as many of these methods to extract a sub-graph from the available dataset.
+
+Finally the result of your query can be accessed with `.values`.
+
+## More examples
+
+Check out the [deep dive](deep-dive.md) and other pages for a running example which shows how to use the `graph` object to traverse and manipulate RDF graphs.
 
 We use the well known `<subject>` `<predicate>` `<object>` nomenclature for a triple in the following description. All examples are based on the toy dataset [tbbt-ld][tbbt].
 

@@ -75,45 +75,18 @@
 				<p>Querying an RDF graph can be challenging. Apart from trivial queries, e.g. simply listing all the
 					objects connected to a subject, it is usually necessary to write multiple loop and validation
 				conditions to retrieve an answer. Clownface is there to help.</p>
-				<p>If we would like to get the given name and family name of all persons known by e.g. Stuart Bloom
-				(from <a href="https://github.com/zazuko/tbbt-ld">tbbt-ld</a>) we can write:</p>
-				<run-kit>
-					<pre><code class="language-js"><span class="hljs-keyword">const</span> cf = <span class="hljs-built_in">require</span>(<span class="hljs-string">'clownface'</span>)
-<span class="hljs-keyword">const</span> fetch = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@rdfjs/fetch'</span>)
-<span class="hljs-keyword">const</span> { schema } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@tpluscode/rdf-ns-builders'</span>)
-
-<span class="hljs-comment">// load the tbbt-ld graph</span>
-<span class="hljs-keyword">const</span> dataset = <span class="hljs-keyword">await</span> fetch(<span class="hljs-string">'http://zazuko.github.io/tbbt-ld/dist/tbbt.nt'</span>)
-  .then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.dataset())
-
-<span class="hljs-comment">// turn the RDF/JS dataset into a Clownface context</span>
-<span class="hljs-keyword">const</span> tbbt = cf({ dataset })
-
-<span class="hljs-comment">// get a starting node inside the dataset</span>
-<span class="hljs-keyword">const</span> stuartBloom = tbbt.namedNode(<span class="hljs-string">'http://localhost:8080/data/person/stuart-bloom'</span>)
-
-<span class="hljs-comment">// query for all people Stuart knows and print their full name</span>
-stuartBloom
-  <span class="hljs-comment">// get all nodes connected through schema:knows </span>
-  .out(schema.knows) 
-  <span class="hljs-comment">// for every result</span>
-  .map(<span class="hljs-function">(<span class="hljs-params">person</span>) =&gt;</span> {
-    <span class="hljs-comment">// get their schema:givenName and schema:familyName</span>
-    <span class="hljs-keyword">const</span> personalInformation = person.out([
-      schema.givenName,
-      schema.familyName
-    ])
-    <span class="hljs-comment">// join the givenName and familyName with a space</span>
-    <span class="hljs-keyword">return</span> personalInformation.values.join(<span class="hljs-string">' '</span>)
-  })
-  <span class="hljs-comment">// join the list of names with a comma</span>
-  .join(<span class="hljs-string">', '</span>)</code></pre>
-				</run-kit>
-				<a href="#details" id="details" style="color: inherit; text-decoration: none;">
-					<h2>Details</h2>
+				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+					<h2>Getting started</h2>
 				</a>
-				<p>Clownface provides a set of chainable methods. The most important ones are <code>.in(predicate)</code> and <code>.out(predicate)</code> which allow the traversal through the graph. It is possible to chain as many of these methods to extract a sub-graph from the available dataset.</p>
-				<p>Finally the result of your query can be accessed with <code>.values</code>.</p>
+				<p>The package is installed from npm:</p>
+				<pre><code><span class="hljs-built_in">npm</span> i -S clownface</code></pre><p>To start using it, an instance of <a href="https://rdf.js.org/dataset-spec/#datasetcore-interface">RDF/JS <code>DatasetCore</code></a> must be
+				provided to the exported factory method</p>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> cf = <span class="hljs-built_in">require</span>(<span class="hljs-string">'clownface'</span>)
+<span class="hljs-keyword">const</span> dataset = <span class="hljs-built_in">require</span>(<span class="hljs-string">'rdf-dataset-indexed'</span>)
+
+<span class="hljs-keyword">const</span> graph = cf({ <span class="hljs-attr">dataset</span>: dataset() })</code></pre>
+				<p>Check out the <a href="deep-dive.md">deep dive</a> page for a running example which shows how to use the <code>graph</code> object to traverse
+				am RDF graph.</p>
 				<p>We use the well known <code>&lt;subject&gt;</code> <code>&lt;predicate&gt;</code> <code>&lt;object&gt;</code> nomenclature for a triple in the following description. All examples are based on the toy dataset <a href="https://github.com/zazuko/tbbt-ld">tbbt-ld</a>.</p>
 				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
 					<h1>API</h1>

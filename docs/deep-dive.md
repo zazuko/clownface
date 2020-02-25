@@ -40,10 +40,4 @@ stuartBloom
 
 </run-kit>
 
-## Details
-
-Clownface provides a set of chainable methods. The most important ones are `.in(predicate)` and `.out(predicate)` which allow the traversal through the graph. It is possible to chain as many of these methods to extract a sub-graph from the available dataset.
-
-Finally the result of your query can be accessed with `.values`.
-
 [tbbt]: https://github.com/zazuko/tbbt-ld
