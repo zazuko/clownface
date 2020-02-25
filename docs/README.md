@@ -41,7 +41,7 @@ graph
   .namedNode('http://localhost:8080/data/person/penny')
   .addOut(foaf.firstName, 'Penny')
   
-// and not retrieve the first names of those who have a last name
+// and now retrieve the first names of those who have a last name
 graph
   .has(foaf.lastName)
   .out(foaf.firstName)
