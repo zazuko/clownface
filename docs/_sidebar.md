@@ -1,6 +1,6 @@
 * Getting started
   * [About](/)
-  * [Deep dive example](deep-dive.md)
+  * [Deep dive](deep-dive.md)
 * User guide
   * Creating nodes
   * Working with named graphs

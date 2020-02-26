@@ -28,7 +28,10 @@ provided to the exported factory method
 ```js
 const cf = require('clownface')
 const dataset = require('rdf-dataset-indexed')
-const { foaf } = require('@tpluscode/rdf-ns-builders')
+const { namedNode } = require('@rdfjs/data-model')
+
+const firstName = namedNode('http://xmlns.com/foaf/0.1/firstName')
+const lastName = namedNode('http://xmlns.com/foaf/0.1/lastName')
 
 // initialize
 const graph = cf({ dataset: dataset() })
@@ -36,15 +39,15 @@ const graph = cf({ dataset: dataset() })
 // add some resources 
 graph
   .namedNode('http://localhost:8080/data/person/stuart-bloom')
-  .addOut(foaf.firstName, 'Stuart')
-  .addOut(foaf.lastName, 'Bloom')
+  .addOut(firstName, 'Stuart')
+  .addOut(lastName, 'Bloom')
   .namedNode('http://localhost:8080/data/person/penny')
-  .addOut(foaf.firstName, 'Penny')
+  .addOut(firstName, 'Penny')
   
 // and now retrieve the first names of those who have a last name
 graph
-  .has(foaf.lastName)
-  .out(foaf.firstName)
+  .has(lastName)
+  .out(firstName)
   .values
 ```
 

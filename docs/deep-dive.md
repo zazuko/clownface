@@ -41,3 +41,9 @@ stuartBloom
 </run-kit>
 
 [tbbt]: https://github.com/zazuko/tbbt-ld
+
+## Notes
+
+See that unlike the [Getting started](/#getting-started) example, which uses absolute URIs to refer to terms, the code above imports the [@tpluscode/rdf-ns-builders](https://npm.im/@tpluscode/rdf-ns-builders) library which exports a number of common RDF vocabularies wrapped as [namespace builder objects](https://npm.im/@rdfjs/namespace).
+
+Thus, typing `schema.givenName` is equivalent to `namedNode('http://schema.org/givenName')`
