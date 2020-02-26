@@ -69,4 +69,4 @@ We use the well known `<subject>` `<predicate>` `<object>` nomenclature for a tr
 
 # API
 
-Check the generated Typedoc pages at [`/api`](/api)
+A Typescript declaration package [`@types/clownface`](https://npm.im/@types/clownface) is available.
