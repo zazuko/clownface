@@ -38,10 +38,10 @@ const graph = cf({ dataset: dataset() })
 
 // add some resources 
 graph
-  .namedNode('http://localhost:8080/data/person/stuart-bloom')
+  .namedNode('http://example.com/person/stuart-bloom')
   .addOut(firstName, 'Stuart')
   .addOut(lastName, 'Bloom')
-  .namedNode('http://localhost:8080/data/person/penny')
+  .namedNode('http://example.com/person/penny')
   .addOut(firstName, 'Penny')
   
 // and now retrieve the first names of those who have a last name
