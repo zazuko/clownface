@@ -42,10 +42,5 @@
     "exclude": [
       "test/*.js"
     ]
-  },
-  "standard": {
-    "ignore": [
-      "docs/"
-    ]
   }
 }
