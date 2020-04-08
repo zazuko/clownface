@@ -98,6 +98,17 @@ describe('constructor', () => {
     assert.strictEqual(clone._context, cf._context)
   })
 
+  it('should inherit factory of the given _context', () => {
+    const dataset = rdf.dataset()
+    const term = rdf.namedNode('http://example.org/subject')
+    const factory = rdf
+    const cf = new Clownface({ dataset, term, factory })
+    const clone = new Clownface(cf)
+
+    assert.strictEqual(clone.factory, factory)
+    assert.strictEqual(clone._context[0].factory, factory)
+  })
+
   it('should prioritize _context over term', () => {
     const dataset = rdf.dataset()
     const term = rdf.namedNode('http://example.org/subject')

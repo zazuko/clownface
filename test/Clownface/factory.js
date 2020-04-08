@@ -39,4 +39,13 @@ describe('factory', () => {
     assert.strictEqual(cf._context[0].term.termType, 'Literal')
     assert.strictEqual(cf._context[0].term.value, value)
   })
+
+  it('should forward the factory argument', () => {
+    const dataset = rdf.dataset()
+    const factory = rdf
+    const cf = clownface({ dataset, factory })
+
+    assert.strictEqual(cf.factory, factory)
+    assert.strictEqual(cf._context[0].factory, factory)
+  })
 })

@@ -147,4 +147,33 @@ describe('.addIn', () => {
 
     assert.strictEqual(cf.addIn(predicate, subject), cf)
   })
+
+  it('should use the provided factory', () => {
+    const dataset = rdf.dataset()
+    const predicate = rdf.namedNode('http://schema.org/knows')
+    const factory = {
+      quad: (s, p, o, g) => {
+        const quad = rdf.quad(s, p, o, g)
+        quad.testProperty = 'test'
+        return quad
+      },
+      literal: (value, languageOrDatatype) => {
+        const node = rdf.literal(value, languageOrDatatype)
+        node.testProperty = 'test'
+        return node
+      },
+      namedNode: (value) => {
+        const node = rdf.namedNode(value)
+        node.testProperty = 'test'
+        return node
+      }
+    }
+
+    const cf = clownface({ dataset, factory }).addIn(predicate, 'test')
+
+    assert.strictEqual(cf.in(predicate).term.testProperty, 'test')
+    cf.dataset.match(null, predicate, null).forEach((quad) => {
+      assert.strictEqual(quad.testProperty, 'test')
+    })
+  })
 })
