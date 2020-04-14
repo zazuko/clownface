@@ -1,6 +1,7 @@
 const assert = require('assert')
 const { describe, it } = require('mocha')
 const term = require('../lib/term')
+const rdf = require('./support/factory')
 
 describe('term', () => {
   it('should be a function', () => {
@@ -20,27 +21,27 @@ describe('term', () => {
   })
 
   it('should create a Literal if only a string is given', () => {
-    const result = term('test')
+    const result = term('test', undefined, undefined, rdf)
 
     assert.strictEqual(result.termType, 'Literal')
     assert.strictEqual(result.value, 'test')
   })
 
   it('should create a BlankNode if the type is BlankNode', () => {
-    const result = term(null, 'BlankNode')
+    const result = term(null, 'BlankNode', undefined, rdf)
 
     assert.strictEqual(result.termType, 'BlankNode')
   })
 
   it('should use the value as blank node identifier', () => {
-    const result = term('test', 'BlankNode')
+    const result = term('test', 'BlankNode', undefined, rdf)
 
     assert.strictEqual(result.termType, 'BlankNode')
     assert.strictEqual(result.value, 'test')
   })
 
   it('should create a NamedNode if the type is NamedNode', () => {
-    const result = term('http://example.org/', 'NamedNode')
+    const result = term('http://example.org/', 'NamedNode', undefined, rdf)
 
     assert.strictEqual(result.termType, 'NamedNode')
     assert.strictEqual(result.value, 'http://example.org/')

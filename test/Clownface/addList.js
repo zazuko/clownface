@@ -70,4 +70,41 @@ describe('.addList', () => {
     assert(first1)
     assert(rest1)
   })
+
+  it('should use the provided factory', () => {
+    const dataset = rdf.dataset()
+    const subject = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
+    const predicate = rdf.namedNode('http://schema.org/knows')
+    const item0 = rdf.literal('0')
+    const factory = {
+      quad: (s, p, o, g) => {
+        const quad = rdf.quad(s, p, o, g)
+        quad.testProperty = 'test'
+        return quad
+      },
+      blankNode: (value) => {
+        const node = rdf.blankNode(value)
+        node.testProperty = 'test'
+        return node
+      },
+      namedNode: (value) => {
+        const node = rdf.namedNode(value)
+        node.testProperty = 'test'
+        return node
+      }
+    }
+
+    clownface({ dataset, term: subject, factory }).addList(predicate, [item0])
+
+    const entry = [...dataset.match(subject, predicate)][0]
+    const first0 = [...dataset.match(entry.object, ns.first, item0)][0]
+    const rest0 = [...dataset.match(entry.object, ns.rest, ns.nil)][0]
+
+    assert.strictEqual(entry.testProperty, 'test')
+    assert.strictEqual(entry.object.testProperty, 'test')
+    assert.strictEqual(first0.testProperty, 'test')
+    assert.strictEqual(first0.predicate.testProperty, 'test')
+    assert.strictEqual(rest0.testProperty, 'test')
+    assert.strictEqual(rest0.predicate.testProperty, 'test')
+  })
 })
