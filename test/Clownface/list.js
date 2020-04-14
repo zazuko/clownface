@@ -70,4 +70,37 @@ describe('.list', () => {
 
     assert.strictEqual(first.done, true)
   })
+
+  it('should throw when a list node has multiple rdf:first', () => {
+    const start = rdf.blankNode()
+    const listNode = rdf.blankNode()
+    const dataset = rdf.dataset([
+      rdf.quad(start, ns.list, listNode),
+      rdf.quad(listNode, ns.first, rdf.literal('1')),
+      rdf.quad(listNode, ns.first, rdf.literal('3')),
+      rdf.quad(listNode, ns.rest, ns.nil)
+    ])
+    const cf = clownface({ dataset })
+
+    assert.throws(() => {
+      [...cf.out(ns.list).list()] // eslint-disable-line no-unused-expressions
+    })
+  })
+
+  it('should throw when a list node has multiple rdf:rest', () => {
+    const start = rdf.blankNode()
+    const listNode = rdf.blankNode()
+    console.log(rdf.nil)
+    const dataset = rdf.dataset([
+      rdf.quad(start, ns.list, listNode),
+      rdf.quad(listNode, ns.first, rdf.literal('1')),
+      rdf.quad(listNode, ns.rest, rdf.blankNode()),
+      rdf.quad(listNode, ns.rest, ns.nil)
+    ])
+    const cf = clownface({ dataset })
+
+    assert.throws(() => {
+      [...cf.out(ns.list).list()] // eslint-disable-line no-unused-expressions
+    })
+  })
 })
