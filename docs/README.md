@@ -55,13 +55,15 @@ graph
 
 ## Details
 
-Clownface provides a set of chainable methods. The most important ones are `.in(predicate)` and `.out(predicate)` which allow the traversal through the graph. It is possible to chain as many of these methods to extract a sub-graph from the available dataset.
+At the core of clownface sits an object called a "graph pointer". A graph pointer can be backed by zero or more RDF/JS terms. It is being created by calling the function exported by the packages's default module.
 
-Finally the result of your query can be accessed with `.values`.
+The current context node or nodes can be accessed by `term`/`value` and `terms`/`values` pairs of properties. The first pair return only a single RDF/JS and its string value. They will return `undefined` if the context points at 0 or >1 nodes. The second pair of properties always return an array of the context terms and their string values.
+
+Graph pointers provides a set of chainable methods. The most important ones are `.in(predicate)` and `.out(predicate)` which allow the traversal through the graph. It is possible to chain as many of these methods to extract a sub-graph from the available dataset.
 
 ## More examples
 
-Check out the [deep dive](deep-dive.md) and other pages for a running example which shows how to use the `graph` object to traverse and manipulate RDF graphs.
+Check out the [deep dive](deep-dive.md) and other pages for a running examples which show how to use the graph pointer to traverse and manipulate RDF graphs.
 
 We use the well known `<subject>` `<predicate>` `<object>` nomenclature for a triple in the following description. All examples are based on the toy dataset [tbbt-ld][tbbt].
 

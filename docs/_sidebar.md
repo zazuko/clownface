@@ -2,9 +2,10 @@
   * [About](/)
   * [Deep dive](deep-dive.md)
 * User guide
-  * Creating nodes
-  * Working with named graphs
-  * Adding quads
-  * RDF Lists
+  * [The context](context.md)
+  * [Navigating the graph](traversal.md)
+  * [Manipulating data](manipulation.md)
+  * [Working with named graphs](named-graphs.md)
+  * [RDF Lists](rdf-lists.md)
 * Reference
   * [Typings](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/clownface)
