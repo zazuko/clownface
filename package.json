@@ -8,7 +8,7 @@
     "test": "nyc mocha",
     "posttest": "nyc report --reporter=text-lcov > coverage.lcov",
     "prejsdoc": "rimraf docs/api",
-    "jsdoc": "jsdoc index.js lib -r -d docs/api -R README.md -c jsdoc.conf.json",
+    "jsdoc": "jsdoc2md --no-gfm -f index.js lib/* > docs/api.md",
     "docs:serve": "docsify serve docs"
   },
   "repository": {
