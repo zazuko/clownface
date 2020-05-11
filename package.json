@@ -8,7 +8,6 @@
     "test": "nyc mocha",
     "posttest": "nyc report --reporter=text-lcov > coverage.lcov",
     "prejsdoc": "rimraf docs/api",
-    "jsdoc": "jsdoc2md --no-gfm -f index.js lib/* > docs/api.md",
     "docs:serve": "docsify serve docs"
   },
   "repository": {
@@ -33,6 +32,7 @@
   "devDependencies": {
     "@rdfjs/parser-n3": "^1.1.2",
     "docsify-cli": "^4.4.0",
+    "husky": "^4.2.5",
     "jsdoc-to-markdown": "^5.0.3",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
@@ -46,5 +46,10 @@
     "exclude": [
       "test/*.js"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "jsdoc2md --no-gfm -f index.js lib/* > docs/api.md; git add docs/api.md"
+    }
   }
 }
