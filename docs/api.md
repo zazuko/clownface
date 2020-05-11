@@ -201,7 +201,7 @@ Depending on the value creates pointers to:
 <a name="Clownface+blankNode"></a>
 
 ### clownface.blankNode([values]) ⇒ [<code>Clownface</code>](#Clownface)
-Creates graph pointer to one or more blank node(s)
+Creates graph pointer to one or more blank nodes
 
 **Kind**: instance method of [<code>Clownface</code>](#Clownface)  
 <table>
@@ -212,7 +212,7 @@ Creates graph pointer to one or more blank node(s)
   </thead>
   <tbody>
 <tr>
-    <td>[values]</td><td><code>null</code> | <code>string</code> | <code>Array.&lt;string&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td><td><p>blank node identifiers (uses generated if undefined of null)</p>
+    <td>[values]</td><td><code>null</code> | <code>string</code> | <code>Array.&lt;string&gt;</code> | <code>BlankNode</code> | <code>Array.&lt;BlankNode&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td><td><p>blank node identifiers (generates it when falsy) or existing RDF/JS blank node(s)</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -220,7 +220,7 @@ Creates graph pointer to one or more blank node(s)
 <a name="Clownface+literal"></a>
 
 ### clownface.literal(values, [languageOrDatatype]) ⇒ [<code>Clownface</code>](#Clownface)
-Creates graph pointer to one or more literal node(s)
+Creates graph pointer to one or more literal nodes
 
 **Kind**: instance method of [<code>Clownface</code>](#Clownface)  
 <table>
@@ -231,7 +231,7 @@ Creates graph pointer to one or more literal node(s)
   </thead>
   <tbody>
 <tr>
-    <td>values</td><td><code>string</code> | <code>Array.&lt;string&gt;</code> | <code>boolean</code> | <code>Array.&lt;boolean&gt;</code> | <code>number</code> | <code>Array.&lt;number&gt;</code> | <code>Literal</code> | <code>Array.&lt;Literal&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td><td><p>blank node identifiers (uses generated if undefined of null)</p>
+    <td>values</td><td><code>string</code> | <code>Array.&lt;string&gt;</code> | <code>boolean</code> | <code>Array.&lt;boolean&gt;</code> | <code>number</code> | <code>Array.&lt;number&gt;</code> | <code>Literal</code> | <code>Array.&lt;Literal&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td><td><p>literal values as JS objects or RDF/JS Literal(s)</p>
 </td>
     </tr><tr>
     <td>[languageOrDatatype]</td><td><code>string</code> | <code>Term</code></td><td><p>a language tag string or datatype term</p>
@@ -242,7 +242,7 @@ Creates graph pointer to one or more literal node(s)
 <a name="Clownface+namedNode"></a>
 
 ### clownface.namedNode(values) ⇒ [<code>Clownface</code>](#Clownface)
-Creates graph pointer to one or more named node(s)
+Creates graph pointer to one or more named nodes
 
 **Kind**: instance method of [<code>Clownface</code>](#Clownface)  
 <table>
@@ -253,7 +253,7 @@ Creates graph pointer to one or more named node(s)
   </thead>
   <tbody>
 <tr>
-    <td>values</td><td><code>string</code> | <code>Array.&lt;string&gt;</code> | <code>Term</code> | <code>Array.&lt;Term&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td><td><p>URI(s) or RDF/JS NamedNode(s)</p>
+    <td>values</td><td><code>string</code> | <code>Array.&lt;string&gt;</code> | <code>NamedNode</code> | <code>Array.&lt;NamedNode&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td><td><p>URI(s) or RDF/JS NamedNode(s)</p>
 </td>
     </tr>  </tbody>
 </table>
