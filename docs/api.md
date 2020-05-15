@@ -340,7 +340,7 @@ Creates a new quad(s) in the dataset where the current context is the object
     <td>subjects</td><td><code>NamedNode</code> | <code>Array.&lt;NamedNode&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td><td><p>one or more nodes to use as subjects</p>
 </td>
     </tr><tr>
-    <td>[callback]</td><td><code><a href="#GraphPointerCallback">GraphPointerCallback</a></code></td><td><p>a callback called for each graph pointer to the subjects</p>
+    <td>[callback]</td><td><code><a href="#GraphPointerCallback">GraphPointerCallback</a></code></td><td><p>called for each object, with subject pointer as parameter</p>
 </td>
     </tr>  </tbody>
 </table>
@@ -362,10 +362,10 @@ Creates a new quad(s) in the dataset where the current context is the subject
 <tr>
     <td>predicates</td><td><code>Term</code> | <code>Array.&lt;Term&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td><td></td>
     </tr><tr>
-    <td>objects</td><td><code>*</code></td><td><p>one or more values to use for subjects</p>
+    <td>objects</td><td><code>*</code></td><td><p>one or more values to use for objects</p>
 </td>
     </tr><tr>
-    <td>[callback]</td><td><code><a href="#GraphPointerCallback">GraphPointerCallback</a></code></td><td><p>a callback called for each graph pointer to the objects</p>
+    <td>[callback]</td><td><code><a href="#GraphPointerCallback">GraphPointerCallback</a></code></td><td><p>called for each subject, with object pointer as parameter</p>
 </td>
     </tr>  </tbody>
 </table>
