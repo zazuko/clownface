@@ -1,6 +1,6 @@
 # RDF Lists
 
-RDF Lists are unavoidable when working with RDF data and their awkward triples representation make it necessary to provide specialized programmatic APIs to handle.
+RDF Lists are unavoidable when working with RDF data and their bare triples representation make it necessary to provide specialized programmatic APIs to handle.
 
 Clownface comes with handy methods to create, iterate and remove lists from RDF datasets.
 
