@@ -5,3 +5,4 @@ test/support/mocha.css
 test/support/mocha.js
 .nyc_output
 coverage.lcov
+docs/api/

@@ -8,4 +8,5 @@
   * [Working with named graphs](named-graphs.md)
   * [RDF Lists](rdf-lists.md)
 * Reference
-  * [Typings](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/clownface)
+  * [JSDoc](api.md)
+  * [TypeScript](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/clownface)
