@@ -7,4 +7,4 @@ Simple but powerful graph traversing library
 
 # Learn more
 
-For documentation and examples see http://clownface.github.io/clownface/.
+For documentation and examples see http://zazuko.github.io/clownface/.
