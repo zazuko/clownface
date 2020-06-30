@@ -7,6 +7,7 @@
   * [Manipulating data](manipulation.md)
   * [Working with named graphs](named-graphs.md)
   * [RDF Lists](rdf-lists.md)
+  * [Tagged literals](tagged-literals.md)
 * Reference
   * [JSDoc](api.md)
   * [TypeScript](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/clownface)
