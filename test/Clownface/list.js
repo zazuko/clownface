@@ -74,7 +74,7 @@ describe('.list', () => {
   it('should return empty iterator when list is rdf:nil', () => {
     const start = rdf.blankNode()
     const dataset = rdf.dataset([
-      rdf.quad(start, ns.list, ns.nil),
+      rdf.quad(start, ns.list, ns.nil)
     ])
     const cf = clownface({ dataset })
 
@@ -87,7 +87,7 @@ describe('.list', () => {
   it('should return null when node is literal', () => {
     const start = rdf.blankNode()
     const dataset = rdf.dataset([
-      rdf.quad(start, ns.list, rdf.literal("not list")),
+      rdf.quad(start, ns.list, rdf.literal('not list'))
     ])
     const cf = clownface({ dataset })
 
@@ -99,7 +99,7 @@ describe('.list', () => {
   it('should return null when node is not a list', () => {
     const start = rdf.blankNode()
     const dataset = rdf.dataset([
-      rdf.quad(start, ns.list, rdf.namedNode("not list")),
+      rdf.quad(start, ns.list, rdf.namedNode('not list'))
     ])
     const cf = clownface({ dataset })
 
