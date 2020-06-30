@@ -41,7 +41,7 @@ A graph pointer object, which points at 0..N nodes within a dataset
     * [.values](#Clownface+values) ⇒ <code>Array.&lt;string&gt;</code>
     * [.dataset](#Clownface+dataset) ⇒ <code>undefined</code> \| <code>DatasetCore</code>
     * [.datasets](#Clownface+datasets) ⇒ <code>Array.&lt;DatasetCore&gt;</code>
-    * [.list()](#Clownface+list) ⇒ <code>Iterable</code>
+    * [.list()](#Clownface+list) ⇒ <code>Iterable</code> \| <code>null</code>
     * [.toArray()](#Clownface+toArray) ⇒ [<code>Array.&lt;Clownface&gt;</code>](#Clownface)
     * [.filter(callback)](#Clownface+filter) ⇒ [<code>Clownface</code>](#Clownface)
     * [.forEach(callback)](#Clownface+forEach) ⇒ [<code>Clownface</code>](#Clownface)
@@ -98,7 +98,7 @@ Gets the current context's datasets
 **Kind**: instance property of [<code>Clownface</code>](#Clownface)  
 <a name="Clownface+list"></a>
 
-### clownface.list() ⇒ <code>Iterable</code>
+### clownface.list() ⇒ <code>Iterable</code> \| <code>null</code>
 Creates an iterator which iterates and rdf:List of the current term
 
 **Kind**: instance method of [<code>Clownface</code>](#Clownface)  
