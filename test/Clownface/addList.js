@@ -1,5 +1,4 @@
-/* global describe, it */
-
+const { describe, it } = require('mocha')
 const assert = require('assert')
 const clownface = require('../..')
 const rdf = require('../support/factory')
@@ -106,5 +105,15 @@ describe('.addList', () => {
     assert.strictEqual(first0.predicate.testProperty, 'test')
     assert.strictEqual(rest0.testProperty, 'test')
     assert.strictEqual(rest0.predicate.testProperty, 'test')
+  })
+
+  it('should not add quads if context is undefined', () => {
+    const dataset = rdf.dataset()
+    const graph = clownface({ dataset })
+    const predicate = rdf.namedNode('http://example.org/foo')
+
+    graph.addList(predicate, ['bar', 'baz'])
+
+    assert.strictEqual(dataset.size, 0)
   })
 })
