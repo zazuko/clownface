@@ -38,3 +38,34 @@ turtle`${game.dataset}`.toString()
 ```
 
 </run-kit>
+
+## Handling non-lists
+
+The `list()` method will return null when the object is not a list (such as a literal or without a `rdf:first`). A little bit of defensive programming can be employed to conditionally iterate a list or get the non-list objects of a property.
+
+<run-kit>
+
+```js
+const cf = require('clownface')
+const namespace = require('@rdfjs/namespace')
+const { dataset } = require('@rdfjs/dataset')
+const { dtype } = require('@tpluscode/rdf-ns-builders')
+const { turtle } = require('@tpluscode/rdf-string')
+
+const ex = namespace('http://example.com/')
+
+const game = cf({ dataset: dataset() })
+  .namedNode(ex.game)
+
+// add object directly to ex:score
+game.addOut(ex.score, [ex.score1, ex.score2, ex.score3])
+
+// pretend we don't know if the value is a list of scores
+const scores = game.out(ex.score)
+const list = scores.list()
+
+// iterate the raw objects as alternative
+;(list && [...list]) || scores.toArray() 
+```
+
+</run-kit>

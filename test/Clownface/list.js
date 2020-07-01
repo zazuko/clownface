@@ -71,6 +71,43 @@ describe('.list', () => {
     assert.strictEqual(first.done, true)
   })
 
+  it('should return empty iterator when list is rdf:nil', () => {
+    const start = rdf.blankNode()
+    const dataset = rdf.dataset([
+      rdf.quad(start, ns.list, ns.nil)
+    ])
+    const cf = clownface({ dataset })
+
+    const list = cf.out(ns.list).list()[Symbol.iterator]()
+    const first = list.next()
+
+    assert.strictEqual(first.done, true)
+  })
+
+  it('should return null when node is literal', () => {
+    const start = rdf.blankNode()
+    const dataset = rdf.dataset([
+      rdf.quad(start, ns.list, rdf.literal('not list'))
+    ])
+    const cf = clownface({ dataset })
+
+    const list = cf.out(ns.list).list()
+
+    assert.strictEqual(list, null)
+  })
+
+  it('should return null when node is not a list', () => {
+    const start = rdf.blankNode()
+    const dataset = rdf.dataset([
+      rdf.quad(start, ns.list, rdf.namedNode('not list'))
+    ])
+    const cf = clownface({ dataset })
+
+    const list = cf.out(ns.list).list()
+
+    assert.strictEqual(list, null)
+  })
+
   it('should throw when a list node has multiple rdf:first', () => {
     const start = rdf.blankNode()
     const listNode = rdf.blankNode()
@@ -90,7 +127,7 @@ describe('.list', () => {
   it('should throw when a list node has multiple rdf:rest', () => {
     const start = rdf.blankNode()
     const listNode = rdf.blankNode()
-    console.log(rdf.nil)
+
     const dataset = rdf.dataset([
       rdf.quad(start, ns.list, listNode),
       rdf.quad(listNode, ns.first, rdf.literal('1')),
