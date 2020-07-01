@@ -105,7 +105,7 @@ Creates an iterator which iterates and rdf:List of the current term
 <a name="Clownface+toArray"></a>
 
 ### clownface.toArray() ⇒ [<code>Array.&lt;Clownface&gt;</code>](#Clownface)
-Returns an array of graph pointers where each on has a single _context
+Returns an array of graph pointers where each one has a single _context
 
 **Kind**: instance method of [<code>Clownface</code>](#Clownface)  
 <a name="Clownface+filter"></a>

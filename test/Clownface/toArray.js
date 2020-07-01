@@ -30,4 +30,12 @@ describe('.toArray', () => {
     assert.strictEqual(result.length, 7)
     assert(result[0] instanceof Clownface)
   })
+
+  it('should not return an instance for undefined context', () => {
+    const cf = clownface({ dataset: rdf.dataset() })
+
+    const array = cf.toArray()
+
+    assert.strictEqual(array.length, 0)
+  })
 })

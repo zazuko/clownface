@@ -1,6 +1,6 @@
-/* global describe, it */
-
+const { describe, it } = require('mocha')
 const assert = require('assert')
+const sinon = require('sinon')
 const clownface = require('../..')
 const loadExample = require('../support/example')
 const rdf = require('../support/factory')
@@ -168,6 +168,7 @@ describe('.addOut', () => {
   it('should use the provided factory', () => {
     const dataset = rdf.dataset()
     const predicate = rdf.namedNode('http://schema.org/knows')
+    const term = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
     const factory = {
       quad: (s, p, o, g) => {
         const quad = rdf.quad(s, p, o, g)
@@ -186,11 +187,34 @@ describe('.addOut', () => {
       }
     }
 
-    const cf = clownface({ dataset, factory }).addOut(predicate, 'test')
+    const cf = clownface({ dataset, factory, term }).addOut(predicate, 'test')
 
     assert.strictEqual(cf.out(predicate).term.testProperty, 'test')
     cf.dataset.match(null, predicate, null).forEach((quad) => {
       assert.strictEqual(quad.testProperty, 'test')
     })
+  })
+
+  it('should not add quads if context is undefined', () => {
+    const dataset = rdf.dataset()
+    const cf = clownface({ dataset })
+    const object = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+    const predicate = rdf.namedNode('http://schema.org/knows')
+
+    cf.addOut(predicate, object)
+
+    assert.strictEqual(dataset.size, 0)
+  })
+
+  it('should not call callback function if context is undefined', () => {
+    const dataset = rdf.dataset()
+    const cf = clownface({ dataset })
+    const object = rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+    const predicate = rdf.namedNode('http://schema.org/knows')
+    const callback = sinon.spy()
+
+    cf.addOut(predicate, object, callback)
+
+    assert.strictEqual(callback.called, false)
   })
 })
