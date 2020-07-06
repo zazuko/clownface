@@ -1,5 +1,4 @@
-/* global describe, it */
-
+const { describe, it } = require('mocha')
 const assert = require('assert')
 const clownface = require('../..')
 const loadExample = require('../support/example')
@@ -41,5 +40,16 @@ describe('.forEach', () => {
     })
 
     assert.strictEqual(count, 7)
+  })
+
+  it('should return self', () => {
+    const cf = clownface({
+      dataset: rdf.dataset(),
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+    })
+
+    const forEachReturned = cf.forEach(() => {})
+
+    assert.strictEqual(forEachReturned, cf)
   })
 })
