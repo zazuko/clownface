@@ -1,7 +1,5 @@
 # Literals with language tags
 
-?> New in 1.0
-
 Using the `.out()` method it is possible to only find literals in specific languages by passing a second `{ language }` parameter to the method.
 
 When that parameter is defined, only string literal nodes will be returned.
