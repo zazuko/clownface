@@ -51,7 +51,7 @@ A graph pointer object, which points at 0..N nodes within a dataset
     * [.literal(values, [languageOrDatatype])](#Clownface+literal) ⇒ [<code>Clownface</code>](#Clownface)
     * [.namedNode(values)](#Clownface+namedNode) ⇒ [<code>Clownface</code>](#Clownface)
     * [.in(predicates)](#Clownface+in) ⇒ [<code>Clownface</code>](#Clownface)
-    * [.out(predicates)](#Clownface+out) ⇒ [<code>Clownface</code>](#Clownface)
+    * [.out(predicates, [options])](#Clownface+out) ⇒ [<code>Clownface</code>](#Clownface)
     * [.has(predicates, [objects])](#Clownface+has) ⇒ [<code>Clownface</code>](#Clownface)
     * [.addIn(predicates, subjects, [callback])](#Clownface+addIn) ⇒ [<code>Clownface</code>](#Clownface)
     * [.addOut(predicates, objects, [callback])](#Clownface+addOut) ⇒ [<code>Clownface</code>](#Clownface)
@@ -279,7 +279,7 @@ Creates a graph pointer to nodes which are linked to the current pointer by `pre
 
 <a name="Clownface+out"></a>
 
-### clownface.out(predicates) ⇒ [<code>Clownface</code>](#Clownface)
+### clownface.out(predicates, [options]) ⇒ [<code>Clownface</code>](#Clownface)
 Creates a graph pointer to nodes which link the current pointer by `predicates`
 
 **Kind**: instance method of [<code>Clownface</code>](#Clownface)  
@@ -293,6 +293,10 @@ Creates a graph pointer to nodes which link the current pointer by `predicates`
 <tr>
     <td>predicates</td><td><code>Term</code> | <code>Array.&lt;Term&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td><td><p>one or more RDF/JS term identifying a property</p>
 </td>
+    </tr><tr>
+    <td>[options]</td><td><code>object</code></td><td></td>
+    </tr><tr>
+    <td>[options.language]</td><td><code>string</code> | <code>Array.&lt;string&gt;</code> | <code>undefined</code></td><td></td>
     </tr>  </tbody>
 </table>
 
