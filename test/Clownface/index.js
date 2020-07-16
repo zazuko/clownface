@@ -29,4 +29,5 @@ describe('Clownface', () => {
   require('./deleteOut')
   require('./deleteList')
   require('./fromGraph')
+  require('./defaultGraph')
 })
