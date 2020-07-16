@@ -2,7 +2,7 @@
 
 ## Default behavior
 
-The examples on all other pages do not specify any graph identifier. In this mode the traversal methods are free to navigate the entire dataset (aka. [union graph](https://patterns.dataincubator.org/book/union-graph.html)) but any triples added and removed only apply to the default graph.
+The examples on all other pages do not specify any graph identifier. In this mode the traversal methods are free to navigate the entire dataset (aka. [union graph][union]) but any triples added and removed only apply to the default graph.
 
 <run-kit>
 
@@ -63,3 +63,39 @@ nquads`${leonard.dataset}`.toString()
 ```
 
 </run-kit>
+
+## Moving between graphs
+
+?> From v1.1
+
+It is possible to move a graph pointer to the same node in different (named) graphs using a `fromGraph` method. It will return a new pointer with quads only originating from the desired graph.
+
+Use `null` value to move the pointer back to the [union graph][union].
+
+<run-kit>
+
+```js
+const cf = require('clownface')
+const { dataset } = require('@rdfjs/dataset')
+const namespace = require('@rdfjs/namespace')
+const RDF = require('@rdfjs/data-model')
+const { rdfs } = require('@tpluscode/rdf-ns-builders')
+
+const ex = namespace('https://example.com/') 
+
+const quads = [
+  RDF.quad(ex.Apple, rdfs.label, 'Apple', ex.EnglishLabels),
+  RDF.quad(ex.Apple, rdfs.label, 'Apfel', ex.GermanLabels),
+]
+
+const apple = cf({ dataset: dataset(quads) }).node(tbbt.Apple)
+
+console.log({
+  de: apple.fromGraph(ex.GermanLabels).out(rdfs.label).value,
+  en: apple.fromGraph(ex.EnglishLabels).out(rdfs.label).value,
+})
+```
+
+</run-kit>
+
+[union]: https://patterns.dataincubator.org/book/union-graph.html
