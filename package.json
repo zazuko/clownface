@@ -15,6 +15,11 @@
     "test": "c8 --reporter=lcov mocha test/*.test.mjs test/**/*.test.mjs",
     "docs:serve": "docsify serve docs"
   },
+  "files": [
+    "lib",
+    "index.js",
+    "index.mjs"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/rdf-ext/clownface.git"
@@ -60,5 +65,8 @@
     "hooks": {
       "pre-commit": "jsdoc2md -c jsdoc.conf.json --no-gfm -f index.mjs lib/*.mjs > docs/api.md; git add docs/api.md"
     }
+  },
+  "engines": {
+    "node": ">=12"
   }
 }
