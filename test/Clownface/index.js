@@ -28,4 +28,5 @@ describe('Clownface', () => {
   require('./deleteIn')
   require('./deleteOut')
   require('./deleteList')
+  require('./fromGraph')
 })
