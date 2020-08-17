@@ -5,11 +5,11 @@ const clownface = require('../..')
 const rdf = require('../support/factory')
 
 describe('defaultGraph', () => {
-  it('returns defaultGraphInstance', () => {
+  it('returns pointer to default graph node', () => {
     const pointer = clownface({ dataset: rdf.dataset() })
 
     const defaultGraph = pointer.defaultGraph
 
-    assert(defaultGraph.equals(rdf.defaultGraphInstance))
+    assert(defaultGraph.term.equals(rdf.defaultGraphInstance))
   })
 })
