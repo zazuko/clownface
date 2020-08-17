@@ -36,4 +36,12 @@ describe('.any', () => {
     assert.strictEqual(typeof any.term, 'undefined')
     assert.deepStrictEqual(any.terms, [])
   })
+
+  it('should keep same graph pointer in the result', () => {
+    const cf = clownface({ dataset: rdf.dataset(), graph: rdf.namedNode('foo'), term: rdf.blankNode() })
+
+    const anyPointer = cf.any()
+
+    assert.strictEqual(anyPointer._context[0].graph.value, 'foo')
+  })
 })
