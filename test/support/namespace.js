@@ -8,7 +8,8 @@ const ns = {
   rest: rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#rest'),
   ex: namespace('http://example.org/'),
   rdfs: namespace('http://www.w3.org/2000/01/rdf-schema#'),
-  schema: namespace('http://schema.org/')
+  schema: namespace('http://schema.org/'),
+  xsd: namespace('http://www.w3.org/2001/XMLSchema#')
 }
 
 module.exports = ns

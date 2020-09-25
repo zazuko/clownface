@@ -1,6 +1,7 @@
 /* global describe, it */
 
 const assert = require('assert')
+const TermSet = require('@rdfjs/term-set')
 const clownface = require('../..')
 const rdf = require('../support/factory')
 const Clownface = require('../../lib/Clownface')
@@ -47,6 +48,32 @@ describe('.namedNode', () => {
     const cf = clownface({ dataset: rdf.dataset() })
 
     const result = cf.namedNode([iriA, iriB])
+
+    assert.strictEqual(result._context.length, 2)
+    assert.strictEqual(result._context[0].term.termType, 'NamedNode')
+    assert.strictEqual(result._context[0].term.value, iriA)
+    assert.strictEqual(result._context[1].term.termType, 'NamedNode')
+    assert.strictEqual(result._context[1].term.value, iriB)
+  })
+
+  it('should support multiple values from NamedNode iterator', () => {
+    const iriA = rdf.namedNode('http://example.org/a')
+    const iriB = rdf.namedNode('http://example.org/b')
+    const cf = clownface({ dataset: rdf.dataset() })
+
+    const result = cf.namedNode(new TermSet([iriA, iriB]))
+
+    assert.strictEqual(result._context.length, 2)
+    assert.deepStrictEqual(result._context[0].term, iriA)
+    assert.deepStrictEqual(result._context[1].term, iriB)
+  })
+
+  it('should support multiple values from string iterator', () => {
+    const iriA = 'http://example.org/a'
+    const iriB = 'http://example.org/b'
+    const cf = clownface({ dataset: rdf.dataset() })
+
+    const result = cf.namedNode(new Set([iriA, iriB]))
 
     assert.strictEqual(result._context.length, 2)
     assert.strictEqual(result._context[0].term.termType, 'NamedNode')
