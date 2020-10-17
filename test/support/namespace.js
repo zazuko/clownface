@@ -6,7 +6,9 @@ const ns = {
   list: rdf.namedNode('http://example.org/list'),
   nil: rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#nil'),
   rest: rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#rest'),
-  ex: namespace('http://example.org/')
+  ex: namespace('http://example.org/'),
+  rdfs: namespace('http://www.w3.org/2000/01/rdf-schema#'),
+  schema: namespace('http://schema.org/')
 }
 
 module.exports = ns

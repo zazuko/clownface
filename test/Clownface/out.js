@@ -1,12 +1,10 @@
 const { describe, it } = require('mocha')
 const assert = require('assert')
-const { turtle } = require('@tpluscode/rdf-string')
-const { rdfs } = require('@tpluscode/rdf-ns-builders')
 const clownface = require('../..')
 const loadExample = require('../support/example')
 const rdf = require('../support/factory')
 const Clownface = require('../../lib/Clownface')
-const { ex } = require('../support/namespace')
+const { ex, rdfs } = require('../support/namespace')
 const parse = require('../support/parse')
 
 describe('.out', () => {
@@ -70,34 +68,34 @@ describe('.out', () => {
   })
 
   describe('with language option', () => {
-    const testData = turtle`${ex.ananas}
-      ${rdfs.label} "Pineapple" ;
-      ${rdfs.label} "Ananas"@pl ;
-      ${rdfs.label} "Ananas"@de ;
-      ${rdfs.label} "Ananász"@hu ;
-      ${rdfs.label} "Ananas"@sr-Latn ;
-      ${rdfs.label} "Ананас"@sr-Cyrl ;
+    const testData = `<${ex.ananas.value}>
+      <${rdfs.label.value}> "Pineapple" ;
+      <${rdfs.label.value}> "Ananas"@pl ;
+      <${rdfs.label.value}> "Ananas"@de ;
+      <${rdfs.label.value}> "Ananász"@hu ;
+      <${rdfs.label.value}> "Ananas"@sr-Latn ;
+      <${rdfs.label.value}> "Ананас"@sr-Cyrl ;
     .
     
-    ${ex.noLabels} ${rdfs.label} _:foo , ${ex.bar}, 41 .
+    <${ex.noLabels.value}> <${rdfs.label.value}> _:foo , <${ex.bar.value.value}>, 41 .
     
-    ${ex.apple}
-      ${rdfs.label} "Apple"@en ;
-      ${rdfs.label} "Apfel"@de ;
-      ${rdfs.label} "Јабука"@sr-Cyrl .
+    <${ex.apple.value}>
+      <${rdfs.label.value}> "Apple"@en ;
+      <${rdfs.label.value}> "Apfel"@de ;
+      <${rdfs.label.value}> "Јабука"@sr-Cyrl .
       
-    ${ex.carrot}
-      ${rdfs.label} "Karotte"@de ;
-      ${rdfs.label} "Karotte"@de-AT ;
-      ${rdfs.label} "Rüebli"@de-CH ;
+    <${ex.carrot.value}>
+      <${rdfs.label.value}> "Karotte"@de ;
+      <${rdfs.label.value}> "Karotte"@de-AT ;
+      <${rdfs.label.value}> "Rüebli"@de-CH ;
     .
     
-    ${ex.eggplant}
-      ${rdfs.label} "Psianka podłużna"@pl, "Bakłażan"@pl, "Oberżyna"@pl .
+    <${ex.eggplant.value}>
+      <${rdfs.label.value}> "Psianka podłużna"@pl, "Bakłażan"@pl, "Oberżyna"@pl .
       
-    ${ex.kongressstrasse} 
-      ${rdfs.label} "Kongressstraße"@de ;
-      ${rdfs.label} "Kongreßstraße"@de-DE-1901 ;
+    <${ex.kongressstrasse.value}> 
+      <${rdfs.label.value}> "Kongressstraße"@de ;
+      <${rdfs.label.value}> "Kongreßstraße"@de-DE-1901 ;
     .`.toString()
 
     describe('filtered by single language parameter', () => {

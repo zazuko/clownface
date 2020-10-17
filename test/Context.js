@@ -1,6 +1,6 @@
 const { describe, it } = require('mocha')
 const assert = require('assert')
-const { schema } = require('@tpluscode/rdf-ns-builders')
+const { schema } = require('./support/namespace')
 const Context = require('../lib/Context')
 const rdf = require('./support/factory')
 
