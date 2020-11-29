@@ -1,6 +1,6 @@
 # clownface
 
-[![Build Status](https://travis-ci.org/clownface/clownface.svg?branch=master)](https://travis-ci.org/clownface/clownface)
+[![Build Status](https://travis-ci.org/clownface/clownface.svg?branch=master)](https://travis-ci.org/github/zazuko/clownface)
 [![NPM Version](https://img.shields.io/npm/v/clownface.svg?style=flat)](https://npm.im/clownface)
 
 Clownface is a graph traversal library inspired by [Gremlin](https://tinkerpop.apache.org/gremlin.html) which allows to query any [RDF dataset](https://rdf.js.org/dataset-spec/) in a concise and readable way.
