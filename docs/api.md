@@ -57,8 +57,8 @@ A graph pointer object, which points at 0..N nodes within a dataset
     * [.addIn(predicates, subjects, [callback])](#Clownface+addIn) ⇒ [<code>Clownface</code>](#Clownface)
     * [.addOut(predicates, objects, [callback])](#Clownface+addOut) ⇒ [<code>Clownface</code>](#Clownface)
     * [.addList(predicates, items)](#Clownface+addList) ⇒ [<code>Clownface</code>](#Clownface)
-    * [.deleteIn(predicates)](#Clownface+deleteIn) ⇒ [<code>Clownface</code>](#Clownface)
-    * [.deleteOut(predicates)](#Clownface+deleteOut) ⇒ [<code>Clownface</code>](#Clownface)
+    * [.deleteIn(predicates, subjects)](#Clownface+deleteIn) ⇒ [<code>Clownface</code>](#Clownface)
+    * [.deleteOut(predicates, objects)](#Clownface+deleteOut) ⇒ [<code>Clownface</code>](#Clownface)
     * [.deleteList(predicates)](#Clownface+deleteList) ⇒ [<code>Clownface</code>](#Clownface)
 
 <a name="Clownface+term"></a>
@@ -406,7 +406,7 @@ Creates a new RDF list or lists containing the given items
 
 <a name="Clownface+deleteIn"></a>
 
-### clownface.deleteIn(predicates) ⇒ [<code>Clownface</code>](#Clownface)
+### clownface.deleteIn(predicates, subjects) ⇒ [<code>Clownface</code>](#Clownface)
 Deletes all quads where the current graph pointer contexts are the objects
 
 **Kind**: instance method of [<code>Clownface</code>](#Clownface)  
@@ -420,12 +420,14 @@ Deletes all quads where the current graph pointer contexts are the objects
   <tbody>
 <tr>
     <td>predicates</td><td><code>Term</code> | <code>Array.&lt;Term&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td>
+    </tr><tr>
+    <td>subjects</td><td><code>Term</code> | <code>Array.&lt;Term&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td>
     </tr>  </tbody>
 </table>
 
 <a name="Clownface+deleteOut"></a>
 
-### clownface.deleteOut(predicates) ⇒ [<code>Clownface</code>](#Clownface)
+### clownface.deleteOut(predicates, objects) ⇒ [<code>Clownface</code>](#Clownface)
 Deletes all quads where the current graph pointer contexts are the subjects
 
 **Kind**: instance method of [<code>Clownface</code>](#Clownface)  
@@ -439,6 +441,8 @@ Deletes all quads where the current graph pointer contexts are the subjects
   <tbody>
 <tr>
     <td>predicates</td><td><code>Term</code> | <code>Array.&lt;Term&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td>
+    </tr><tr>
+    <td>objects</td><td><code>Term</code> | <code>Array.&lt;Term&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td>
     </tr>  </tbody>
 </table>
 
