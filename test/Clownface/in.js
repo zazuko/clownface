@@ -4,6 +4,7 @@ const assert = require('assert')
 const clownface = require('../..')
 const loadExample = require('../support/example')
 const rdf = require('../support/factory')
+const ns = require('../support/namespace')
 const Clownface = require('../../lib/Clownface')
 
 describe('.in', () => {
@@ -13,7 +14,7 @@ describe('.in', () => {
     assert.strictEqual(typeof cf.in, 'function')
   })
 
-  it('should return a new Dataset instance', async () => {
+  it('should return a new Clownface instance', async () => {
     const cf = clownface({
       dataset: await loadExample(),
       value: '2311 North Los Robles Avenue, Aparment 4A'
@@ -25,7 +26,18 @@ describe('.in', () => {
     assert.notStrictEqual(result, cf)
   })
 
-  it('should search object -> subject', async () => {
+  it('should search object -> subject without predicate', async () => {
+    const cf = clownface({
+      dataset: await loadExample(),
+      term: ns.tbbtp('bernadette-rostenkowski')
+    })
+
+    const result = cf.in()
+
+    assert.strictEqual(result._context.length, 8)
+  })
+
+  it('should search object -> subject with predicate', async () => {
     const cf = clownface({
       dataset: await loadExample(),
       value: '2311 North Los Robles Avenue, Aparment 4A'
