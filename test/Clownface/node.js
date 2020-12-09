@@ -1,6 +1,8 @@
 /* global describe, it */
 
 const assert = require('assert')
+const TermSet = require('@rdfjs/term-set')
+const { xsd } = require('../support/namespace')
 const clownface = require('../..')
 const loadExample = require('../support/example')
 const rdf = require('../support/factory')
@@ -108,6 +110,22 @@ describe('.node', () => {
 
     assert.strictEqual(result._context.length, 1)
     assert.strictEqual(result._context[0].term.termType, 'BlankNode')
+  })
+
+  it('should create nodes from term iterator', () => {
+    const cf = clownface({ dataset: rdf.dataset() })
+    const nodes = new TermSet([
+      rdf.namedNode('http://example.com/'),
+      rdf.literal('10', xsd.int),
+      rdf.blankNode()
+    ])
+
+    const result = cf.node(nodes)
+
+    assert.strictEqual(result._context.length, 3)
+    assert.deepStrictEqual(result._context[0].term, rdf.namedNode('http://example.com/'))
+    assert.deepStrictEqual(result._context[1].term, rdf.literal('10', xsd.int))
+    assert.strictEqual(result._context[2].term.termType, 'BlankNode')
   })
 
   it('should use the given datatype', () => {

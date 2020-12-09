@@ -63,4 +63,18 @@ describe('.blankNode', () => {
     assert.strictEqual(result._context[1].term.termType, 'BlankNode')
     assert.strictEqual(result._context[1].term.value, labelB)
   })
+
+  it('should support multiple values in an iterable', () => {
+    const labelA = 'b321a'
+    const labelB = 'b321b'
+    const cf = clownface({ dataset: rdf.dataset() })
+
+    const result = cf.blankNode(new Set([labelA, labelB]))
+
+    assert.strictEqual(result._context.length, 2)
+    assert.strictEqual(result._context[0].term.termType, 'BlankNode')
+    assert.strictEqual(result._context[0].term.value, labelA)
+    assert.strictEqual(result._context[1].term.termType, 'BlankNode')
+    assert.strictEqual(result._context[1].term.value, labelB)
+  })
 })

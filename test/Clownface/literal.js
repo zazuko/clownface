@@ -135,6 +135,18 @@ describe('.literal', () => {
     assert.strictEqual(result._context[1].term.value, '2')
   })
 
+  it('should support multiple values in an iterable', () => {
+    const cf = clownface({ dataset: rdf.dataset() })
+
+    const result = cf.literal(new Set(['1', '2']))
+
+    assert.strictEqual(result._context.length, 2)
+    assert.strictEqual(result._context[0].term.termType, 'Literal')
+    assert.strictEqual(result._context[0].term.value, '1')
+    assert.strictEqual(result._context[1].term.termType, 'Literal')
+    assert.strictEqual(result._context[1].term.value, '2')
+  })
+
   it('should use the given datatype', () => {
     const datatypeIri = 'http://example.org/datatype'
     const cf = clownface({ dataset: rdf.dataset() })
