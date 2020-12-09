@@ -3,6 +3,7 @@
 const assert = require('assert')
 const clownface = require('../..')
 const loadExample = require('../support/example')
+const ns = require('../support/namespace')
 const rdf = require('../support/factory')
 const { addAll } = require('rdf-dataset-ext')
 
@@ -57,5 +58,29 @@ describe('.deleteIn', () => {
     ])
 
     assert.strictEqual(dataset.size, 118)
+  })
+
+  it('should remove quads based on the object value, predicate and subject', async () => {
+    const dataset = addAll(rdf.dataset(), await loadExample())
+    const cf = clownface({
+      dataset,
+      term: ns.tbbtp('bernadette-rostenkowski')
+    })
+
+    cf.deleteIn(ns.schema.knows, ns.tbbtp('amy-farrah-fowler'))
+
+    assert.strictEqual(dataset.size, 125)
+  })
+
+  it('should remove quads based on the object value, multiple predicates and multiple subjects', async () => {
+    const dataset = addAll(rdf.dataset(), await loadExample())
+    const cf = clownface({
+      dataset,
+      term: ns.tbbtp('bernadette-rostenkowski')
+    })
+
+    cf.deleteIn([ns.schema.knows, ns.schema.spouse], [ns.tbbtp('amy-farrah-fowler'), ns.tbbtp('howard-wolowitz')])
+
+    assert.strictEqual(dataset.size, 123)
   })
 })

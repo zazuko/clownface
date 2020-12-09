@@ -10,7 +10,7 @@ describe('Context', () => {
       const context = new Context({ dataset: rdf.dataset() })
 
       assert.doesNotThrow(() => {
-        context.out(schema.knows)
+        context.out([schema.knows])
       })
     })
   })
