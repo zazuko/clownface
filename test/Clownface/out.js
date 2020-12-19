@@ -190,6 +190,14 @@ describe('.out', () => {
         assert(label.term.equals(rdf.literal('Јабука', 'sr-Cyrl')))
       })
 
+      it('should match primary language tag by secondary if there is no exact match', async () => {
+        const kongressstrasse = (await parse(testData)).node(ns.ex.kongressstrasse)
+
+        const label = kongressstrasse.out(ns.rdfs.label, { language: 'de-CH' })
+
+        assert(label.term.equals(rdf.literal('Kongressstraße', 'de')))
+      })
+
       it('should match tertiary tag by secondary language', async () => {
         const apple = (await parse(testData)).node(ns.ex.kongressstrasse)
 
