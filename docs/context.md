@@ -70,7 +70,7 @@ const context = {
 
 ### Multiple pointers
 
-The context can represent a single graph pointer, that is a single node in the graph.
+A multi-pointer state is also possible, where multiple nodes are pointerd at. In that case `term` and `value` are going to be undefined and only their array variants will return those nodes.
 
 <run-kit>
 
