@@ -72,6 +72,8 @@ const context = {
 
 A multi-pointer state is also possible, where multiple nodes are pointerd at. In that case `term` and `value` are going to be undefined and only their array variants will return those nodes.
 
+The return value of all [graph traversals](traversal.md) potentially returns a multi-pointer, thus always remember to check if `term/value` is defined.
+
 <run-kit>
 
 ```js
