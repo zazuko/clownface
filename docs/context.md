@@ -70,7 +70,9 @@ const context = {
 
 ### Multiple pointers
 
-The context can represent a single graph pointer, that is a single node in the graph.
+A multi-pointer state is also possible. The pointer can point to multiple nodes simultaneously. In that case `term` and `value` are going to be undefined and only their array variants will return those nodes.
+
+The return value of all [graph traversals](traversal.md) potentially returns a multi-pointer, thus always remember to check if `term/value` is defined.	
 
 <run-kit>
 
