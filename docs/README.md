@@ -26,18 +26,17 @@ provided to the exported factory method
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const dataset = require('rdf-dataset-indexed')
-const { namedNode } = require('@rdfjs/data-model')
+const clownface = require('clownface')
+const rdf = require('rdf-ext')
 
-const firstName = namedNode('http://xmlns.com/foaf/0.1/firstName')
-const lastName = namedNode('http://xmlns.com/foaf/0.1/lastName')
+const firstName = rdf.namedNode('http://xmlns.com/foaf/0.1/firstName')
+const lastName = rdf.namedNode('http://xmlns.com/foaf/0.1/lastName')
 
 // initialize
-const graph = cf({ dataset: dataset() })
+const ptr = clownface({ dataset: rdf.dataset() })
 
 // add some resources 
-graph
+ptr
   .namedNode('http://example.com/person/stuart-bloom')
   .addOut(firstName, 'Stuart')
   .addOut(lastName, 'Bloom')
@@ -45,7 +44,7 @@ graph
   .addOut(firstName, 'Penny')
   
 // and now retrieve the first names of those who have a last name
-graph
+ptr
   .has(lastName)
   .out(firstName)
   .values

@@ -288,7 +288,8 @@ Creates a graph pointer to nodes which are linked to the current pointer by `pre
 <a name="Clownface+out"></a>
 
 ### clownface.out([predicates], [options]) ⇒ [<code>Clownface</code>](#Clownface)
-Creates a graph pointer to nodes which link the current pointer by `predicates`
+Creates a graph pointer to the result nodes after following a predicate, or after
+following any predicates in an array, starting from the subject(s) (current graph pointer) to the objects.
 
 **Kind**: instance method of [<code>Clownface</code>](#Clownface)  
 <table>
@@ -299,7 +300,7 @@ Creates a graph pointer to nodes which link the current pointer by `predicates`
   </thead>
   <tbody>
 <tr>
-    <td>[predicates]</td><td><code>Term</code> | <code>Array.&lt;Term&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td><td><p>one or more RDF/JS term identifying a property</p>
+    <td>[predicates]</td><td><code>Term</code> | <code>Array.&lt;Term&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td><td><p>any predicates to follow</p>
 </td>
     </tr><tr>
     <td>[options]</td><td><code>object</code></td><td></td>
