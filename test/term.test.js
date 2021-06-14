@@ -20,6 +20,14 @@ describe('term', () => {
     assert.strictEqual(typeof result, 'undefined')
   })
 
+  it('should create a NamedNode if only a URL object is given', () => {
+    const url = new URL('http://localhost:8080/test')
+    const result = term(url, undefined, undefined, rdf)
+
+    assert.strictEqual(result.termType, 'NamedNode')
+    assert.strictEqual(result.value, url.toString())
+  })
+
   it('should create a Literal if only a string is given', () => {
     const result = term('test', undefined, undefined, rdf)
 
