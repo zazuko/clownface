@@ -4,10 +4,10 @@
   "description": "Simple but powerful graph traversing library",
   "main": "index.js",
   "scripts": {
-    "pretest": "standard",
-    "test": "nyc mocha",
-    "posttest": "nyc report --reporter=text-lcov > coverage.lcov",
-    "docs:serve": "docsify serve docs"
+    "coverage": "codecov",
+    "docs:build": "jsdoc2md --no-gfm -f index.js lib/* > docs/api.md; git add docs/api.md",
+    "docs:serve": "docsify serve docs",
+    "test": "standard && nyc --reporter=lcov mocha"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
   "devDependencies": {
     "@rdfjs/parser-n3": "^1.1.2",
     "@rdfjs/term-set": "^1.0.1",
+    "codecov": "^3.8.2",
     "docsify-cli": "^4.4.0",
     "husky": "^4.2.5",
     "jsdoc-to-markdown": "^5.0.3",
@@ -44,14 +45,9 @@
     "string-to-stream": "^3.0.1",
     "tbbt-ld": "^1.1.0"
   },
-  "nyc": {
-    "exclude": [
-      "test/*.js"
-    ]
-  },
   "husky": {
     "hooks": {
-      "pre-commit": "jsdoc2md --no-gfm -f index.js lib/* > docs/api.md; git add docs/api.md"
+      "pre-commit": "npm run docs:build"
     }
   }
 }
