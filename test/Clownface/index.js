@@ -10,6 +10,7 @@ describe('Clownface', () => {
   require('./values')
   require('./dataset')
   require('./datasets')
+  require('./isList')
   require('./list')
   require('./node')
   require('./blankNode')

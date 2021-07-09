@@ -42,6 +42,7 @@ A graph pointer object, which points at 0..N nodes within a dataset
     * [.dataset](#Clownface+dataset) ⇒ <code>undefined</code> \| <code>DatasetCore</code>
     * [.datasets](#Clownface+datasets) ⇒ <code>Array.&lt;DatasetCore&gt;</code>
     * [.any()](#Clownface+any) ⇒ [<code>Clownface</code>](#Clownface)
+    * [.isList()](#Clownface+isList) ⇒ <code>boolean</code>
     * [.list()](#Clownface+list) ⇒ <code>Iterable</code> \| <code>null</code>
     * [.toArray()](#Clownface+toArray) ⇒ [<code>Array.&lt;Clownface&gt;</code>](#Clownface)
     * [.filter(callback)](#Clownface+filter) ⇒ [<code>Clownface</code>](#Clownface)
@@ -102,6 +103,12 @@ Gets the current context's datasets
 ### clownface.any() ⇒ [<code>Clownface</code>](#Clownface)
 Removes current pointers from the context and return an "any pointer".
 The returned object can be used to find any nodes in the dataset
+
+**Kind**: instance method of [<code>Clownface</code>](#Clownface)  
+<a name="Clownface+isList"></a>
+
+### clownface.isList() ⇒ <code>boolean</code>
+Returns true if the current term is a rdf:List
 
 **Kind**: instance method of [<code>Clownface</code>](#Clownface)  
 <a name="Clownface+list"></a>
