@@ -53,7 +53,9 @@ A graph pointer object, which points at 0..N nodes within a dataset
     * [.literal(values, [languageOrDatatype])](#Clownface+literal) ⇒ [<code>Clownface</code>](#Clownface)
     * [.namedNode(values)](#Clownface+namedNode) ⇒ [<code>Clownface</code>](#Clownface)
     * [.in([predicates])](#Clownface+in) ⇒ [<code>Clownface</code>](#Clownface)
+    * [.inE([predicates])](#Clownface+inE) ⇒ [<code>Clownface</code>](#Clownface)
     * [.out([predicates], [options])](#Clownface+out) ⇒ [<code>Clownface</code>](#Clownface)
+    * [.outE([predicates], [options])](#Clownface+outE) ⇒ [<code>Clownface</code>](#Clownface)
     * [.has(predicates, [objects])](#Clownface+has) ⇒ [<code>Clownface</code>](#Clownface)
     * [.addIn(predicates, subjects, [callback])](#Clownface+addIn) ⇒ [<code>Clownface</code>](#Clownface)
     * [.addOut(predicates, objects, [callback])](#Clownface+addOut) ⇒ [<code>Clownface</code>](#Clownface)
@@ -292,11 +294,53 @@ Creates a graph pointer to nodes which are linked to the current pointer by `pre
     </tr>  </tbody>
 </table>
 
+<a name="Clownface+inE"></a>
+
+### clownface.inE([predicates]) ⇒ [<code>Clownface</code>](#Clownface)
+A similar operation to in, but instead of returning the objects, it returns pointers to the matching predicates
+
+**Kind**: instance method of [<code>Clownface</code>](#Clownface)  
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>[predicates]</td><td><code>Term</code> | <code>Array.&lt;Term&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td><td><p>one or more RDF/JS term identifying a property</p>
+</td>
+    </tr>  </tbody>
+</table>
+
 <a name="Clownface+out"></a>
 
 ### clownface.out([predicates], [options]) ⇒ [<code>Clownface</code>](#Clownface)
 Creates a graph pointer to the result nodes after following a predicate, or after
 following any predicates in an array, starting from the subject(s) (current graph pointer) to the objects.
+
+**Kind**: instance method of [<code>Clownface</code>](#Clownface)  
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th><th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>[predicates]</td><td><code>Term</code> | <code>Array.&lt;Term&gt;</code> | <code><a href="#Clownface">Clownface</a></code> | <code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td><td><p>any predicates to follow</p>
+</td>
+    </tr><tr>
+    <td>[options]</td><td><code>object</code></td><td></td>
+    </tr><tr>
+    <td>[options.language]</td><td><code>string</code> | <code>Array.&lt;string&gt;</code> | <code>undefined</code></td><td></td>
+    </tr>  </tbody>
+</table>
+
+<a name="Clownface+outE"></a>
+
+### clownface.outE([predicates], [options]) ⇒ [<code>Clownface</code>](#Clownface)
+A similar operation to out, but instead of returning the objects, it returns pointers to the matching predicates
 
 **Kind**: instance method of [<code>Clownface</code>](#Clownface)  
 <table>

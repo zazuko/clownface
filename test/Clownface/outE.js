@@ -76,5 +76,4 @@ describe('.outE', () => {
 
     assert.strictEqual(result._context.length, 2)
   })
-
 })
