@@ -7,11 +7,11 @@ const rdf = require('../support/factory')
 const ns = require('../support/namespace')
 const Clownface = require('../../lib/Clownface')
 
-describe('.inE', () => {
+describe('.inProp', () => {
   it('should be a function', () => {
     const cf = clownface({ dataset: rdf.dataset() })
 
-    assert.strictEqual(typeof cf.inE, 'function')
+    assert.strictEqual(typeof cf.inProp, 'function')
   })
 
   it('should return a new Clownface instance', async () => {
@@ -20,7 +20,7 @@ describe('.inE', () => {
       value: '2311 North Los Robles Avenue, Aparment 4A'
     })
 
-    const result = cf.inE(rdf.namedNode('http://schema.org/streetAddress'))
+    const result = cf.inProp(rdf.namedNode('http://schema.org/streetAddress'))
 
     assert(result instanceof Clownface)
     assert.notStrictEqual(result, cf)
@@ -32,7 +32,7 @@ describe('.inE', () => {
       term: ns.tbbtp('bernadette-rostenkowski')
     })
 
-    const result = cf.inE()
+    const result = cf.inProp()
 
     assert.strictEqual(result._context.length, 8)
   })
@@ -43,7 +43,7 @@ describe('.inE', () => {
       value: '2311 North Los Robles Avenue, Aparment 4A'
     })
 
-    const result = cf.inE(rdf.namedNode('http://schema.org/streetAddress'))
+    const result = cf.inProp(rdf.namedNode('http://schema.org/streetAddress'))
 
     assert.strictEqual(result._context.length, 2)
     assert.strictEqual(result._context[0].term.termType, 'NamedNode')
@@ -56,7 +56,7 @@ describe('.inE', () => {
       term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
     })
 
-    const result = cf.inE([
+    const result = cf.inProp([
       rdf.namedNode('http://schema.org/spouse'),
       rdf.namedNode('http://schema.org/knows')
     ])
@@ -70,7 +70,7 @@ describe('.inE', () => {
       term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
     })
 
-    const result = cf.inE(cf.node([
+    const result = cf.inProp(cf.node([
       rdf.namedNode('http://schema.org/spouse'),
       rdf.namedNode('http://schema.org/knows')
     ]))
