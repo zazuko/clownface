@@ -12,6 +12,8 @@
 <dt><a href="#factory">factory(init)</a> ⇒ <code><a href="#Clownface">Clownface</a></code></dt>
 <dd><p>Factory to create graph pointer objects</p>
 </dd>
+<dt><a href="#filterTaggedLiterals">filterTaggedLiterals(terms, [options])</a> ⇒ <code>Array.&lt;Term&gt;</code></dt>
+<dd></dd>
 </dl>
 
 ## Typedefs
@@ -509,6 +511,26 @@ Factory to create graph pointer objects
     </tr>  </tbody>
 </table>
 
+<a name="filterTaggedLiterals"></a>
+
+## filterTaggedLiterals(terms, [options]) ⇒ <code>Array.&lt;Term&gt;</code>
+**Kind**: global function  
+<table>
+  <thead>
+    <tr>
+      <th>Param</th><th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+    <td>terms</td><td><code>Array.&lt;Term&gt;</code></td>
+    </tr><tr>
+    <td>[options]</td><td><code>object</code></td>
+    </tr><tr>
+    <td>[options.language]</td><td><code>string</code> | <code>Array.&lt;string&gt;</code></td>
+    </tr>  </tbody>
+</table>
+
 <a name="GraphPointerCallback"></a>
 
 ## GraphPointerCallback : <code>function</code>
@@ -539,6 +561,10 @@ Factory to create graph pointer objects
   <tbody>
 <tr>
     <td>pointer</td><td><code><a href="#Clownface">Clownface</a></code></td>
+    </tr><tr>
+    <td>index</td><td><code>number</code></td>
+    </tr><tr>
+    <td>pointers</td><td><code><a href="#Clownface">Array.&lt;Clownface&gt;</a></code></td>
     </tr>  </tbody>
 </table>
 
