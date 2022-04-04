@@ -5,6 +5,7 @@ const clownface = require('../..')
 const loadExample = require('../support/example')
 const rdf = require('../support/factory')
 const Clownface = require('../../lib/Clownface')
+const Context = require('../../lib/Context')
 
 describe('.filter', () => {
   it('should be a function', () => {
@@ -17,6 +18,14 @@ describe('.filter', () => {
     const cf = clownface({ dataset: rdf.dataset() })
 
     assert(cf.filter(() => true) instanceof Clownface)
+  })
+
+  it('should return instance with _context of correct type', () => {
+    const cf = clownface({ dataset: rdf.dataset() }).namedNode()
+
+    const [context] = cf.filter(() => true)._context
+
+    assert(context instanceof Context)
   })
 
   it('should call the function with Dataset parameter', async () => {
