@@ -26,8 +26,10 @@ provided to the exported factory method
 <run-kit>
 
 ```js
-const clownface = require('clownface')
-const rdf = require('rdf-ext')
+
+
+import clownface from 'clownface'
+import rdf from 'rdf-ext'
 
 const firstName = rdf.namedNode('http://xmlns.com/foaf/0.1/firstName')
 const lastName = rdf.namedNode('http://xmlns.com/foaf/0.1/lastName')
