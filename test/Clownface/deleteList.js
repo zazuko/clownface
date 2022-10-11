@@ -61,4 +61,12 @@ describe('.deleteList', () => {
     assert.strictEqual(dataset.size, 1)
     assert([...dataset][0].equals(other))
   })
+
+  it('should not hang if enters in a loop ', () => {
+    const dataset = rdf.dataset([
+      rdf.quad(ns.ex.term, ns.ex.p, ns.ex.list)
+    ])
+    const cf = clownface({ term: ns.ex.term, dataset })
+    cf.deleteList(ns.ex.p)
+  })
 })
