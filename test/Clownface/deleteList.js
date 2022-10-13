@@ -62,11 +62,73 @@ describe('.deleteList', () => {
     assert([...dataset][0].equals(other))
   })
 
-  it('should not hang if enters in a loop ', () => {
+  it('should not delete when is not a list', () => {
     const dataset = rdf.dataset([
-      rdf.quad(ns.ex.term, ns.ex.p, ns.ex.list)
-    ])
-    const cf = clownface({ term: ns.ex.term, dataset })
+      rdf.quad(ns.ex.s, ns.ex.p, ns.ex.notAList)])
+    const cf = clownface({ term: ns.ex.s, dataset })
+
     cf.deleteList(ns.ex.p)
+
+    assert.strictEqual(dataset.size, 1)
+  })
+
+  it('should not delete when node is literal', () => {
+    const start = rdf.blankNode()
+    const dataset = rdf.dataset([
+      rdf.quad(start, ns.list, rdf.literal('not list'))])
+    const cf = clownface({ dataset })
+
+    cf.out(ns.list).deleteList(ns.list)
+
+    assert.strictEqual(cf.dataset.size, 1)
+  })
+
+  it('should not delete when list is rdf:nil', () => {
+    const start = rdf.blankNode()
+    const dataset = rdf.dataset([
+      rdf.quad(start, ns.list, ns.nil)])
+    const cf = clownface({ dataset })
+
+    cf.out(ns.list).deleteList(ns.list)
+
+    assert.strictEqual(cf.dataset.size, 1)
+  })
+
+  it('should throw error when list is not connected through rest', () => {
+    const start = rdf.blankNode()
+    const item = [rdf.blankNode(), rdf.blankNode(), rdf.blankNode()]
+    const dataset = rdf.dataset([
+      rdf.quad(start, ns.list, item[0]),
+      rdf.quad(item[0], ns.first, rdf.literal('1')),
+      rdf.quad(item[0], ns.dontFollowThis, item[1]),
+      rdf.quad(item[1], ns.first, rdf.literal('2')),
+      rdf.quad(item[1], ns.rest, item[2]),
+      rdf.quad(item[2], ns.first, rdf.literal('3')),
+      rdf.quad(item[2], ns.rest, ns.nil)])
+    const cf = clownface({ dataset })
+
+    assert.throws(() => {
+      cf.node(start).deleteList(ns.list)
+    })
+    assert.strictEqual(cf.dataset.size, 7)
+  })
+
+  it('should throw error when ending was not nil', () => {
+    const start = rdf.blankNode()
+    const item = [rdf.blankNode(), rdf.blankNode(), rdf.blankNode()]
+    const dataset = rdf.dataset([
+      rdf.quad(start, ns.list, item[0]),
+      rdf.quad(item[0], ns.first, rdf.literal('1')),
+      rdf.quad(item[0], ns.rest, item[1]),
+      rdf.quad(ns.ex.the, ns.ex.survivor, ns.ex.quad),
+      rdf.quad(item[1], ns.first, rdf.literal('2')),
+      rdf.quad(item[1], ns.rest, item[2]),
+      rdf.quad(item[2], ns.first, rdf.literal('3'))])
+    const cf = clownface({ dataset })
+
+    assert.throws(() => {
+      cf.node(start).deleteList(ns.list)
+    })
+    assert.strictEqual(cf.dataset.size, 7)
   })
 })
