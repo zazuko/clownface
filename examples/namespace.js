@@ -1,5 +1,5 @@
-const clownface = require('..')
 const namespace = require('@rdfjs/namespace')
+const clownface = require('..')
 const initExample = require('../test/support/example')
 
 initExample().then(dataset => {
@@ -14,7 +14,7 @@ initExample().then(dataset => {
   console.log(
     stuartBloom
       .out([schema.givenName, schema.familyName])
-      .values.join(' ')
+      .values.join(' '),
   )
 
   console.log(`people ${stuartBloom.values[0]} knows:`)
@@ -23,9 +23,9 @@ initExample().then(dataset => {
       .out(schema.knows)
       .map(person => person
         .out([schema.givenName, schema.familyName])
-        .values.join(' ')
+        .values.join(' '),
       )
-      .join(', ')
+      .join(', '),
   )
 
   const apartment4a = tbbt.node('2311 North Los Robles Avenue, Aparment 4A')
@@ -36,15 +36,15 @@ initExample().then(dataset => {
       .in(schema.streetAddress)
       .in(schema.address)
       .map(person => person.out(schema.givenName).value)
-      .join(', ')
+      .join(', '),
   )
 
   const neurobiologist = tbbt.has(schema.jobTitle, 'neurobiologist')
 
-  console.log(`people with the job title neurobiologist`)
+  console.log('people with the job title neurobiologist')
   console.log(
     neurobiologist
       .out(schema.givenName)
-      .values.join(', ')
+      .values.join(', '),
   )
 })

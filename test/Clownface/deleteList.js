@@ -1,10 +1,10 @@
 /* global describe, it */
 
 const assert = require('assert')
+const { addAll } = require('rdf-dataset-ext')
 const clownface = require('../..')
 const rdf = require('../support/factory')
 const ns = require('../support/namespace')
-const { addAll } = require('rdf-dataset-ext')
 
 describe('.deleteList', () => {
   it('should be a function', () => {
@@ -18,7 +18,7 @@ describe('.deleteList', () => {
     const subject = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
     const cf = clownface({
       dataset,
-      term: subject
+      term: subject,
     })
 
     let touched = false
@@ -44,7 +44,7 @@ describe('.deleteList', () => {
     const other = rdf.quad(subject, predicateOther, item0)
     const cf = clownface({
       dataset,
-      term: subject
+      term: subject,
     })
 
     addAll(dataset, [
@@ -53,7 +53,7 @@ describe('.deleteList', () => {
       rdf.quad(first0, ns.first, item0),
       rdf.quad(first0, ns.rest, first1),
       rdf.quad(first1, ns.first, item1),
-      rdf.quad(first1, ns.rest, ns.nil)
+      rdf.quad(first1, ns.rest, ns.nil),
     ])
 
     cf.deleteList(predicate)

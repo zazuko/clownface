@@ -117,7 +117,7 @@ describe('.node', () => {
     const nodes = new TermSet([
       rdf.namedNode('http://example.com/'),
       rdf.literal('10', xsd.int),
-      rdf.blankNode()
+      rdf.blankNode(),
     ])
 
     const result = cf.node(nodes)
@@ -144,7 +144,7 @@ describe('.node', () => {
     const datatype = rdf.namedNode('http://example.org/datatype')
     const cf = clownface({ dataset: rdf.dataset() })
 
-    const result = cf.node('example', { datatype: datatype })
+    const result = cf.node('example', { datatype })
 
     assert.strictEqual(result._context.length, 1)
     assert.strictEqual(result._context[0].term.termType, 'Literal')

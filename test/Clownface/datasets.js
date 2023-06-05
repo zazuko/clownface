@@ -1,9 +1,9 @@
 /* global describe, it */
 
 const assert = require('assert')
+const { equals } = require('rdf-dataset-ext')
 const clownface = require('../..')
 const rdf = require('../support/factory')
-const { equals } = require('rdf-dataset-ext')
 
 describe('.datasets', () => {
   it('should be an array property', () => {

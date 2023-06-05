@@ -1,0 +1,11 @@
+{
+  "extends": [ "@tpluscode/eslint-config/js" ],
+  "overrides": [
+    {
+      "files": ["examples/**"],
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ]
+}

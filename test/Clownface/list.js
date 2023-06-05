@@ -1,12 +1,12 @@
 /* global describe, it */
 
 const assert = require('assert')
+const { addAll } = require('rdf-dataset-ext')
 const clownface = require('../..')
 const rdf = require('../support/factory')
 const ns = require('../support/namespace')
-const { addAll } = require('rdf-dataset-ext')
 
-function listDataset () {
+function listDataset() {
   const start = rdf.blankNode()
   const item = [rdf.blankNode(), rdf.blankNode(), rdf.blankNode()]
 
@@ -17,7 +17,7 @@ function listDataset () {
     rdf.quad(item[1], ns.first, rdf.literal('2')),
     rdf.quad(item[1], ns.rest, item[2]),
     rdf.quad(item[2], ns.first, rdf.literal('3')),
-    rdf.quad(item[2], ns.rest, ns.nil)
+    rdf.quad(item[2], ns.rest, ns.nil),
   ])
 }
 
@@ -74,7 +74,7 @@ describe('.list', () => {
   it('should return empty iterator when list is rdf:nil', () => {
     const start = rdf.blankNode()
     const dataset = rdf.dataset([
-      rdf.quad(start, ns.list, ns.nil)
+      rdf.quad(start, ns.list, ns.nil),
     ])
     const cf = clownface({ dataset })
 
@@ -87,7 +87,7 @@ describe('.list', () => {
   it('should return null when node is literal', () => {
     const start = rdf.blankNode()
     const dataset = rdf.dataset([
-      rdf.quad(start, ns.list, rdf.literal('not list'))
+      rdf.quad(start, ns.list, rdf.literal('not list')),
     ])
     const cf = clownface({ dataset })
 
@@ -99,7 +99,7 @@ describe('.list', () => {
   it('should return null when node is not a list', () => {
     const start = rdf.blankNode()
     const dataset = rdf.dataset([
-      rdf.quad(start, ns.list, rdf.namedNode('not list'))
+      rdf.quad(start, ns.list, rdf.namedNode('not list')),
     ])
     const cf = clownface({ dataset })
 
@@ -115,7 +115,7 @@ describe('.list', () => {
       rdf.quad(start, ns.list, listNode),
       rdf.quad(listNode, ns.first, rdf.literal('1')),
       rdf.quad(listNode, ns.first, rdf.literal('3')),
-      rdf.quad(listNode, ns.rest, ns.nil)
+      rdf.quad(listNode, ns.rest, ns.nil),
     ])
     const cf = clownface({ dataset })
 
@@ -132,7 +132,7 @@ describe('.list', () => {
       rdf.quad(start, ns.list, listNode),
       rdf.quad(listNode, ns.first, rdf.literal('1')),
       rdf.quad(listNode, ns.rest, rdf.blankNode()),
-      rdf.quad(listNode, ns.rest, ns.nil)
+      rdf.quad(listNode, ns.rest, ns.nil),
     ])
     const cf = clownface({ dataset })
 

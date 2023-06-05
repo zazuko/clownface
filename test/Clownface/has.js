@@ -72,7 +72,7 @@ describe('.has', () => {
     const predicate = rdf.namedNode('http://schema.org/givenName')
     const objects = [
       rdf.literal('Leonard'),
-      rdf.literal('Sheldon')
+      rdf.literal('Sheldon'),
     ]
 
     const cf = clownface({ dataset: await loadExample(), term: [subjectA, subjectB] })

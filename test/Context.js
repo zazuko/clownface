@@ -1,7 +1,7 @@
-const { describe, it } = require('mocha')
 const assert = require('assert')
-const { schema } = require('./support/namespace')
+const { describe, it } = require('mocha')
 const Context = require('../lib/Context')
+const { schema } = require('./support/namespace')
 const rdf = require('./support/factory')
 
 describe('Context', () => {

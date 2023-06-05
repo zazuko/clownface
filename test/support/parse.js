@@ -5,7 +5,7 @@ const cf = require('../../')
 
 const parser = new Parser()
 
-async function parse (string) {
+async function parse(string) {
   const dataset = await $rdf.dataset().import(parser.import(toStream(string)))
 
   return cf({ dataset })

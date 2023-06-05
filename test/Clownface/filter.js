@@ -31,7 +31,7 @@ describe('.filter', () => {
   it('should call the function with Dataset parameter', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     cf.in(rdf.namedNode('http://schema.org/knows')).filter(item => {
@@ -44,7 +44,7 @@ describe('.filter', () => {
   it('should call the function for each context', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     let count = 0
@@ -61,7 +61,7 @@ describe('.filter', () => {
   it('should filter the context based on the return value of the function', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     const result = cf.in(rdf.namedNode('http://schema.org/knows')).filter(item => {

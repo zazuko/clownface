@@ -2,8 +2,8 @@
 
 const assert = require('assert')
 const namespace = require('@rdfjs/namespace')
-const rdf = require('./support/factory')
 const { booleanToLiteral, numberToLiteral, stringToLiteral, toLiteral } = require('../lib/fromPrimitive')
+const rdf = require('./support/factory')
 
 const xsd = namespace('http://www.w3.org/2001/XMLSchema#')
 
