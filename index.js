@@ -12,7 +12,7 @@ const Clownface = require('./lib/Clownface')
  * @param {Context} [init._context] an existing clownface context. takes precedence before other params
  * @returns {Clownface}
  */
-function factory ({ dataset, graph, term, value, factory, _context }) {
+function factory({ dataset, graph, term, value, factory, _context }) {
   return new Clownface({ dataset, graph, term, value, factory, _context })
 }
 

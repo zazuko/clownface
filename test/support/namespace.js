@@ -10,7 +10,7 @@ const ns = {
   rdfs: namespace('http://www.w3.org/2000/01/rdf-schema#'),
   schema: namespace('http://schema.org/'),
   xsd: namespace('http://www.w3.org/2001/XMLSchema#'),
-  tbbtp: namespace('http://localhost:8080/data/person/')
+  tbbtp: namespace('http://localhost:8080/data/person/'),
 }
 
 module.exports = ns

@@ -1,9 +1,9 @@
-const { describe, it } = require('mocha')
 const assert = require('assert')
+const { describe, it } = require('mocha')
 const sinon = require('sinon')
+const { addAll } = require('rdf-dataset-ext')
 const clownface = require('../..')
 const rdf = require('../support/factory')
-const { addAll } = require('rdf-dataset-ext')
 
 describe('.addIn', () => {
   it('should be a function', () => {
@@ -167,7 +167,7 @@ describe('.addIn', () => {
         const node = rdf.namedNode(value)
         node.testProperty = 'test'
         return node
-      }
+      },
     }
 
     const cf = clownface({ dataset, factory, term }).addIn(predicate, 'test')

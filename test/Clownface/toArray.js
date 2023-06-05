@@ -22,7 +22,7 @@ describe('.toArray', () => {
   it('should return a Dataset instance for every context object', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     const result = cf.in(rdf.namedNode('http://schema.org/knows')).toArray()

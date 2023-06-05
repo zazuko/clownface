@@ -1,5 +1,5 @@
-const { describe, it } = require('mocha')
 const assert = require('assert')
+const { describe, it } = require('mocha')
 const clownface = require('../..')
 const loadExample = require('../support/example')
 const rdf = require('../support/factory')
@@ -17,7 +17,7 @@ describe('.out', () => {
   it('should return a new Clownface instance', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: rdf.namedNode('http://localhost:8080/data/person/amy-farrah-fowler')
+      term: rdf.namedNode('http://localhost:8080/data/person/amy-farrah-fowler'),
     })
 
     const result = cf.out(rdf.namedNode('http://schema.org/jobTitle'))
@@ -29,7 +29,7 @@ describe('.out', () => {
   it('should search subject -> object without predicate', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: ns.tbbtp('amy-farrah-fowler')
+      term: ns.tbbtp('amy-farrah-fowler'),
     })
 
     const result = cf.out()
@@ -40,7 +40,7 @@ describe('.out', () => {
   it('should search subject -> object with predicate', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: rdf.namedNode('http://localhost:8080/data/person/amy-farrah-fowler')
+      term: rdf.namedNode('http://localhost:8080/data/person/amy-farrah-fowler'),
     })
 
     const result = cf.out(rdf.namedNode('http://schema.org/jobTitle'))
@@ -53,12 +53,12 @@ describe('.out', () => {
   it('should support multiple predicate values in an array', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     const result = cf.out([
       rdf.namedNode('http://schema.org/familyName'),
-      rdf.namedNode('http://schema.org/givenName')
+      rdf.namedNode('http://schema.org/givenName'),
     ])
 
     assert.strictEqual(result._context.length, 2)
@@ -67,12 +67,12 @@ describe('.out', () => {
   it('should support clownface objects as predicates', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     const result = cf.out(cf.node([
       rdf.namedNode('http://schema.org/familyName'),
-      rdf.namedNode('http://schema.org/givenName')
+      rdf.namedNode('http://schema.org/givenName'),
     ]))
 
     assert.strictEqual(result._context.length, 2)

@@ -7,7 +7,7 @@ const { filterTaggedLiterals } = require('./lib/languageTag')
  * @param {string | string[]} language
  * @returns {function(Clownface, number, Clownface[]): boolean}
  */
-function taggedLiteral (language) {
+function taggedLiteral(language) {
   return (current, index, pointers) => {
     const found = filterTaggedLiterals(pointers.map(ptr => ptr.term), { language })
 

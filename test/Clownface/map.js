@@ -22,7 +22,7 @@ describe('.map', () => {
   it('should call the function with Dataset parameter', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     cf.in(rdf.namedNode('http://schema.org/knows')).map(item => {
@@ -35,7 +35,7 @@ describe('.map', () => {
   it('should call the function for each context', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     let count = 0
@@ -52,7 +52,7 @@ describe('.map', () => {
   it('should return an array of all return values', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     const result = cf.in(rdf.namedNode('http://schema.org/knows')).map((item, index) => index)

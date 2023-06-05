@@ -1,5 +1,5 @@
-const { describe, it } = require('mocha')
 const assert = require('assert')
+const { describe, it } = require('mocha')
 const clownface = require('../..')
 const rdf = require('../support/factory')
 const ns = require('../support/namespace')
@@ -90,7 +90,7 @@ describe('.addList', () => {
         const node = rdf.namedNode(value)
         node.testProperty = 'test'
         return node
-      }
+      },
     }
 
     clownface({ dataset, term: subject, factory }).addList(predicate, [item0])

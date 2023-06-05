@@ -2,18 +2,28 @@ name: CI
 on: [push, pull_request]
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node:
-          - '12'
           - '14'
           - '16'
+          - '18'
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-      - run: npm install
+      - run: npm install --ci
       - run: npm test
-      - run: npm run coverage
+      - uses: codecov/codecov-action@v2
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm install --ci
+      - run: npm run lint

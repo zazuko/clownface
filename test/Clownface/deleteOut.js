@@ -1,11 +1,11 @@
 /* global describe, it */
 
 const assert = require('assert')
+const { addAll } = require('rdf-dataset-ext')
 const clownface = require('../..')
 const loadExample = require('../support/example')
 const ns = require('../support/namespace')
 const rdf = require('../support/factory')
-const { addAll } = require('rdf-dataset-ext')
 
 describe('.deleteOut', () => {
   it('should be a function', () => {
@@ -25,7 +25,7 @@ describe('.deleteOut', () => {
     const dataset = addAll(rdf.dataset(), await loadExample())
     const cf = clownface({
       dataset,
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     cf.deleteOut()
@@ -37,7 +37,7 @@ describe('.deleteOut', () => {
     const dataset = addAll(rdf.dataset(), await loadExample())
     const cf = clownface({
       dataset,
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     cf.deleteOut(rdf.namedNode('http://schema.org/knows'))
@@ -49,12 +49,12 @@ describe('.deleteOut', () => {
     const dataset = addAll(rdf.dataset(), await loadExample())
     const cf = clownface({
       dataset,
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     cf.deleteOut([
       rdf.namedNode('http://schema.org/knows'),
-      rdf.namedNode('http://schema.org/spouse')
+      rdf.namedNode('http://schema.org/spouse'),
     ])
 
     assert.strictEqual(dataset.size, 118)
@@ -64,7 +64,7 @@ describe('.deleteOut', () => {
     const dataset = addAll(rdf.dataset(), await loadExample())
     const cf = clownface({
       dataset,
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     cf.deleteOut(rdf.namedNode('http://schema.org/knows'))
@@ -76,7 +76,7 @@ describe('.deleteOut', () => {
     const dataset = addAll(rdf.dataset(), await loadExample())
     const cf = clownface({
       dataset,
-      term: ns.tbbtp('bernadette-rostenkowski')
+      term: ns.tbbtp('bernadette-rostenkowski'),
     })
 
     cf.deleteOut(ns.schema.knows, ns.tbbtp('amy-farrah-fowler'))
@@ -88,7 +88,7 @@ describe('.deleteOut', () => {
     const dataset = addAll(rdf.dataset(), await loadExample())
     const cf = clownface({
       dataset,
-      term: ns.tbbtp('bernadette-rostenkowski')
+      term: ns.tbbtp('bernadette-rostenkowski'),
     })
 
     cf.deleteOut([ns.schema.knows, ns.schema.spouse], [ns.tbbtp('amy-farrah-fowler'), ns.tbbtp('howard-wolowitz')])

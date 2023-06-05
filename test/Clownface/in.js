@@ -17,7 +17,7 @@ describe('.in', () => {
   it('should return a new Clownface instance', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      value: '2311 North Los Robles Avenue, Aparment 4A'
+      value: '2311 North Los Robles Avenue, Aparment 4A',
     })
 
     const result = cf.in(rdf.namedNode('http://schema.org/streetAddress'))
@@ -29,7 +29,7 @@ describe('.in', () => {
   it('should search object -> subject without predicate', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: ns.tbbtp('bernadette-rostenkowski')
+      term: ns.tbbtp('bernadette-rostenkowski'),
     })
 
     const result = cf.in()
@@ -40,7 +40,7 @@ describe('.in', () => {
   it('should search object -> subject with predicate', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      value: '2311 North Los Robles Avenue, Aparment 4A'
+      value: '2311 North Los Robles Avenue, Aparment 4A',
     })
 
     const result = cf.in(rdf.namedNode('http://schema.org/streetAddress'))
@@ -52,12 +52,12 @@ describe('.in', () => {
   it('should support multiple predicate values in an array', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     const result = cf.in([
       rdf.namedNode('http://schema.org/spouse'),
-      rdf.namedNode('http://schema.org/knows')
+      rdf.namedNode('http://schema.org/knows'),
     ])
 
     assert.strictEqual(result._context.length, 8)
@@ -66,12 +66,12 @@ describe('.in', () => {
   it('should support clownface objects as predicates', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     const result = cf.in(cf.node([
       rdf.namedNode('http://schema.org/spouse'),
-      rdf.namedNode('http://schema.org/knows')
+      rdf.namedNode('http://schema.org/knows'),
     ]))
 
     assert.strictEqual(result._context.length, 8)

@@ -1,5 +1,5 @@
-const { describe, it } = require('mocha')
 const assert = require('assert')
+const { describe, it } = require('mocha')
 const clownface = require('../..')
 const loadExample = require('../support/example')
 const rdf = require('../support/factory')
@@ -15,7 +15,7 @@ describe('.forEach', () => {
   it('should call the function with Dataset parameter', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     cf.in(rdf.namedNode('http://schema.org/knows')).forEach(item => {
@@ -28,7 +28,7 @@ describe('.forEach', () => {
   it('should call the function for each context', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     let count = 0
@@ -45,7 +45,7 @@ describe('.forEach', () => {
   it('should return self', () => {
     const cf = clownface({
       dataset: rdf.dataset(),
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     const forEachReturned = cf.forEach(() => {})

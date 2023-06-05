@@ -1,10 +1,10 @@
 /* global describe, it */
 
 const assert = require('assert')
+const TermSet = require('@rdfjs/term-set')
 const clownface = require('..')
 const { taggedLiteral } = require('../filter')
 const rdf = require('./support/factory')
-const TermSet = require('@rdfjs/term-set')
 
 describe('clownface/filter', () => {
   describe('.taggedLiteral', () => {
@@ -33,7 +33,7 @@ describe('clownface/filter', () => {
           .addOut(name, cf.literal('Die Schweiz', 'de')),
         cf.namedNode('PL')
           .addOut(name, cf.literal('Poland', 'en'))
-          .addOut(name, cf.literal('Polen', 'de'))
+          .addOut(name, cf.literal('Polen', 'de')),
       ])
 
       const multi = cf.node([rdf.namedNode('CH'), rdf.namedNode('PL')]).out(name)

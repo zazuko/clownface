@@ -29,7 +29,7 @@ describe('.isList', () => {
       rdf.quad(item[0], ns.first, rdf.literal('1')),
       rdf.quad(item[0], ns.rest, item[1]),
       rdf.quad(item[1], ns.first, rdf.literal('2')),
-      rdf.quad(item[1], ns.rest, ns.nil)
+      rdf.quad(item[1], ns.rest, ns.nil),
     ])
     const ptr = clownface({ term: item[0], dataset })
 

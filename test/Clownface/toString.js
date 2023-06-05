@@ -21,7 +21,7 @@ describe('.toString', () => {
   it('should return the value of a single term', async () => {
     const cf = clownface({
       dataset: await loadExample(),
-      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski')
+      term: rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
     })
 
     const result = cf.out(rdf.namedNode('http://schema.org/givenName')).toString()
@@ -34,8 +34,8 @@ describe('.toString', () => {
       dataset: await loadExample(),
       term: [
         rdf.namedNode('http://localhost:8080/data/person/bernadette-rostenkowski'),
-        rdf.namedNode('http://localhost:8080/data/person/howard-wolowitz')
-      ]
+        rdf.namedNode('http://localhost:8080/data/person/howard-wolowitz'),
+      ],
     })
 
     const givenName = cf.out(rdf.namedNode('http://schema.org/givenName')).toString()
