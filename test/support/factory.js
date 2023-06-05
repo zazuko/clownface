@@ -1,12 +1,12 @@
 // RDF-Ext
-const factory = require('rdf-ext')
+import factory from 'rdf-ext'
 
 /*
 // Reference implementations of Data Model and Dataset
-const dataset = require('@rdfjs/dataset')
-const model = require('@rdfjs/data-model')
+import dataset from '@rdfjs/dataset'
+import model from '@rdfjs/data-model'
 
 const factory = { ...model, ...dataset }
 */
 
-module.exports = factory
+export default factory

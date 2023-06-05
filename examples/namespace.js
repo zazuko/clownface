@@ -1,10 +1,10 @@
-const namespace = require('@rdfjs/namespace')
-const clownface = require('..')
-const initExample = require('../test/support/example')
+import rdf from '@rdfjs/environment'
+import clownface from '../index.js'
+import initExample from '../test/support/example.js'
 
 initExample().then(dataset => {
-  const people = namespace('http://localhost:8080/data/person/')
-  const schema = namespace('http://schema.org/')
+  const people = rdf.namespace('http://localhost:8080/data/person/')
+  const schema = rdf.namespace('http://schema.org/')
 
   const tbbt = clownface({ dataset })
 

@@ -7,9 +7,9 @@ When called with no properties (or empty array), all properties are traversed an
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const fetch = require('@rdfjs/fetch')
-const { schema } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import fetch from '@rdfjs/fetch'
+import { schema } from '@tpluscode/rdf-ns-builders'
 
 const dataset = await fetch('http://zazuko.github.io/tbbt-ld/dist/tbbt.nt')
   .then(response => response.dataset())
@@ -40,10 +40,10 @@ When the context does not represent any pointer, all subjects from the dataset a
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const RDF = require('@rdfjs/data-model')
-const fetch = require('@rdfjs/fetch')
-const { schema } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import RDF from '@rdfjs/data-model'
+import fetch from '@rdfjs/fetch'
+import { schema } from '@tpluscode/rdf-ns-builders'
 
 const dataset = await fetch('http://zazuko.github.io/tbbt-ld/dist/tbbt.nt')
   .then(response => response.dataset())

@@ -1,7 +1,7 @@
-const assert = require('assert')
-const { describe, it } = require('mocha')
-const term = require('../lib/term')
-const rdf = require('./support/factory')
+import assert from 'assert'
+import { describe, it } from 'mocha'
+import term from '../lib/term.js'
+import rdf from './support/factory.js'
 
 describe('term', () => {
   it('should be a function', () => {

@@ -1,4 +1,4 @@
-const { filterTaggedLiterals } = require('./lib/languageTag')
+import { filterTaggedLiterals } from './lib/languageTag.js'
 
 /**
  * Returns a function to be used as callback to `Clownface#filter`.
@@ -7,12 +7,10 @@ const { filterTaggedLiterals } = require('./lib/languageTag')
  * @param {string | string[]} language
  * @returns {function(Clownface, number, Clownface[]): boolean}
  */
-function taggedLiteral(language) {
+export function taggedLiteral(language) {
   return (current, index, pointers) => {
     const found = filterTaggedLiterals(pointers.map(ptr => ptr.term), { language })
 
     return found.some(term => current.term.equals(term))
   }
 }
-
-module.exports = { taggedLiteral }
