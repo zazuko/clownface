@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import namespace from '@rdfjs/namespace'
 import clownface from '../index.js'
 import initExample from '../test/support/example.js'
