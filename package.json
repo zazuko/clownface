@@ -8,7 +8,7 @@
     "docs:build": "jsdoc2md --no-gfm -f index.js lib/* > docs/api.md; git add docs/api.md",
     "docs:serve": "docsify serve docs",
     "lint": "eslint . --quiet --ignore-path .gitignore",
-    "test": "c8 --all --reporter=lcovonly mocha test/**/*.test.js",
+    "test": "c8 --all --reporter=lcovonly mocha --recursive test",
     "release": "changeset publish"
   },
   "repository": {
