@@ -1,14 +1,12 @@
-const $rdf = require('rdf-ext')
-const toStream = require('string-to-stream')
-const Parser = require('@rdfjs/parser-n3')
-const cf = require('../../')
+import $rdf from 'rdf-ext'
+import toStream from 'string-to-stream'
+import Parser from '@rdfjs/parser-n3'
+import cf from '../..//index.js'
 
 const parser = new Parser()
 
-async function parse(string) {
+export default async function parse(string) {
   const dataset = await $rdf.dataset().import(parser.import(toStream(string)))
 
   return cf({ dataset })
 }
-
-module.exports = parse

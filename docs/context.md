@@ -24,8 +24,8 @@ This state is quite unique, because this is the only circumstance in which a con
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const rdf = require('@rdfjs/dataset')
+import cf from 'clownface'
+import rdf from '@rdfjs/dataset'
 
 // only dataset is a required parameter
 const graphPointer = cf({ dataset: rdf.dataset() })
@@ -49,9 +49,9 @@ The context can represent a single graph pointer, that is a single node in the g
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const rdf = require('@rdfjs/dataset')
-const { schema } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import rdf from '@rdfjs/dataset'
+import { schema } from '@tpluscode/rdf-ns-builders'
 
 // the initial term can be initialized in the factory method
 const graphPointer = cf({ dataset: rdf.dataset(), term: schema.Person })
@@ -77,9 +77,9 @@ The return value of all [graph traversals](traversal.md) potentially returns a m
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const rdf = require('@rdfjs/dataset')
-const { foaf, schema } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import rdf from '@rdfjs/dataset'
+import { foaf, schema } from '@tpluscode/rdf-ns-builders'
 
 // the term can also be an array of RDF/JS nodes
 const graphPointer = cf({ dataset: rdf.dataset(), term: [ schema.Person, foaf.Person ] })
@@ -110,10 +110,10 @@ Note that switching the pointer always returns a new `Clownface` object. Also, t
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const rdf = require('@rdfjs/dataset')
-const namespace = require('@rdfjs/namespace')
-const { xsd } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import rdf from '@rdfjs/dataset'
+import namespace from '@rdfjs/namespace'
+import { xsd } from '@tpluscode/rdf-ns-builders'
 
 const ex = namespace('http://example.com/')
 

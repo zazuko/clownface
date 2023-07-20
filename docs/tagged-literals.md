@@ -13,10 +13,10 @@ To find string literal in a given language, pass a second object argument with a
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const RDF = require('@rdfjs/dataset')
-const { literal } = require('@rdfjs/data-model')
-const { rdf, rdfs } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import RDF from '@rdfjs/dataset'
+import { literal } from '@rdfjs/data-model'
+import { rdf, rdfs } from '@tpluscode/rdf-ns-builders'
 
 // create two labels for a resource
 const apple = cf({ dataset: RDF.dataset() })
@@ -37,10 +37,10 @@ Using an empty string for the `language` parameter will find strings without a l
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const RDF = require('@rdfjs/dataset')
-const { literal } = require('@rdfjs/data-model')
-const { rdf, rdfs } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import RDF from '@rdfjs/dataset'
+import { literal } from '@rdfjs/data-model'
+import { rdf, rdfs } from '@tpluscode/rdf-ns-builders'
 
 // create two labels for a resource
 const apple = cf({ dataset: RDF.dataset() })
@@ -61,10 +61,10 @@ It is possible to look up the literals in multiple alternatives byt providing an
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const RDF = require('@rdfjs/dataset')
-const { literal } = require('@rdfjs/data-model')
-const { rdf, rdfs } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import RDF from '@rdfjs/dataset'
+import { literal } from '@rdfjs/data-model'
+import { rdf, rdfs } from '@tpluscode/rdf-ns-builders'
 
 // create two labels for a resource
 const apple = cf({ dataset: RDF.dataset() })
@@ -95,10 +95,10 @@ For example, in the snippet below the more specific subtag `de-CH-1996` will ind
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const RDF = require('@rdfjs/dataset')
-const { literal } = require('@rdfjs/data-model')
-const { rdf, rdfs } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import RDF from '@rdfjs/dataset'
+import { literal } from '@rdfjs/data-model'
+import { rdf, rdfs } from '@tpluscode/rdf-ns-builders'
 
 // create two labels for a resource
 const bicycle = cf({ dataset: RDF.dataset() })
@@ -117,10 +117,10 @@ bicycle.out(rdfs.label, { language: 'de-CH' }).value
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const RDF = require('@rdfjs/dataset')
-const { literal } = require('@rdfjs/data-model')
-const { rdf, rdfs } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import RDF from '@rdfjs/dataset'
+import { literal } from '@rdfjs/data-model'
+import { rdf, rdfs } from '@tpluscode/rdf-ns-builders'
 
 // create two labels for a resource
 const bicycle = cf({ dataset: RDF.dataset() })

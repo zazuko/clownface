@@ -7,12 +7,12 @@ The examples on all other pages do not specify any graph identifier. In this mod
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const { dataset } = require('@rdfjs/dataset')
-const namespace = require('@rdfjs/namespace')
-const RDF = require('@rdfjs/data-model')
-const { nquads } = require('@tpluscode/rdf-string')
-const { schema } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import { dataset } from '@rdfjs/dataset'
+import namespace from '@rdfjs/namespace'
+import RDF from '@rdfjs/data-model'
+import { nquads } from '@tpluscode/rdf-string'
+import { schema } from '@tpluscode/rdf-ns-builders'
 
 const tbbt = namespace('https://bigbangtheory.tv/') 
 
@@ -39,12 +39,12 @@ A graph identifier can be passed to the factory call, which narrows down the con
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const { dataset } = require('@rdfjs/dataset')
-const namespace = require('@rdfjs/namespace')
-const RDF = require('@rdfjs/data-model')
-const { nquads } = require('@tpluscode/rdf-string')
-const { schema } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import { dataset } from '@rdfjs/dataset'
+import namespace from '@rdfjs/namespace'
+import RDF from '@rdfjs/data-model'
+import { nquads } from '@tpluscode/rdf-string'
+import { schema } from '@tpluscode/rdf-ns-builders'
 
 const tbbt = namespace('https://bigbangtheory.tv/') 
 

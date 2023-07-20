@@ -11,11 +11,11 @@ Clownface comes with handy methods to create, iterate and remove lists from RDF 
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const namespace = require('@rdfjs/namespace')
-const { dataset } = require('@rdfjs/dataset')
-const { dtype } = require('@tpluscode/rdf-ns-builders')
-const { turtle } = require('@tpluscode/rdf-string')
+import cf from 'clownface'
+import namespace from '@rdfjs/namespace'
+import { dataset } from '@rdfjs/dataset'
+import { dtype } from '@tpluscode/rdf-ns-builders'
+import { turtle } from '@tpluscode/rdf-string'
 
 const ex = namespace('http://example.com/')
 
@@ -46,11 +46,11 @@ The `list()` method will return null when the object is not a list (such as a li
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const namespace = require('@rdfjs/namespace')
-const { dataset } = require('@rdfjs/dataset')
-const { dtype } = require('@tpluscode/rdf-ns-builders')
-const { turtle } = require('@tpluscode/rdf-string')
+import cf from 'clownface'
+import namespace from '@rdfjs/namespace'
+import { dataset } from '@rdfjs/dataset'
+import { dtype } from '@tpluscode/rdf-ns-builders'
+import { turtle } from '@tpluscode/rdf-string'
 
 const ex = namespace('http://example.com/')
 

@@ -11,10 +11,10 @@ They also can be chained as the return value is the original context.
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const RDF = require('@rdfjs/dataset')
-const { turtle } = require('@tpluscode/rdf-string')
-const { rdf, schema } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import RDF from '@rdfjs/dataset'
+import { turtle } from '@tpluscode/rdf-string'
+import { rdf, schema } from '@tpluscode/rdf-ns-builders'
 
 // Create a pointer for Leonard
 const pointer = cf({ dataset: RDF.dataset() })
@@ -40,10 +40,10 @@ The `addIn`/`addOut` methods accept an optional callback parameter which gets ca
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const RDF = require('@rdfjs/dataset')
-const { turtle } = require('@tpluscode/rdf-string')
-const { rdf, schema } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import RDF from '@rdfjs/dataset'
+import { turtle } from '@tpluscode/rdf-string'
+import { rdf, schema } from '@tpluscode/rdf-ns-builders'
 
 // Create a pointer for Leonard
 const pointer = cf({ dataset: RDF.dataset() })
@@ -72,11 +72,11 @@ Analogous to adding, there are two methods for removing quads: `deleteIn` and `d
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const RDF = require('@rdfjs/data-model')
-const { dataset } = require('@rdfjs/dataset')
-const { turtle } = require('@tpluscode/rdf-string')
-const { schema } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import RDF from '@rdfjs/data-model'
+import { dataset } from '@rdfjs/dataset'
+import { turtle } from '@tpluscode/rdf-string'
+import { schema } from '@tpluscode/rdf-ns-builders'
 
 const leonard = RDF.namedNode('https://bigbangtheory.tv/Leonard')
 const quads = [
@@ -107,11 +107,11 @@ A Clownface instance which represents multiple graph pointers can also be used t
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const RDF = require('@rdfjs/dataset')
-const ns = require('@rdfjs/namespace')
-const { turtle } = require('@tpluscode/rdf-string')
-const { foaf, rdf, schema } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import RDF from '@rdfjs/dataset'
+import ns from '@rdfjs/namespace'
+import { turtle } from '@tpluscode/rdf-string'
+import { foaf, rdf, schema } from '@tpluscode/rdf-ns-builders'
 
 const tbbt = ns('https://bigbangtheory.tv/') 
 

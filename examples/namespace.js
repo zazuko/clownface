@@ -1,6 +1,7 @@
-const namespace = require('@rdfjs/namespace')
-const clownface = require('..')
-const initExample = require('../test/support/example')
+/* eslint-disable import/no-extraneous-dependencies */
+import namespace from '@rdfjs/namespace'
+import clownface from '../index.js'
+import initExample from '../test/support/example.js'
 
 initExample().then(dataset => {
   const people = namespace('http://localhost:8080/data/person/')

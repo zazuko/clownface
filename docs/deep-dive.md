@@ -6,9 +6,9 @@ If we would like to get the given name and family name of all persons known by e
 <run-kit>
 
 ```js
-const cf = require('clownface')
-const fetch = require('@rdfjs/fetch')
-const { schema } = require('@tpluscode/rdf-ns-builders')
+import cf from 'clownface'
+import fetch from '@rdfjs/fetch'
+import { schema } from '@tpluscode/rdf-ns-builders'
 
 // load the tbbt-ld graph
 const dataset = await fetch('http://zazuko.github.io/tbbt-ld/dist/tbbt.nt')

@@ -1,16 +1,11 @@
-const rdf = require('rdf-ext')
-const namespace = require('@rdfjs/namespace')
+import rdf from 'rdf-ext'
 
-const ns = {
-  first: rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#first'),
-  list: rdf.namedNode('http://example.org/list'),
-  nil: rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#nil'),
-  rest: rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#rest'),
-  ex: namespace('http://example.org/'),
-  rdfs: namespace('http://www.w3.org/2000/01/rdf-schema#'),
-  schema: namespace('http://schema.org/'),
-  xsd: namespace('http://www.w3.org/2001/XMLSchema#'),
-  tbbtp: namespace('http://localhost:8080/data/person/'),
-}
-
-module.exports = ns
+export const first = rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#first')
+export const list = rdf.namedNode('http://example.org/list')
+export const nil = rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#nil')
+export const rest = rdf.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#rest')
+export const ex = rdf.namespace('http://example.org/')
+export const rdfs = rdf.namespace('http://www.w3.org/2000/01/rdf-schema#')
+export const schema = rdf.namespace('http://schema.org/')
+export const xsd = rdf.namespace('http://www.w3.org/2001/XMLSchema#')
+export const tbbtp = rdf.namespace('http://localhost:8080/data/person/')
