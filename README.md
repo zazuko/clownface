@@ -9,7 +9,8 @@ Clownface greatly simplifies interacting with RDF data in JavaScript.
 
 # Quick start
 
-The recommended way is to use clownface with and RDF/JS environment. It also requires [`DataFactory`](https://rdf.js.org/data-model-spec/#datafactory-interface) and [DatasetFactory](https://rdf.js.org/dataset-spec/#datasetfactory-interface), for example those provided by [@rdfjs/data-model](https://npm.im/@rdfjs/data-model) and [@rdfjs/dataset](https://npm.im/@rdfjs/dataset) packages respectively, as well as [@rdfjs/namespace](https://npm.im/@rdfjs/namespace).
+The recommended way is to use clownface with and RDF/JS environment.
+It also requires [`DataFactory`](https://rdf.js.org/data-model-spec/#datafactory-interface) and [`DatasetFactory`](https://rdf.js.org/dataset-spec/#datasetfactory-interface), for example those provided by [`@rdfjs/data-model`](https://npm.im/@rdfjs/data-model) and [`@rdfjs/dataset`](https://npm.im/@rdfjs/dataset) packages respectively, as well as [`@rdfjs/namespace`](https://npm.im/@rdfjs/namespace).
 
 ```shell
 npm install clownface @rdfjs/environment @rdfjs/data-model @rdfjs/dataset @rdfjs/namespace
