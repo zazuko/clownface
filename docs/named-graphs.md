@@ -8,13 +8,13 @@ The examples on all other pages do not specify any graph identifier. In this mod
 
 ```js
 const rdf = require('@zazuko/env-bundle')
-const { nquads } = require('@tpluscode/rdf-string@0.2.27')
+const { nquads } = require('@tpluscode/rdf-string@0.2.26')
 
 const tbbt = rdf.namespace('https://bigbangtheory.tv/') 
 
 const quads = [
-  rdf.quad(tbbt.Leonard, schema.knows, tbbt.Amy, tbbt.Amy),
-  rdf.quad(tbbt.Leonard, schema.knows, tbbt.Sheldon, tbbt.Sheldon),
+  rdf.quad(tbbt.Leonard, rdf.ns.schema.knows, tbbt.Amy, tbbt.Amy),
+  rdf.quad(tbbt.Leonard, rdf.ns.schema.knows, tbbt.Sheldon, tbbt.Sheldon),
 ]
 
 const leonard = rdf.clownface({ dataset: rdf.dataset(quads) })
@@ -36,7 +36,7 @@ A graph identifier can be passed to the factory call, which narrows down the con
 
 ```js
 const rdf = require('@zazuko/env-bundle')
-const { nquads } = require('@tpluscode/rdf-string@0.2.27')
+const { nquads } = require('@tpluscode/rdf-string@0.2.26')
 
 const tbbt = rdf.namespace('https://bigbangtheory.tv/') 
 
@@ -49,7 +49,7 @@ const quads = [
 // or use RDF.defaultGraph() for the default graph
 const leonard = rdf.clownface({ dataset: rdf.dataset(quads), graph: tbbt.Leonard })
   .node(tbbt.Leonard)
-  .addOut(rdf.schema.knows, tbbt.Sheldon)
+  .addOut(rdf.ns.schema.knows, tbbt.Sheldon)
 
 nquads`${leonard.dataset}`.toString()
 ```

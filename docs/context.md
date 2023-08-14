@@ -117,7 +117,7 @@ const contexts = {
   named: graphPointer.namedNode('http://example.com/bar').term,
 
   // literal can have language or datatype
-  literal: graphPointer.literal('10', xsd.nonNegativeInteger).term,
+  literal: graphPointer.literal('10', rdf.ns.xsd.nonNegativeInteger).term,
 
   // blank node does not require parameters
   blank: graphPointer.blankNode().term,

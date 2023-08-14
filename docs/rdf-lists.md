@@ -12,7 +12,7 @@ Clownface comes with handy methods to create, iterate and remove lists from RDF 
 
 ```js
 const rdf = require('@zazuko/env-bundle')
-const { turtle } = require('@tpluscode/rdf-string@0.2.27')
+const { turtle } = require('@tpluscode/rdf-string@0.2.26')
 
 const ex = rdf.namespace('http://example.com/')
 
@@ -25,7 +25,7 @@ game.addList(ex.score, [ex.score1, ex.score2, ex.score3])
 // Add statements about the list elements
 let scoreIndex = 1
 for (const score of game.out(ex.score).list()) {
-  score.addOut(rdf.ns,dtype.orderIndex, scoreIndex++)
+  score.addOut(rdf.ns.dtype.orderIndex, scoreIndex++)
 }
 
 // Remove the list but not statements about the individual scores
@@ -44,7 +44,7 @@ The `list()` method will return null when the object is not a list (such as a li
 
 ```js
 const rdf = require('@zazuko/env-bundle')
-const { turtle } = require('@tpluscode/rdf-string@0.2.27')
+const { turtle } = require('@tpluscode/rdf-string@0.2.26')
 
 const ex = rdf.namespace('http://example.com/')
 

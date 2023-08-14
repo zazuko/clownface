@@ -12,7 +12,7 @@ They also can be chained as the return value is the original context.
 
 ```js
 const rdf = require('@zazuko/env-bundle')
-const { turtle } = require('@tpluscode/rdf-string@0.2.27')
+const { turtle } = require('@tpluscode/rdf-string@0.2.26')
 
 // Create a pointer for Leonard
 const pointer = rdf.clownface()
@@ -39,21 +39,21 @@ The `addIn`/`addOut` methods accept an optional callback parameter which gets ca
 
 ```js
 const rdf = require('@zazuko/env-bundle')
-const { turtle } = require('@tpluscode/rdf-string@0.2.27')
+const { turtle } = require('@tpluscode/rdf-string@0.2.26')
 
 // Create a pointer for Leonard
-const pointer = cf({ dataset: RDF.dataset() })
+const pointer = rdf.clownface()
   .namedNode('https://bigbangtheory.tv/Leonard')
 
 pointer
-  .addOut(schema.spouse, pointer.namedNode('https://bigbangtheory.tv/Penny'), penny => {
-    penny.addOut(rdf.type, schema.Person)
+  .addOut(rdf.ns.schema.spouse, pointer.namedNode('https://bigbangtheory.tv/Penny'), penny => {
+    penny.addOut(rdf.ns.rdf.type, rdf.ns.schema.Person)
   })
 
 // the callback can also replace the value to generate a blank node
 pointer
-  .addOut(schema.address, address => {
-    address.addOut(schema.addressLocality, 'Pasadena')
+  .addOut(rdf.ns.schema.address, address => {
+    address.addOut(rdf.ns.schema.addressLocality, 'Pasadena')
   })
 
 turtle`${pointer.dataset}`.toString()
@@ -69,7 +69,7 @@ Analogous to adding, there are two methods for removing quads: `deleteIn` and `d
 
 ```js
 const rdf = require('@zazuko/env-bundle')
-const { turtle } = require('@tpluscode/rdf-string@0.2.27')
+const { turtle } = require('@tpluscode/rdf-string@0.2.26')
 
 const leonard = rdf.namedNode('https://bigbangtheory.tv/Leonard')
 const quads = [
@@ -101,18 +101,20 @@ A Clownface instance which represents multiple graph pointers can also be used t
 
 ```js
 const rdf = require('@zazuko/env-bundle')
-const { turtle } = require('@tpluscode/rdf-string@0.2.27')
+const { turtle } = require('@tpluscode/rdf-string@0.2.26')
 
 const tbbt = rdf.namespace('https://bigbangtheory.tv/') 
 
-const characters = rdf.clownface().node([tbbt.Leonard, tbbt.Penny, tbbt.Stewart])
+const dataset = rdf.dataset()
+const characters = rdf.clownface({ dataset })
+  .node([tbbt.Leonard, tbbt.Penny, tbbt.Stewart])
 
 // every character is a Person
 characters
   .addOut(rdf.ns.rdf.type, rdf.ns.schema.Person)
   .addOut([rdf.ns.schema.knows, rdf.ns.foaf.knows], [tbbt.Penny, tbbt.Amy], girl => {
     // this will be called 3 times
-    girl.addOut(rdf.type, rdf.ns.schema.Person)
+    girl.addOut(rdf.ns.rdf.type, rdf.ns.schema.Person)
   })
   
 console.log(`The dataset now has ${dataset.size} triples`)
