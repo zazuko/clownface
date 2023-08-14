@@ -11,15 +11,12 @@ Clownface comes with handy methods to create, iterate and remove lists from RDF 
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import namespace from '@rdfjs/namespace'
-import { dataset } from '@rdfjs/dataset'
-import { dtype } from '@tpluscode/rdf-ns-builders'
-import { turtle } from '@tpluscode/rdf-string'
+const rdf = require('@zazuko/env-bundle')
+const { turtle } = require('@tpluscode/rdf-string@0.2.27')
 
-const ex = namespace('http://example.com/')
+const ex = rdf.namespace('http://example.com/')
 
-const game = cf({ dataset: dataset() })
+const game = rdf.clownface()
   .namedNode(ex.game)
 
 // Create a list with 3 elements 
@@ -28,7 +25,7 @@ game.addList(ex.score, [ex.score1, ex.score2, ex.score3])
 // Add statements about the list elements
 let scoreIndex = 1
 for (const score of game.out(ex.score).list()) {
-  score.addOut(dtype.orderIndex, scoreIndex++)
+  score.addOut(rdf.ns,dtype.orderIndex, scoreIndex++)
 }
 
 // Remove the list but not statements about the individual scores
@@ -46,15 +43,12 @@ The `list()` method will return null when the object is not a list (such as a li
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import namespace from '@rdfjs/namespace'
-import { dataset } from '@rdfjs/dataset'
-import { dtype } from '@tpluscode/rdf-ns-builders'
-import { turtle } from '@tpluscode/rdf-string'
+const rdf = require('@zazuko/env-bundle')
+const { turtle } = require('@tpluscode/rdf-string@0.2.27')
 
-const ex = namespace('http://example.com/')
+const ex = rdf.namespace('http://example.com/')
 
-const game = cf({ dataset: dataset() })
+const game = rdf.clownface()
   .namedNode(ex.game)
 
 // add object directly to ex:score

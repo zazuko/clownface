@@ -13,19 +13,16 @@ To find string literal in a given language, pass a second object argument with a
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import RDF from '@rdfjs/dataset'
-import { literal } from '@rdfjs/data-model'
-import { rdf, rdfs } from '@tpluscode/rdf-ns-builders'
+const rdf = require('@zazuko/env-bundle')
 
 // create two labels for a resource
-const apple = cf({ dataset: RDF.dataset() })
-  .node(rdf.Resource)
-  .addOut(rdfs.label, literal('apple', 'en'))
-  .addOut(rdfs.label, literal('Apfel', 'de'))
+const apple = rdf.clownface()
+  .node(rdf.ns.rdf.Resource)
+  .addOut(rdf.ns.rdfs.label, rdf.literal('apple', 'en'))
+  .addOut(rdf.ns.rdfs.label, rdf.literal('Apfel', 'de'))
 
 // find German label
-apple.out(rdfs.label, { language: 'de' }).value
+apple.out(rdf.ns.rdfs.label, { language: 'de' }).value
 ```
 
 </run-kit>
@@ -37,19 +34,16 @@ Using an empty string for the `language` parameter will find strings without a l
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import RDF from '@rdfjs/dataset'
-import { literal } from '@rdfjs/data-model'
-import { rdf, rdfs } from '@tpluscode/rdf-ns-builders'
+const rdf = require('@zazuko/env-bundle')
 
 // create two labels for a resource
-const apple = cf({ dataset: RDF.dataset() })
-  .node(rdf.Resource)
-  .addOut(rdfs.label, literal('apple'))
-  .addOut(rdfs.label, literal('Apfel', 'de'))
+const apple = rdf.clownface()
+  .node(rdf.ns.rdf.Resource)
+  .addOut(rdf.ns.rdfs.label, rdf.literal('apple'))
+  .addOut(rdf.ns.rdfs.label, rdf.literal('Apfel', 'de'))
 
 // find literal without language tag
-apple.out(rdfs.label, { language: '' }).value
+apple.out(rdf.ns.rdfs.label, { language: '' }).value
 ```
 
 </run-kit>
@@ -61,19 +55,16 @@ It is possible to look up the literals in multiple alternatives byt providing an
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import RDF from '@rdfjs/dataset'
-import { literal } from '@rdfjs/data-model'
-import { rdf, rdfs } from '@tpluscode/rdf-ns-builders'
+const rdf = require('@zazuko/env-bundle')
 
 // create two labels for a resource
-const apple = cf({ dataset: RDF.dataset() })
-  .node(rdf.Resource)
-  .addOut(rdfs.label, literal('apple', 'en'))
-  .addOut(rdfs.label, literal('Apfel', 'de'))
+const apple = rdf.clownface()
+  .node(rdf.ns.rdf.Resource)
+  .addOut(rdf.ns.rdfs.label, rdf.literal('apple', 'en'))
+  .addOut(rdf.ns.rdfs.label, rdf.literal('Apfel', 'de'))
 
 // there is no French translation so English will be returned
-apple.out(rdfs.label, { language: ['fr', 'en'] }).value
+apple.out(rdf.ns.rdfs.label, { language: ['fr', 'en'] }).value
 ```
 
 </run-kit>
@@ -81,7 +72,7 @@ apple.out(rdfs.label, { language: ['fr', 'en'] }).value
 A wildcard (asterisk) can also be used to choose any other (random) literal if the preceding choices did not yield any results. It would look similarly to previous example.
 
 ```js
-apple.out(rdfs.label, { language: ['fr', '*'] }).value
+apple.out(rdf.ns.rdfs.label, { language: ['fr', '*'] }).value
 ```
 
 !> The result can be either English or German with equal probability.
@@ -95,19 +86,16 @@ For example, in the snippet below the more specific subtag `de-CH-1996` will ind
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import RDF from '@rdfjs/dataset'
-import { literal } from '@rdfjs/data-model'
-import { rdf, rdfs } from '@tpluscode/rdf-ns-builders'
+const rdf = require('@zazuko/env-bundle')
 
 // create two labels for a resource
-const bicycle = cf({ dataset: RDF.dataset() })
-  .node(rdf.Resource)
-  .addOut(rdfs.label, literal('Fahrrad', 'de'))
-  .addOut(rdfs.label, literal('Velo', 'de-CH-1996'))
+const bicycle = rdf.clownface()
+  .node(rdf.ns.rdf.Resource)
+  .addOut(rdf.ns.rdfs.label, rdf.literal('Fahrrad', 'de'))
+  .addOut(rdf.ns.rdfs.label, rdf.literal('Velo', 'de-CH-1996'))
 
 // finds a Swiss translation
-bicycle.out(rdfs.label, { language: 'de-CH' }).value
+bicycle.out(rdf.ns.rdfs.label, { language: 'de-CH' }).value
 ```
 
 </run-kit>
@@ -117,19 +105,16 @@ bicycle.out(rdfs.label, { language: 'de-CH' }).value
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import RDF from '@rdfjs/dataset'
-import { literal } from '@rdfjs/data-model'
-import { rdf, rdfs } from '@tpluscode/rdf-ns-builders'
+const rdf = require('@zazuko/env-bundle')
 
 // create two labels for a resource
-const bicycle = cf({ dataset: RDF.dataset() })
-  .node(rdf.Resource)
-  .addOut(rdfs.label, literal('Fahrrad', 'de'))
-  .addOut(rdfs.label, literal('Velo', 'de-CH-1996'))
+const bicycle = rdf.clownface()
+  .node(rdf.ns.rdf.Resource)
+  .addOut(rdf.ns.rdfs.label, rdf.literal('Fahrrad', 'de'))
+  .addOut(rdf.ns.rdfs.label, rdf.literal('Velo', 'de-CH-1996'))
 
 // finds the standard German label
-bicycle.out(rdfs.label, { language: 'de' }).value
+bicycle.out(rdf.ns.rdfs.label, { language: 'de' }).value
 ```
 
 </run-kit>

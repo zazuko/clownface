@@ -26,16 +26,13 @@ provided to the exported factory method
 <run-kit>
 
 ```js
-
-
-import clownface from 'clownface'
-import rdf from 'rdf-ext'
+const rdf = require('@zazuko/env-bundle')
 
 const firstName = rdf.namedNode('http://xmlns.com/foaf/0.1/firstName')
 const lastName = rdf.namedNode('http://xmlns.com/foaf/0.1/lastName')
 
 // initialize
-const ptr = clownface({ dataset: rdf.dataset() })
+const ptr = rdf.clownface()
 
 // add some resources 
 ptr

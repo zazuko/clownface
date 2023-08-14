@@ -7,19 +7,17 @@ When called with no properties (or empty array), all properties are traversed an
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import fetch from '@rdfjs/fetch'
-import { schema } from '@tpluscode/rdf-ns-builders'
+const rdf = require('@zazuko/env-bundle')
 
-const dataset = await fetch('http://zazuko.github.io/tbbt-ld/dist/tbbt.nt')
+const dataset = await rdf.fetch('http://zazuko.github.io/tbbt-ld/dist/tbbt.nt')
   .then(response => response.dataset())
 
-cf({ dataset })
+rdf.clownface({ dataset })
   .namedNode('http://localhost:8080/data/person/howard-wolowitz')
-  .in(schema.spouse)
-  .out(schema.knows)
-  .out(schema.address)
-  .out(schema.addressLocality)
+  .in(rdf.ns.schema.spouse)
+  .out(rdf.ns.schema.knows)
+  .out(rdf.ns.schema.address)
+  .out(rdf.ns.schema.addressLocality)
   .values
 ```
 
@@ -40,19 +38,16 @@ When the context does not represent any pointer, all subjects from the dataset a
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import RDF from '@rdfjs/data-model'
-import fetch from '@rdfjs/fetch'
-import { schema } from '@tpluscode/rdf-ns-builders'
+const rdf = require('@zazuko/env-bundle')
 
-const dataset = await fetch('http://zazuko.github.io/tbbt-ld/dist/tbbt.nt')
+const dataset = await rdf.fetch('http://zazuko.github.io/tbbt-ld/dist/tbbt.nt')
   .then(response => response.dataset())
 
-const howard = RDF.namedNode('http://localhost:8080/data/person/howard-wolowitz')
+const howard = rdf.namedNode('http://localhost:8080/data/person/howard-wolowitz')
 
 // all people whose spouse is Howard
-const hasSpouse = cf({ dataset })
-  .has(schema.spouse, howard)
+const hasSpouse = rdf.clownface({ dataset })
+  .has(rdf.ns.schema.spouse, howard)
   .values
 ```
 

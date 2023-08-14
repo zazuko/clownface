@@ -11,20 +11,18 @@ They also can be chained as the return value is the original context.
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import RDF from '@rdfjs/dataset'
-import { turtle } from '@tpluscode/rdf-string'
-import { rdf, schema } from '@tpluscode/rdf-ns-builders'
+const rdf = require('@zazuko/env-bundle')
+const { turtle } = require('@tpluscode/rdf-string@0.2.27')
 
 // Create a pointer for Leonard
-const pointer = cf({ dataset: RDF.dataset() })
+const pointer = rdf.clownface()
   .namedNode('https://bigbangtheory.tv/Leonard')
 
 // Add a triple where Leonard is the subject
 // Then add a triple where Leonard is the object
 pointer
-  .addOut(rdf.type, schema.Person)
-  .addIn(schema.spouse, pointer.namedNode('https://bigbangtheory.tv/Penny'))
+  .addOut(rdf.ns.rdf.type, rdf.ns.schema.Person)
+  .addIn(rdf.ns.schema.spouse, pointer.namedNode('https://bigbangtheory.tv/Penny'))
 
 turtle`${pointer.dataset}`.toString()
 ```
@@ -40,10 +38,8 @@ The `addIn`/`addOut` methods accept an optional callback parameter which gets ca
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import RDF from '@rdfjs/dataset'
-import { turtle } from '@tpluscode/rdf-string'
-import { rdf, schema } from '@tpluscode/rdf-ns-builders'
+const rdf = require('@zazuko/env-bundle')
+const { turtle } = require('@tpluscode/rdf-string@0.2.27')
 
 // Create a pointer for Leonard
 const pointer = cf({ dataset: RDF.dataset() })
@@ -72,24 +68,21 @@ Analogous to adding, there are two methods for removing quads: `deleteIn` and `d
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import RDF from '@rdfjs/data-model'
-import { dataset } from '@rdfjs/dataset'
-import { turtle } from '@tpluscode/rdf-string'
-import { schema } from '@tpluscode/rdf-ns-builders'
+const rdf = require('@zazuko/env-bundle')
+const { turtle } = require('@tpluscode/rdf-string@0.2.27')
 
-const leonard = RDF.namedNode('https://bigbangtheory.tv/Leonard')
+const leonard = rdf.namedNode('https://bigbangtheory.tv/Leonard')
 const quads = [
-  RDF.quad(leonard, schema.name, 'Leonard'),
-  RDF.quad(leonard, schema.name, 'Leonard Hofstadder'),
-  RDF.quad(leonard, schema.familyName, 'Hofstadder'),
+  rdf.quad(leonard, rdf.ns.schema.name, 'Leonard'),
+  rdf.quad(leonard, rdf.ns.schema.name, 'Leonard Hofstadder'),
+  rdf.quad(leonard, rdf.ns.schema.familyName, 'Hofstadder'),
 ]
 
 // initially contains 3 quads
-const pointer = cf({ dataset: dataset(quads) })
+const pointer = rdf.clownface({ dataset: rdf.dataset(quads) })
 
 // remove all schema:name triples
-pointer.deleteOut(schema.name)
+pointer.deleteOut(rdf.ns.schema.name)
 
 // one triples remains
 turtle`${pointer.dataset}`.toString()
@@ -107,23 +100,19 @@ A Clownface instance which represents multiple graph pointers can also be used t
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import RDF from '@rdfjs/dataset'
-import ns from '@rdfjs/namespace'
-import { turtle } from '@tpluscode/rdf-string'
-import { foaf, rdf, schema } from '@tpluscode/rdf-ns-builders'
+const rdf = require('@zazuko/env-bundle')
+const { turtle } = require('@tpluscode/rdf-string@0.2.27')
 
-const tbbt = ns('https://bigbangtheory.tv/') 
+const tbbt = rdf.namespace('https://bigbangtheory.tv/') 
 
-const dataset = RDF.dataset()
-const characters = cf({ dataset }).node([tbbt.Leonard, tbbt.Penny, tbbt.Stewart])
+const characters = rdf.clownface().node([tbbt.Leonard, tbbt.Penny, tbbt.Stewart])
 
 // every character is a Person
 characters
-  .addOut(rdf.type, schema.Person)
-  .addOut([schema.knows, foaf.knows], [tbbt.Penny, tbbt.Amy], girl => {
+  .addOut(rdf.ns.rdf.type, rdf.ns.schema.Person)
+  .addOut([rdf.ns.schema.knows, rdf.ns.foaf.knows], [tbbt.Penny, tbbt.Amy], girl => {
     // this will be called 3 times
-    girl.addOut(rdf.type, schema.Person)
+    girl.addOut(rdf.type, rdf.ns.schema.Person)
   })
   
 console.log(`The dataset now has ${dataset.size} triples`)

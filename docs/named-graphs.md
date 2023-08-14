@@ -7,25 +7,21 @@ The examples on all other pages do not specify any graph identifier. In this mod
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import { dataset } from '@rdfjs/dataset'
-import namespace from '@rdfjs/namespace'
-import RDF from '@rdfjs/data-model'
-import { nquads } from '@tpluscode/rdf-string'
-import { schema } from '@tpluscode/rdf-ns-builders'
+const rdf = require('@zazuko/env-bundle')
+const { nquads } = require('@tpluscode/rdf-string@0.2.27')
 
-const tbbt = namespace('https://bigbangtheory.tv/') 
+const tbbt = rdf.namespace('https://bigbangtheory.tv/') 
 
 const quads = [
-  RDF.quad(tbbt.Leonard, schema.knows, tbbt.Amy, tbbt.Amy),
-  RDF.quad(tbbt.Leonard, schema.knows, tbbt.Sheldon, tbbt.Sheldon),
+  rdf.quad(tbbt.Leonard, schema.knows, tbbt.Amy, tbbt.Amy),
+  rdf.quad(tbbt.Leonard, schema.knows, tbbt.Sheldon, tbbt.Sheldon),
 ]
 
-const leonard = cf({ dataset: dataset(quads) })
+const leonard = rdf.clownface({ dataset: rdf.dataset(quads) })
   .namedNode(tbbt.Leonard)
-  .addOut(schema.name, 'Leonard')
+  .addOut(rdf.ns.schema.name, 'Leonard')
 
-console.log('Leonard knows ' + leonard.out(schema.knows).values.join(', '))
+console.log('Leonard knows ' + leonard.out(rdf.ns.schema.knows).values.join(', '))
 
 nquads`${leonard.dataset}`.toString()
 ```
@@ -39,25 +35,21 @@ A graph identifier can be passed to the factory call, which narrows down the con
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import { dataset } from '@rdfjs/dataset'
-import namespace from '@rdfjs/namespace'
-import RDF from '@rdfjs/data-model'
-import { nquads } from '@tpluscode/rdf-string'
-import { schema } from '@tpluscode/rdf-ns-builders'
+const rdf = require('@zazuko/env-bundle')
+const { nquads } = require('@tpluscode/rdf-string@0.2.27')
 
-const tbbt = namespace('https://bigbangtheory.tv/') 
+const tbbt = rdf.namespace('https://bigbangtheory.tv/') 
 
 const quads = [
-  RDF.quad(tbbt.Leonard, schema.name, 'Leonard', tbbt.Leonard),
-  RDF.quad(tbbt.Sheldon, schema.name, 'Sheldon', tbbt.Sheldon),
+  rdf.quad(tbbt.Leonard, rdf.ns.schema.name, 'Leonard', tbbt.Leonard),
+  rdf.quad(tbbt.Sheldon, rdf.ns.schema.name, 'Sheldon', tbbt.Sheldon),
 ]
 
 // pass a NamedNode
 // or use RDF.defaultGraph() for the default graph
-const leonard = cf({ dataset: dataset(quads), graph: tbbt.Leonard })
+const leonard = rdf.clownface({ dataset: rdf.dataset(quads), graph: tbbt.Leonard })
   .node(tbbt.Leonard)
-  .addOut(schema.knows, tbbt.Sheldon)
+  .addOut(rdf.schema.knows, tbbt.Sheldon)
 
 nquads`${leonard.dataset}`.toString()
 ```

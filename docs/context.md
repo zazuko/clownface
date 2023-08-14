@@ -24,11 +24,10 @@ This state is quite unique, because this is the only circumstance in which a con
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import rdf from '@rdfjs/dataset'
+const rdf = require('@zazuko/env-bundle')
 
 // only dataset is a required parameter
-const graphPointer = cf({ dataset: rdf.dataset() })
+const graphPointer = rdf.clownface()
 
 // term/value are undefined
 // terms/values are empty arrays
@@ -49,12 +48,10 @@ The context can represent a single graph pointer, that is a single node in the g
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import rdf from '@rdfjs/dataset'
-import { schema } from '@tpluscode/rdf-ns-builders'
+const rdf = require('@zazuko/env-bundle')
 
 // the initial term can be initialized in the factory method
-const graphPointer = cf({ dataset: rdf.dataset(), term: schema.Person })
+const graphPointer = rdf.clownface({ term: rdf.ns.schema.Person })
 
 // term/value are defined
 // terms/values are single-element arrays
@@ -77,12 +74,10 @@ The return value of all [graph traversals](traversal.md) potentially returns a m
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import rdf from '@rdfjs/dataset'
-import { foaf, schema } from '@tpluscode/rdf-ns-builders'
+const rdf = require('@zazuko/env-bundle')
 
 // the term can also be an array of RDF/JS nodes
-const graphPointer = cf({ dataset: rdf.dataset(), term: [ schema.Person, foaf.Person ] })
+const graphPointer = rdf.clownface({ term: [ rdf.ns.schema.Person, rdf.ns.foaf.Person ] })
 
 // term/value are undefined
 // terms/values are arrays
@@ -110,15 +105,12 @@ Note that switching the pointer always returns a new `Clownface` object. Also, t
 <run-kit>
 
 ```js
-import cf from 'clownface'
-import rdf from '@rdfjs/dataset'
-import namespace from '@rdfjs/namespace'
-import { xsd } from '@tpluscode/rdf-ns-builders'
+const rdf = require('@zazuko/env-bundle')
 
-const ex = namespace('http://example.com/')
+const ex = rdf.namespace('http://example.com/')
 
 // the term can also be an array of RDF/JS nodes
-const graphPointer = cf({ dataset: rdf.dataset(), term: ex.foo })
+const graphPointer = rdf.clownface({ term: ex.foo })
 
 const contexts = {
   // namedNode treat string as URI
