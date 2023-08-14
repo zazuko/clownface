@@ -8,7 +8,7 @@ Clownface comes with handy methods to create, iterate and remove lists from RDF 
 - `list` method returns an `Iterator` of the values of an `rdf:List`
 - finally `deleteList` removes the list nodes
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')
@@ -40,7 +40,7 @@ turtle`${game.dataset}`.toString()
 
 The `list()` method will return null when the object is not a list (such as a literal or without a `rdf:first`). A little bit of defensive programming can be employed to conditionally iterate a list or get the non-list objects of a property.
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')

@@ -8,7 +8,7 @@ The basic functionality is to add triples. This can be done both where the graph
 
 They also can be chained as the return value is the original context.
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')
@@ -35,7 +35,7 @@ Note that due to the nature of RDF graphs, simply calling `namedNode` does not y
 
 The `addIn`/`addOut` methods accept an optional callback parameter which gets called with the created pointer. This allows chaining multiple levels of triple, which will produce a deep structure.
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')
@@ -65,7 +65,7 @@ turtle`${pointer.dataset}`.toString()
 
 Analogous to adding, there are two methods for removing quads: `deleteIn` and `deleteOut`. They only take a single parameter for the predicate and will remove all subject's/object's triples where that predicate is the property.
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')
@@ -97,7 +97,7 @@ A Clownface instance which represents multiple graph pointers can also be used t
 - A triple will asserted for every subject/object respectively
 - The callback gets invoked for every graph pointer of the originating instance
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')

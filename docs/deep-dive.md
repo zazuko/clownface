@@ -3,7 +3,7 @@
 If we would like to get the given name and family name of all persons known by e.g. Stuart Bloom
 (from [tbbt-ld][tbbt]) we can write:
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')

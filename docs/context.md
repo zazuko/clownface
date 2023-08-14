@@ -21,7 +21,7 @@ An empty context is created by providing only a `dataset` parameter.
 
 This state is quite unique, because this is the only circumstance in which a context will be empty. The moment any node gets pointed, the context will never return to this state.
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')
@@ -45,7 +45,7 @@ const context = {
 
 The context can represent a single graph pointer, that is a single node in the graph.
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')
@@ -71,7 +71,7 @@ A multi-pointer state is also possible. The pointer can point to multiple nodes 
 
 The return value of all [graph traversals](traversal.md) potentially returns a multi-pointer, thus always remember to check if `term/value` is defined.	
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')
@@ -102,7 +102,7 @@ At any time the graph pointer can be moved to another node using one of a few me
 
 Note that switching the pointer always returns a new `Clownface` object. Also, the new pointed node does not have to exist in the dataset. Simply changing the pointer also does not modify the dataset.
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')

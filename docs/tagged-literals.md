@@ -10,7 +10,7 @@ For any given subject, all strings in the chosen language will be returned.
 
 To find string literal in a given language, pass a second object argument with a string `language` key.
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')
@@ -31,7 +31,7 @@ apple.out(rdf.ns.rdfs.label, { language: 'de' }).value
 
 Using an empty string for the `language` parameter will find strings without a language.
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')
@@ -52,7 +52,7 @@ apple.out(rdf.ns.rdfs.label, { language: '' }).value
 
 It is possible to look up the literals in multiple alternatives byt providing an array of languages instead. The first language which gets matched to the literals will be used.
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')
@@ -83,7 +83,7 @@ In specific cases [subtags](https://tools.ietf.org/html/bcp47#section-2.2), such
 
 For example, in the snippet below the more specific subtag `de-CH-1996` will indeed be matched to the more general Swiss German `de-CH`
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')
@@ -102,7 +102,7 @@ bicycle.out(rdf.ns.rdfs.label, { language: 'de-CH' }).value
 
 !> However, any exact match will always take precedence before the subtag match
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')

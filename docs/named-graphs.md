@@ -4,7 +4,7 @@
 
 The examples on all other pages do not specify any graph identifier. In this mode the traversal methods are free to navigate the entire dataset (aka. [union graph](https://patterns.dataincubator.org/book/union-graph.html)) but any triples added and removed only apply to the default graph.
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')
@@ -32,7 +32,7 @@ nquads`${leonard.dataset}`.toString()
 
 A graph identifier can be passed to the factory call, which narrows down the context to only a specific graph.
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')

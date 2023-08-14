@@ -4,7 +4,7 @@ A core functionality of clownface is moving between nodes along properties, or e
 
 When called with no properties (or empty array), all properties are traversed and returned as a context of multiple graph pointers (if multiple nodes were found that is).
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')
@@ -35,7 +35,7 @@ Both those parameters and be a single value or an array.
 
 When the context does not represent any pointer, all subjects from the dataset are considered.
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')

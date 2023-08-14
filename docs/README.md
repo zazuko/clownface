@@ -23,7 +23,7 @@ npm i -S clownface
 To start using it, an instance of [RDF/JS `DatasetCore`](https://rdf.js.org/dataset-spec/#datasetcore-interface) must be
 provided to the exported factory method
 
-<run-kit>
+<run-kit node-version="16">
 
 ```js
 const rdf = require('@zazuko/env-bundle')
