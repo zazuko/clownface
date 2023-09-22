@@ -7,14 +7,14 @@ import Clownface from '../../lib/Clownface.js'
 describe('constructor', () => {
   it('should create a Clownface object', () => {
     const dataset = rdf.dataset()
-    const cf = new Clownface({ dataset })
+    const cf = new Clownface({ dataset, factory: rdf })
 
     assert(cf instanceof Clownface)
   })
 
   it('should create an empty context using the given dataset', () => {
     const dataset = rdf.dataset()
-    const cf = new Clownface({ dataset })
+    const cf = new Clownface({ dataset, factory: rdf })
 
     assert.strictEqual(cf._context.length, 1)
     assert.strictEqual(cf._context[0].dataset, dataset)
@@ -25,7 +25,7 @@ describe('constructor', () => {
   it('should create an empty context using the given graph', () => {
     const dataset = rdf.dataset()
     const graph = rdf.namedNode('http://example.org/graph')
-    const cf = new Clownface({ dataset, graph })
+    const cf = new Clownface({ dataset, graph, factory: rdf })
 
     assert.strictEqual(cf._context.length, 1)
     assert.strictEqual(cf._context[0].dataset, dataset)
@@ -36,7 +36,7 @@ describe('constructor', () => {
   it('should create a context using the given term', () => {
     const dataset = rdf.dataset()
     const term = rdf.namedNode('http://example.org/subject')
-    const cf = new Clownface({ dataset, term })
+    const cf = new Clownface({ dataset, term, factory: rdf })
 
     assert.strictEqual(cf._context.length, 1)
     assert.strictEqual(cf._context[0].term, term)
@@ -46,7 +46,7 @@ describe('constructor', () => {
     const dataset = rdf.dataset()
     const termA = rdf.namedNode('http://example.org/subjectA')
     const termB = rdf.namedNode('http://example.org/subjectB')
-    const cf = new Clownface({ dataset, term: [termA, termB] })
+    const cf = new Clownface({ dataset, term: [termA, termB], factory: rdf })
 
     assert.strictEqual(cf._context.length, 2)
     assert.strictEqual(cf._context[0].term, termA)
@@ -56,7 +56,7 @@ describe('constructor', () => {
   it('should create a context using the given value', () => {
     const dataset = rdf.dataset()
     const value = 'abc'
-    const cf = new Clownface({ dataset, value })
+    const cf = new Clownface({ dataset, value, factory: rdf })
 
     assert.strictEqual(cf._context.length, 1)
     assert.strictEqual(cf._context[0].term.termType, 'Literal')
@@ -67,7 +67,7 @@ describe('constructor', () => {
     const dataset = rdf.dataset()
     const valueA = 'abc'
     const valueB = 'bcd'
-    const cf = new Clownface({ dataset, value: [valueA, valueB] })
+    const cf = new Clownface({ dataset, value: [valueA, valueB], factory: rdf })
 
     assert.strictEqual(cf._context.length, 2)
     assert.strictEqual(cf._context[0].term.termType, 'Literal')
@@ -82,7 +82,7 @@ describe('constructor', () => {
     const termB = rdf.namedNode('http://example.org/subjectB')
     const valueA = 'abc'
     const valueB = 'bcd'
-    const cf = new Clownface({ dataset, term: [termA, termB], value: [valueA, valueB] })
+    const cf = new Clownface({ dataset, term: [termA, termB], value: [valueA, valueB], factory: rdf })
 
     assert.strictEqual(cf._context.length, 2)
     assert.strictEqual(cf._context[0].term, termA)
@@ -92,7 +92,7 @@ describe('constructor', () => {
   it('should use the given _context', () => {
     const dataset = rdf.dataset()
     const term = rdf.namedNode('http://example.org/subject')
-    const cf = new Clownface({ dataset, term })
+    const cf = new Clownface({ dataset, term, factory: rdf })
     const clone = new Clownface(cf)
 
     assert.strictEqual(clone._context, cf._context)
@@ -112,8 +112,8 @@ describe('constructor', () => {
   it('should prioritize _context over term', () => {
     const dataset = rdf.dataset()
     const term = rdf.namedNode('http://example.org/subject')
-    const cf = new Clownface({ dataset, term })
-    const clone = new Clownface({ term, _context: cf._context })
+    const cf = new Clownface({ dataset, term, factory: rdf })
+    const clone = new Clownface({ term, _context: cf._context, factory: rdf })
 
     assert.strictEqual(clone._context, cf._context)
   })
@@ -124,7 +124,7 @@ describe('constructor', () => {
     let error = null
 
     try {
-      Boolean(new Clownface({ dataset, value: new RegExp() }))
+      Boolean(new Clownface({ dataset, value: new RegExp(), factory: rdf }))
     } catch (err) {
       error = err
     }
