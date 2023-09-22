@@ -1,4 +1,5 @@
 import Clownface from './lib/Clownface.js'
+import environment from './lib/environment.js'
 
 /**
  * Factory to create graph pointer objects
@@ -12,6 +13,6 @@ import Clownface from './lib/Clownface.js'
  * @param {Context} [init._context] an existing clownface context. takes precedence before other params
  * @returns {Clownface}
  */
-export default function factory({ dataset, graph, term, value, factory, _context }) {
+export default function factory({ dataset, graph, term, value, factory = environment, _context }) {
   return new Clownface({ dataset, graph, term, value, factory, _context })
 }

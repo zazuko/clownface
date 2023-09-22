@@ -182,6 +182,23 @@ describe('.addOut', () => {
     })
   })
 
+  context('multi pointer', () => {
+    it('should reuse current factory', () => {
+      const dataset = rdf.dataset()
+      const predicate = rdf.namedNode('http://schema.org/knows')
+      const term = rdf.namedNode('http://localhost:8080/data/person/mary-cooper')
+      const factory = new Environment([NamespaceFactory, CustomDataFactory])
+
+      clownface({ dataset, factory, term })
+        .node([rdf.namedNode('foo'), rdf.namedNode('bar')])
+        .addOut(predicate, 'test')
+
+      dataset.match(null, predicate, null).forEach((quad) => {
+        assert.strictEqual(quad.testProperty, 'test')
+      })
+    })
+  })
+
   it('should not add quads if context is undefined', () => {
     const dataset = rdf.dataset()
     const cf = clownface({ dataset })
