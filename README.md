@@ -33,10 +33,10 @@ const $rdf = new Environment([
 const graph = $rdf.clownface()
 ```
 
-Alternatively, if you already use [rdf-ext](https://npm.im/rdf-ext), it comes bundled with clownface ad its dependencies.
+Alternatively, if you already use [@zazuko/env](https://npm.im/@zazuko/env), it comes bundled with clownface ad its dependencies.
 
 ```js
-import $rdf from 'rdf-ext'
+import $rdf from '@zazuko/env'
 
 const graph = $rdf.clownface()
 ```
