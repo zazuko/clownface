@@ -1,5 +1,11 @@
 # clownface
 
+## 2.0.1
+
+### Patch Changes
+
+- 810ede5: Fixes a problem that in some scenarios when operating on a `MultiPointer` would use clownface's default environment which causes clashing blank node being generated
+
 ## 2.0.0
 
 ### Major Changes
