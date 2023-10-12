@@ -1,15 +1,19 @@
 name: CI
-on: [push, pull_request]
+
+on:
+  - push
+  - pull_request
+
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node:
-          - '16'
-          - '18'
+          - "16"
+          - "18"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
@@ -20,7 +24,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: 18
