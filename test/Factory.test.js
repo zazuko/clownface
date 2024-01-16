@@ -1,9 +1,9 @@
 import { expect } from 'chai'
 import Environment from '@rdfjs/environment'
-import DatasetFactory from '@rdfjs/environment/DatasetFactory.js'
+import DatasetFactory from '@rdfjs/dataset/Factory.js'
 import $rdf from 'rdf-ext'
-import NamespaceFactory from '@rdfjs/environment/NamespaceFactory.js'
-import DataFactory from '@rdfjs/environment/DataFactory.js'
+import NamespaceFactory from '@rdfjs/namespace/Factory.js'
+import DataFactory from '@rdfjs/data-model/Factory.js'
 import ClownfaceFactory from '../Factory.js'
 
 describe('Factory', () => {

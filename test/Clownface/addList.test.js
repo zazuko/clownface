@@ -1,7 +1,7 @@
 import assert from 'assert'
 import { describe, it } from 'mocha'
 import Environment from '@rdfjs/environment'
-import NamespaceFactory from '@rdfjs/environment/NamespaceFactory.js'
+import NamespaceFactory from '@rdfjs/namespace/Factory.js'
 import clownface from '../../index.js'
 import rdf from '../support/factory.js'
 import * as ns from '../support/namespace.js'
