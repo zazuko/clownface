@@ -1,5 +1,11 @@
 # clownface
 
+## 2.0.2
+
+### Patch Changes
+
+- 25f4bf9: Adjust to `@rdfjs/environment@v1` (still compatible with v0)
+
 ## 2.0.1
 
 ### Patch Changes
