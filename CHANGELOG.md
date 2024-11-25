@@ -1,5 +1,11 @@
 # clownface
 
+## 2.0.3
+
+### Patch Changes
+
+- e9da738: chore: update package links
+
 ## 2.0.2
 
 ### Patch Changes
