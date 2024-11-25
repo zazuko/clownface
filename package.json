@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/zazuko/clownface/issues"
   },
-  "homepage": "https://github.com/zazuko/clownface",
+  "homepage": "https://zazuko.github.io/clownface/#/",
   "dependencies": {
     "@rdfjs/data-model": "^2.0.1",
     "@rdfjs/environment": "0 - 1",
